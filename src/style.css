@@ -18,32 +18,48 @@ body, html {
 .appContainer {
     margin: auto;
     grid-template-rows: 0.5fr 2fr 0.6fr;
-    width: 70%;
-    height: 70%;
+    width: 50%;
+    height: 60%;
     margin-top: 7%;
     border: 1px solid black;
     border-radius: 6%;
-    /*background: #a6b4b4;*/
     background: linear-gradient(237deg, #8a8b96, rgb(199, 199, 201));
-    /*background: linear-gradient(237deg, #9faffd, rgb(134, 18, 18));*/
-    /*border-radius: 5%;*/
-    /*background: -moz-linear-gradient(-45deg, #0e5e93 0%, #7a69c7 50%, #144E75 100%);*/
-    /*background: -webkit-linear-gradient(-45deg, #1c3ca4 0%, #48aef1 50%, #144E75 100%);*/
-    /*background: linear-gradient(135deg, #4ca4f3 0%, #58daf1 50%, #4b65d3 100%);*/
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 }
 
 .playerBox {
-    border: 2px solid rebeccapurple;
+    /*border: 2px solid rebeccapurple;*/
     width: 45%;
-    height: 85%;
+    height: 70%;
     display: grid;
     grid-template-rows: 0.1fr 1fr;
+    grid-template-columns: 0.08fr 1fr;
 }
 
 .playerTitle {
-    border: 2px solid green;
+    grid-column: 2 / 2;
+    /*border: 2px solid green;*/
     grid-row: 1 / 1;
+    font-size: 680%;
+    font-family: monospace;
+    padding-left: 2%;
+}
+
+.gridBox {
+    grid-column: 2 / 2;
+    /*border: 2px solid red;*/
+    grid-row: 2 / 2;
+}
+
+.square{
+    /*border: 1px solid blue;*/;
+    width: 100%;
+    height: 160px;
+    border: 1px solid rgba(0, 0, 0, 0.74);
+}
+
+.square:hover {
+    background: red;
 }
