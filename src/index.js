@@ -38,7 +38,7 @@ function createAndAddBoatToUI() {
     const player1 = new Player('Bob', 1);
     const destroyerBoat = new Boat('Destroyer', 3. )
     const min = 1;
-    const max = 120;
+    const max = 100;
     const randomGeneratedShipStaringPosition = Math.floor(Math.random() * (max - min + 1) + min);
     console.log(`Random generated ship starting position ---------->>  ${randomGeneratedShipStaringPosition}`);
     console.log(`Random generated ship starting position result ---------->>  ${checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat)}`);
@@ -49,7 +49,13 @@ function createAndAddBoatToUI() {
 
 function checkShipStartingPosition(startingPosition, ship) {
     const finalPosition = startingPosition + ship.getCellSize();
-    return finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0);
+    if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0)) {
+        return true;
+    }
+    else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length)) {
+        return true;
+    }
+    return false;
 }
 
 function changeGridColorWithShip(ship, startingPosition) {
