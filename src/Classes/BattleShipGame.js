@@ -7,6 +7,19 @@ class BattleShipGame {
         this.name = name;
         this.noOfPlayers = 0;
         this.gamePlayers = [];
+        this.totalNumberOfShips = 0;
+        this.player1Ships = [];
+        this.player2Ships = [];
+    }
+
+    addShip(player, ship) {
+        if(!ship)
+            return null;
+        if(player.playerId === 1)
+            this.player1Ships.push(ship);
+        else
+            this.player2Ships.push(ship);
+        this.totalNumberOfShips++;
     }
 
     addPlayer(player) {
@@ -24,6 +37,10 @@ class BattleShipGame {
 
     getNumberOfPlayers() {
         return this.noOfPlayers;
+    }
+
+    getNumberOfShips() {
+        return this.totalNumberOfShips;
     }
 }
 

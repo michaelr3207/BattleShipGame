@@ -26,6 +26,6 @@ class Boat {
     setCellSize(value) {
         this.cellSize = value;
     }
-
-
 }
+
+export {Boat};

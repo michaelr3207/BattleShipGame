@@ -26,5 +26,6 @@ class Cell {
     setShipOnCell(value) {
         this.shipOnCell = value;
     }
-
 }
+
+export {Cell};
