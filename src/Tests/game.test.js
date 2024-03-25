@@ -2,6 +2,7 @@ import {Player} from "../Classes/Player";
 import {BattleShipGame} from "../Classes/BattleShipGame";
 import {Boat} from "../Classes/Boat";
 import {Cell} from "../Classes/Cell";
+import {GameBoard} from "../Classes/GameBoard";
 
 test('Test player creation, and add to game', () => {
     const battleShipGame = new BattleShipGame('test game');
@@ -20,4 +21,9 @@ test('Test ship creation and also adding the ship to the game', () => {
 
     battleShipGame.addShip(player1, testShip);
     expect(battleShipGame.getNumberOfShips()).toBe(1);
+});
+
+test('100 cells are made by gameboard', () => {
+    const gameBoard = new GameBoard('test board');
+    expect(gameBoard.getAllCells().length).toBe(100);
 });

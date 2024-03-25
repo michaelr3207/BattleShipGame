@@ -32,19 +32,21 @@ body, html {
 .playerBox {
     /*border: 2px solid rebeccapurple;*/
     width: 45%;
-    height: 70%;
+    height: 75%;
     display: grid;
     grid-template-rows: 0.1fr 1fr;
     grid-template-columns: 0.08fr 1fr;
 }
 
-.playerTitle {
+.numberBox {
     grid-column: 2 / 2;
     /*border: 2px solid green;*/
     grid-row: 1 / 1;
-    font-size: 200%;
     font-family: monospace;
     padding-left: 2%;
+    display: flex;
+    font-size: 370%;
+    text-space: 2px;
 }
 
 .gridBox {
@@ -53,6 +55,15 @@ body, html {
     grid-row: 2 / 2;
 }
 
+.letterBox {
+    grid-row: 2 / 2;
+    grid-column: 1 / 1;
+    /*border: 2px solid orange;*/
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    font-size: 277%;
+}
 .square{
     /*border: 1px solid blue;*/;
     width: 100%;
