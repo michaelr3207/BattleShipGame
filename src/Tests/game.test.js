@@ -3,6 +3,7 @@ import {BattleShipGame} from "../Classes/BattleShipGame";
 import {Boat} from "../Classes/Boat";
 import {Cell} from "../Classes/Cell";
 import {GameBoard} from "../Classes/GameBoard";
+import {coordinateReader} from "../Util";
 
 test('Test player creation, and add to game', () => {
     const battleShipGame = new BattleShipGame('test game');
@@ -26,4 +27,11 @@ test('Test ship creation and also adding the ship to the game', () => {
 test('100 cells are made by gameboard', () => {
     const gameBoard = new GameBoard('test board');
     expect(gameBoard.getAllCells().length).toBe(100);
+});
+
+test('Test the attack ship method and coordinate generator', () => {
+    const battleShipGame = new BattleShipGame('test BattleShip Game');
+    const player = new Player('Player', 0);
+    const coordinateForTest = 'D4';
+    expect(coordinateReader(coordinateForTest)).toBe("34");
 });

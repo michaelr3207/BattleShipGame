@@ -1,4 +1,5 @@
 import {Player} from "./Player";
+import {GameBoard} from "./GameBoard";
 
 
 class BattleShipGame {
@@ -10,6 +11,8 @@ class BattleShipGame {
         this.totalNumberOfShips = 0;
         this.player1Ships = [];
         this.player2Ships = [];
+        this.playerOneGameBoard = new GameBoard('Player 1 board');
+        this.playerTwoBoard = new GameBoard('Player 2 board');
     }
 
     addShip(player, ship) {

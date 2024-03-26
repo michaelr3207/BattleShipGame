@@ -3,7 +3,7 @@ class Cell {
 
     constructor(id) {
         this.cellId = id;
-        this.shipOnCell = '';
+        this.shipOnCell = null;
         this.id = id;
     }
 
@@ -23,8 +23,8 @@ class Cell {
         return this.shipOnCell;
     }
 
-    setShipOnCell(value) {
-        this.shipOnCell = value;
+    setShipOnCell(selectedShip) {
+        this.shipOnCell = selectedShip;
     }
 }
 

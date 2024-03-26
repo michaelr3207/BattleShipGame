@@ -1,4 +1,5 @@
 import {Cell} from "./Cell";
+import {coordinateReader} from "../Util";
 
 class GameBoard {
 
@@ -17,6 +18,12 @@ class GameBoard {
 
     getAllCells() {
         return this.allCells;
+    }
+
+    attackShip(coordinates, player) {
+        const playerBoard = player.getBoard();
+        const calculatedCoordinatePosition = coordinateReader(coordinates);
+        console.log(`---------------------->>> ${calculatedCoordinatePosition}`);
     }
 }
 

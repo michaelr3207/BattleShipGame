@@ -67,5 +67,13 @@ function changeGridColorWithShip(ship, startingPosition) {
     }
 }
 
+function main() {
+    const battleShipGame = new BattleShipGame('Simple BattleShip Game');
+    const player = new Player('Player', 0);
+    battleShipGame.playerOneGameBoard.attackShip('B2', player);
+}
+
 populateBothGrids();
 createAndAddBoatToUI();
+
+main();

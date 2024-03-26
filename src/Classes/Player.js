@@ -7,6 +7,10 @@ class Player {
         this.name = name;
     }
 
+    getBoard() {
+        return this.board;
+    }
+
     getName() {
         return this.name;
     }
