@@ -1,5 +1,6 @@
 import {Cell} from "./Cell";
 import {coordinateReader} from "../Util";
+import {UIDisplay} from "./UIDisplay";
 
 class GameBoard {
 
@@ -7,6 +8,7 @@ class GameBoard {
         this.name = name;
         this.maxNumberOfCells = 100;
         this.allCells = this.createGameCells();
+        this.uiDisplay = new UIDisplay();
     }
 
     createGameCells() {
@@ -24,6 +26,7 @@ class GameBoard {
         const playerBoard = player.getBoard();
         const calculatedCoordinatePosition = coordinateReader(coordinates);
         console.log(`---------------------->>> ${calculatedCoordinatePosition}`);
+        this.uiDisplay.markAttackedTargetOnGrid(calculatedCoordinatePosition, player);
     }
 }
 

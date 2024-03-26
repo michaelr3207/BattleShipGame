@@ -9,11 +9,12 @@ class  UIDisplay {
 
     markAttackedTargetOnGrid(targetLocation, player) {
         let targetedGrid;
-        if(player.getId() === 0)
+        if(player.getId() === 1)
             targetedGrid = this.getPlayer1Board().id;
-        else
+        else if (player.getId() === 2)
             targetedGrid = this.getPlayer2Board().id;
-        const targetedLocationOnGrid = targetedGrid;
+        const targetedLocationOnGrid = document.getElementById(targetedGrid + targetLocation);
+        targetedLocationOnGrid.style.background = 'red';
     }
 
     getPlayer1Board() {
@@ -24,3 +25,5 @@ class  UIDisplay {
         return this.boardPlayer2;
     }
 }
+
+export {UIDisplay};

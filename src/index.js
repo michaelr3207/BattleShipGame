@@ -75,7 +75,7 @@ function changeGridColorWithShip(ship, startingPosition, player) {
 
 function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
-    const player = new Player('Player', 0);
+    const player = new Player('Player', 1);
     battleShipGame.playerOneGameBoard.attackShip('B2', player);
 }
 
