@@ -6,6 +6,12 @@ import {Cell} from "./Classes/Cell";
 
 
 function createSquares(index){
+    let playerGrid;
+    if(index === 1)
+        playerGrid = 'grid1';
+    else
+        playerGrid = 'grid2';
+
     let squareId = 0;
     let squares = 10;
     let rows = 10;
@@ -19,7 +25,7 @@ function createSquares(index){
         for(let j = 0; j < rows; j ++){
             const newSquare = document.createElement('div');
             newSquare.classList.add('square');
-            newSquare.id = squareId.toString();
+            newSquare.id = playerGrid + squareId.toString();
             newRow.appendChild(newSquare);
             squareId++;
         }
@@ -35,7 +41,7 @@ function populateBothGrids() {
 }
 
 function createAndAddBoatToUI() {
-    const player1 = new Player('Bob', 1);
+    const player1 = new Player('Bob', 2);
     const destroyerBoat = new Boat('Destroyer', 3. )
     const min = 1;
     const max = 100;
@@ -43,7 +49,7 @@ function createAndAddBoatToUI() {
     console.log(`Random generated ship starting position ---------->>  ${randomGeneratedShipStaringPosition}`);
     console.log(`Random generated ship starting position result ---------->>  ${checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat)}`);
     if(checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat))
-        changeGridColorWithShip(destroyerBoat, randomGeneratedShipStaringPosition);
+        changeGridColorWithShip(destroyerBoat, randomGeneratedShipStaringPosition, player1);
 
 }
 
@@ -58,10 +64,10 @@ function checkShipStartingPosition(startingPosition, ship) {
     return false;
 }
 
-function changeGridColorWithShip(ship, startingPosition) {
+function changeGridColorWithShip(ship, startingPosition, player) {
     for(let index = 0; index < ship.getCellSize(); index ++) {
-        const gridToBeChanged = document.getElementById(startingPosition.toString());
-        console.log(startingPosition.toString());
+        const gridToBeChanged = document.getElementById(player.getGrid() + startingPosition.toString());
+        console.log( '------------------??' + player.getGrid() + startingPosition.toString());
         gridToBeChanged.style.background = 'red';
         startingPosition ++;
     }
