@@ -25,6 +25,19 @@ class BattleShipGame {
         this.totalNumberOfShips++;
     }
 
+    getPlayerOneGameBoard() {
+        return this.playerOneGameBoard;
+    }
+
+    findShip(shipName, player) {
+        let arrayOfShips;
+        if(player.getId() === 1)
+            arrayOfShips = this.player1Ships;
+        else
+            arrayOfShips = this.player2Ships;
+        return arrayOfShips.filter((currentShip) => currentShip.getShipName() !== shipName);
+    }
+
     addPlayer(player) {
         if(player){
             this.gamePlayers.push(player);

@@ -14,7 +14,7 @@ class GameBoard {
     createGameCells() {
         let gameCells = [];
         for(let index = 0; index < this.maxNumberOfCells; index++)
-            gameCells.push(new Cell(0));
+            gameCells.push(new Cell(index));
         return gameCells;
     }
 
@@ -27,6 +27,23 @@ class GameBoard {
         const calculatedCoordinatePosition = coordinateReader(coordinates);
         console.log(`---------------------->>> ${calculatedCoordinatePosition}`);
         this.uiDisplay.markAttackedTargetOnGrid(calculatedCoordinatePosition, player);
+        // this.allCells.forEach(item => {
+        //     console.log(item.shipOnCell)
+        //     if(item.getShipOnCell() !== null) {
+        //         console.log('hit!!!!!!!!!!')
+        //         item.getShipOnCell.hit();
+        //     }
+        // });
+        console.log('bbdddddd');
+        console.log(this.getAllCells());
+        for (let item of this.getAllCells()) {
+            console.log(item.shipOnCell);
+            if (item.getShipOnCell() === null) {
+                console.log('hit!!!!!!!!!!');
+                item.getShipOnCell.hit();
+            }
+        }
+        console.log(this.allCells);
     }
 }
 

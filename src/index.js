@@ -41,45 +41,53 @@ function populateBothGrids() {
 }
 
 function createAndAddBoatToUI() {
+    const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const player1 = new Player('Bob', 2);
-    const destroyerBoat = new Boat('Destroyer', 3. )
+    const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5)
     const min = 1;
     const max = 100;
     const randomGeneratedShipStaringPosition = Math.floor(Math.random() * (max - min + 1) + min);
+    battleShipGame.playerOneGameBoard.attackShip('E5', player1);
     console.log(`Random generated ship starting position ---------->>  ${randomGeneratedShipStaringPosition}`);
     console.log(`Random generated ship starting position result ---------->>  ${checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat)}`);
     if(checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat))
-        changeGridColorWithShip(destroyerBoat, randomGeneratedShipStaringPosition, player1);
-
+        changeGridColorWithShip(destroyerBoat, randomGeneratedShipStaringPosition, player1, battleShipGame);
 }
 
 function checkShipStartingPosition(startingPosition, ship) {
     const finalPosition = startingPosition + ship.getCellSize();
-    if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0)) {
+    if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0))
         return true;
-    }
-    else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length)) {
+    else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length))
         return true;
-    }
     return false;
 }
 
-function changeGridColorWithShip(ship, startingPosition, player) {
+function changeGridColorWithShip(ship, startingPosition, player, battleShipGame) {
     for(let index = 0; index < ship.getCellSize(); index ++) {
         const gridToBeChanged = document.getElementById(player.getGrid() + startingPosition.toString());
         console.log( '------------------??' + player.getGrid() + startingPosition.toString());
         gridToBeChanged.style.background = 'red';
         startingPosition ++;
     }
+    let count = 0;
+    startingPosition = startingPosition - ship.getCellSize();
+    battleShipGame.getPlayerOneGameBoard().getAllCells().forEach((item) => {
+        if((item.getCellId().toString() === (startingPosition + count).toString()) && count < ship.getCellSize()){
+            console.log('nfdjnjdfnjsfjsfs')
+            item.setShipOnCell(ship)
+            count++;
+        }
+    });
+    console.log( battleShipGame.getPlayerOneGameBoard().getAllCells());
 }
 
 function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const player = new Player('Player', 1);
-    battleShipGame.playerOneGameBoard.attackShip('B2', player);
+    // battleShipGame.playerOneGameBoard.attackShip('J9', player);
 }
 
 populateBothGrids();
 createAndAddBoatToUI();
-
 main();
