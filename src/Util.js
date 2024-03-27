@@ -16,4 +16,7 @@ const coordinateReader = (coordinates) => {
     return finalCalculateTargetPosition;
 }
 
-export {coordinateReader};
+const randomNumberGenerator = () =>  Math.floor(Math.random() * (100 - 1 + 1) + 1);
+
+
+export { randomNumberGenerator, coordinateReader};
