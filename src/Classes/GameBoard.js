@@ -36,17 +36,19 @@ class GameBoard {
         //         item.getShipOnCell.hit();
         //     }
         // });
-        console.log('bbdddddd');
-        console.log(this.getAllCells());
+        // console.log('bbdddddd');
+        // console.log(this.getAllCells());
         for (let item of this.getAllCells()) {
             console.log(item.getShipOnCell());
             if (item.getShipOnCell() !== null && calculatedCoordinatePosition.toString() === item.getCellId().toString()) {
+                if(item.getShipOnCell().getNumberOfHits() === 0)
+                    alert('0 detecetdd');
                 console.log('hit!!!!!!!!!!');
                 item.getShipOnCell().hit();
                 break;   // ToDO - add in checks to see if a square has been hit before
             }
         }
-        console.log(this.allCells);
+        // console.log(this.allCells);
     }
 }
 

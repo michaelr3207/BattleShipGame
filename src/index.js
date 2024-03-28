@@ -4,7 +4,8 @@ import {BattleShipGame} from "./Classes/BattleShipGame";
 import {Player} from "./Classes/Player";
 import {Cell} from "./Classes/Cell";
 import {randomNumberGenerator} from "./Util";
-
+import {UIDisplay} from "./Classes/UIDisplay";
+import {GameBoard} from "./Classes/GameBoard";
 
 function createSquares(index){
     let playerGrid;
@@ -45,12 +46,14 @@ function createAndAddBoatToUI() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const player1 = new Player('Bob', 1);
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
-   const randomGeneratedShipStaringPosition = randomNumberGenerator();
+   // const randomGeneratedShipStaringPosition = randomNumberGenerator();
+    const randomGeneratedShipStaringPosition = 23;
     console.log(`Random generated ship starting position ---------->>  ${randomGeneratedShipStaringPosition}`);
     console.log(`Random generated ship starting position result ---------->>  ${checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat)}`);
     if(checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat))
         changeGridColorWithShip(destroyerBoat, randomGeneratedShipStaringPosition, player1, battleShipGame);
     battleShipGame.playerOneGameBoard.attackShip('E5', player1);
+    battleShipGame.playerOneGameBoard.attackShip('E6', player1);
 }
 
 function checkShipStartingPosition(startingPosition, ship) {
@@ -78,8 +81,8 @@ function changeGridColorWithShip(ship, startingPosition, player, battleShipGame)
             count++;
         }
     });
-    console.log('-----------> efusfdsdd' + battleShipGame.getPlayerOneGameBoard().getAllCells().map(obj => obj.shipOnCell));
-    console.log( battleShipGame.getPlayerOneGameBoard().getAllCells());
+    // console.log('-----------> efusfdsdd' + battleShipGame.getPlayerOneGameBoard().getAllCells().map(obj => obj.shipOnCell));
+    // console.log( battleShipGame.getPlayerOneGameBoard().getAllCells());
 }
 
 function main() {
@@ -88,6 +91,10 @@ function main() {
     // battleShipGame.playerOneGameBoard.attackShip('J9', player);
 }
 
+export  {changeGridColorWithShip, createSquares, createAndAddBoatToUI, checkShipStartingPosition};
+
 populateBothGrids();
 createAndAddBoatToUI();
-main();
+// main();
+
+

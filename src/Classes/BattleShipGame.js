@@ -12,7 +12,7 @@ class BattleShipGame {
         this.player1Ships = [];
         this.player2Ships = [];
         this.playerOneGameBoard = new GameBoard('Player 1 board');
-        this.playerTwoBoard = new GameBoard('Player 2 board');
+        this.playerTwoGameBoard = new GameBoard('Player 2 board');
     }
 
     addShip(player, ship) {
@@ -27,6 +27,10 @@ class BattleShipGame {
 
     getPlayerOneGameBoard() {
         return this.playerOneGameBoard;
+    }
+
+    getPlayerTwoGameBoard() {
+        return this.playerTwoGameBoard;
     }
 
     findShip(shipName, player) {
