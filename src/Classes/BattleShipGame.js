@@ -12,7 +12,7 @@ class BattleShipGame {
         this.player1Ships = [];
         this.player2Ships = [];
         this.playerOneGameBoard = new GameBoard('Player 1 board');
-        this.playerTwoGameBoard = new GameBoard('Player 2 board');
+        this.playerTwoBoard = new GameBoard('Player 2 board');
     }
 
     addShip(player, ship) {
@@ -23,23 +23,6 @@ class BattleShipGame {
         else
             this.player2Ships.push(ship);
         this.totalNumberOfShips++;
-    }
-
-    getPlayerOneGameBoard() {
-        return this.playerOneGameBoard;
-    }
-
-    getPlayerTwoGameBoard() {
-        return this.playerTwoGameBoard;
-    }
-
-    findShip(shipName, player) {
-        let arrayOfShips;
-        if(player.getId() === 1)
-            arrayOfShips = this.player1Ships;
-        else
-            arrayOfShips = this.player2Ships;
-        return arrayOfShips.filter((currentShip) => currentShip.getShipName() !== shipName);
     }
 
     addPlayer(player) {

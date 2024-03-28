@@ -5,7 +5,6 @@ class Player {
     constructor(name, id) {
         this.playerId = id;
         this.name = name;
-        this.grid = 'grid' + this.getId();
     }
 
     getBoard() {
@@ -21,15 +20,11 @@ class Player {
     }
 
     getId() {
-        return this.playerId;
+        return this.id;
     }
 
     setId(value) {
         this.id = value;
-    }
-
-    getGrid() {
-        return this.grid;
     }
 }
 

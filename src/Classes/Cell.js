@@ -1,10 +1,10 @@
-import {Boat} from "./Boat";
 
 class Cell {
 
     constructor(id) {
         this.cellId = id;
         this.shipOnCell = null;
+        this.id = id;
     }
 
     getCellId() {
@@ -12,11 +12,11 @@ class Cell {
     }
 
     getId() {
-        return this.cellId;
+        return this.id;
     }
 
     setI(value) {
-        this.cellId = value;
+        this.id = value;
     }
 
     getShipOnCell() {
