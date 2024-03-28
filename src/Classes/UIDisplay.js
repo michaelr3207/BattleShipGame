@@ -3,7 +3,7 @@
 class  UIDisplay {
 
     constructor() {
-        this.boardPlayer1 = document.getElementById('contentBox');
+        this.boardPlayer1 = document.getElementById('grid1');
         this.boardPlayer2 = document.getElementById('grid2');
     }
 

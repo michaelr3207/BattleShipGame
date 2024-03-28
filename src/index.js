@@ -19,7 +19,6 @@ function createSquares(index){
     let rows = 10;
     const container = document.getElementById('grid' + index);
     container.style.display = "block";
-
     for(let i = 0; i < squares; i ++){
         const newRow = document.createElement('div');
         newRow.classList.add('row');
@@ -53,7 +52,7 @@ function createAndAddBoatToUI() {
     if(checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat))
         changeGridColorWithShip(destroyerBoat, randomGeneratedShipStaringPosition, player1, battleShipGame);
     battleShipGame.playerOneGameBoard.attackShip('E5', player1);
-    battleShipGame.playerOneGameBoard.attackShip('E6', player1);
+    // battleShipGame.playerOneGameBoard.attackShip('E6', player1);
 }
 
 function checkShipStartingPosition(startingPosition, ship) {
@@ -91,10 +90,11 @@ function main() {
     // battleShipGame.playerOneGameBoard.attackShip('J9', player);
 }
 
-export  {changeGridColorWithShip, createSquares, createAndAddBoatToUI, checkShipStartingPosition};
 
 populateBothGrids();
 createAndAddBoatToUI();
 // main();
+
+export  {changeGridColorWithShip, createSquares, createAndAddBoatToUI, checkShipStartingPosition};
 
 
