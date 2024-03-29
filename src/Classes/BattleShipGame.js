@@ -1,5 +1,6 @@
 import {Player} from "./Player";
 import {GameBoard} from "./GameBoard";
+import {UIDisplay} from "./UIDisplay";
 
 
 class BattleShipGame {

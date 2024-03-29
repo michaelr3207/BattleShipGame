@@ -3,7 +3,7 @@ import {Boat} from "./Classes/Boat";
 import {BattleShipGame} from "./Classes/BattleShipGame";
 import {Player} from "./Classes/Player";
 import {Cell} from "./Classes/Cell";
-import {randomNumberGenerator} from "./Util";
+import {coordinateReader, randomNumberGenerator} from "./Util";
 import {UIDisplay} from "./Classes/UIDisplay";
 import {GameBoard} from "./Classes/GameBoard";
 
@@ -42,17 +42,26 @@ function populateBothGrids() {
 }
 
 function createAndAddBoatToUI() {
+    const uIDisplay = new UIDisplay();
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const player1 = new Player('Bob', 1);
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
    // const randomGeneratedShipStaringPosition = randomNumberGenerator();
-    const randomGeneratedShipStaringPosition = 23;
+    const randomGeneratedShipStaringPosition = 43;
     console.log(`Random generated ship starting position ---------->>  ${randomGeneratedShipStaringPosition}`);
     console.log(`Random generated ship starting position result ---------->>  ${checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat)}`);
     if(checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat))
         changeGridColorWithShip(destroyerBoat, randomGeneratedShipStaringPosition, player1, battleShipGame);
-    battleShipGame.playerOneGameBoard.attackShip('E5', player1);
-    // battleShipGame.playerOneGameBoard.attackShip('E6', player1);
+    playerAttackAnotherPlayersShip(battleShipGame, 'E5', player1, uIDisplay);
+    playerAttackAnotherPlayersShip(battleShipGame, 'E6', player1, uIDisplay);
+    playerAttackAnotherPlayersShip(battleShipGame, 'E7', player1, uIDisplay);
+}
+
+function playerAttackAnotherPlayersShip(battleShipGame, coordinates, player, uIDisplay) {
+    const targetLocation = coordinateReader(coordinates);
+    battleShipGame.playerOneGameBoard.attackShip(targetLocation, player);
+    uIDisplay.markAttackedTargetOnGrid(targetLocation, player);
+
 }
 
 function checkShipStartingPosition(startingPosition, ship) {

@@ -8,7 +8,6 @@ class GameBoard {
         this.name = name;
         this.maxNumberOfCells = 100;
         this.allCells = this.createGameCells();
-        this.uiDisplay = new UIDisplay();
     }
 
     createGameCells() {
@@ -22,13 +21,11 @@ class GameBoard {
         return this.allCells;
     }
 
-    attackShip(coordinates, player) {
+    attackShip(targetLocation, player) {
         console.log(`Before testing hit on ship-------------->`);
         console.log(this.allCells);
         const playerBoard = player.getBoard();
-        const calculatedCoordinatePosition = coordinateReader(coordinates);
-        console.log(`---------------------->>> ${calculatedCoordinatePosition}`);
-        this.uiDisplay.markAttackedTargetOnGrid(calculatedCoordinatePosition, player);
+        console.log(`---------------------->>> ${targetLocation}`);
         // this.allCells.forEach(item => {
         //     console.log(item.shipOnCell)
         //     if(item.getShipOnCell() !== null) {
@@ -40,7 +37,7 @@ class GameBoard {
         // console.log(this.getAllCells());
         for (let item of this.getAllCells()) {
             console.log(item.getShipOnCell());
-            if (item.getShipOnCell() !== null && calculatedCoordinatePosition.toString() === item.getCellId().toString()) {
+            if (item.getShipOnCell() !== null && targetLocation.toString() === item.getCellId().toString()) {
                 if(item.getShipOnCell().getNumberOfHits() === 0)
                     alert('0 detecetdd');
                 console.log('hit!!!!!!!!!!');
