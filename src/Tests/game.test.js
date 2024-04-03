@@ -3,6 +3,7 @@ import {BattleShipGame} from "../Classes/BattleShipGame";
 import {Boat} from "../Classes/Boat";
 import {GameBoard} from "../Classes/GameBoard";
 import {coordinateReader} from "../Util";
+import expect from "expect";
 // import {changeGridColorWithShip, checkShipStartingPosition} from "../index";
 
 test('Test player creation, and add to game', () => {
@@ -42,8 +43,14 @@ test('Test the attack ship method to see if a ship can be hit and destroyed', ()
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
     const coordinateForTest = 'D4';
     const randomGeneratedShipStaringPosition = 43;
+    battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(0);
-    battleShipGame.playerOneGameBoard.attackShip(43, player1);
+    battleShipGame.playerOneGameBoard.attackShip(38, player1);
     expect(destroyerBoat.getNumberOfHits()).toBe(1);
-    battleShipGame.playerOneGameBoard.attackShip('E6', player1);
+    battleShipGame.playerOneGameBoard.attackShip(39, player1);
+    expect(destroyerBoat.getNumberOfHits()).toBe(2);
+});
+
+test('Test to ensure an empty square can be hit', () => {
+
 });

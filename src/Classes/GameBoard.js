@@ -22,20 +22,12 @@ class GameBoard {
     }
 
     attackShip(targetLocation, player) {
-        console.log(`Before testing hit on ship-------------->`);
-        console.log(this.allCells);
+        // console.log(`Before testing hit on ship-------------->`);
+        // console.log(this.allCells);
         const playerBoard = player.getBoard();
-        console.log(`---------------------->>> ${targetLocation}`);
-        // this.allCells.forEach(item => {
-        //     console.log(item.shipOnCell)
-        //     if(item.getShipOnCell() !== null) {
-        //         console.log('hit!!!!!!!!!!')
-        //         item.getShipOnCell.hit();
-        //     }
-        // });
-        // console.log('bbdddddd');
-        // console.log(this.getAllCells());
+        // console.log(`---------------------->>> ${targetLocation}`);
         for (let item of this.getAllCells()) {
+            console.log(item)
             console.log(item.getShipOnCell());
             if (item.getShipOnCell() !== null && targetLocation.toString() === item.getCellId().toString()) {
                 if(item.getShipOnCell().getNumberOfHits() === 0)
@@ -45,7 +37,21 @@ class GameBoard {
                 break;   // ToDO - add in checks to see if a square has been hit before
             }
         }
-        // console.log(this.allCells);
+        console.log(this.allCells);
+    }
+
+    plotShipOnPlayerGrid(startingPosition, ship, battleShipGame) {
+        let counter = 0;
+        startingPosition = startingPosition - ship.getCellSize();
+        battleShipGame.getPlayerOneGameBoard().getAllCells().forEach((item) => {
+            if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
+                console.log('plotted!!')
+                item.setShipOnCell(ship)
+                counter++;
+            }
+        });
+        console.log('dssddsssssssssssssssssssssssssssssssssssssssssssssssssss')
+        console.log(`ddd` + this.allCells);
     }
 }
 

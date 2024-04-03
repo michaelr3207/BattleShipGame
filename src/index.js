@@ -53,8 +53,8 @@ function createAndAddBoatToUI() {
     if(checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat))
         changeGridColorWithShip(destroyerBoat, randomGeneratedShipStaringPosition, player1, battleShipGame);
     playerAttackAnotherPlayersShip(battleShipGame, 'E5', player1, uIDisplay);
-    playerAttackAnotherPlayersShip(battleShipGame, 'E6', player1, uIDisplay);
-    playerAttackAnotherPlayersShip(battleShipGame, 'E7', player1, uIDisplay);
+    // playerAttackAnotherPlayersShip(battleShipGame, 'E6', player1, uIDisplay);
+    // playerAttackAnotherPlayersShip(battleShipGame, 'E7', player1, uIDisplay);
 }
 
 function playerAttackAnotherPlayersShip(battleShipGame, coordinates, player, uIDisplay) {
@@ -80,15 +80,16 @@ function changeGridColorWithShip(ship, startingPosition, player, battleShipGame)
         gridToBeChanged.style.background = 'red';
         startingPosition ++;
     }
-    let count = 0;
-    startingPosition = startingPosition - ship.getCellSize();
-    battleShipGame.getPlayerOneGameBoard().getAllCells().forEach((item) => {
-        if((item.getCellId().toString() === (startingPosition + count).toString()) && count < ship.getCellSize()){
-            console.log('nfdjnjdfnjsfjsfs')
-            item.setShipOnCell(ship)
-            count++;
-        }
-    });
+    // let count = 0;
+    // startingPosition = startingPosition - ship.getCellSize();
+    // battleShipGame.getPlayerOneGameBoard().getAllCells().forEach((item) => {
+    //     if((item.getCellId().toString() === (startingPosition + count).toString()) && count < ship.getCellSize()){
+    //         console.log('nfdjnjdfnjsfjsfs')
+    //         item.setShipOnCell(ship)
+    //         count++;
+    //     }
+    // });
+    battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
     // console.log('-----------> efusfdsdd' + battleShipGame.getPlayerOneGameBoard().getAllCells().map(obj => obj.shipOnCell));
     // console.log( battleShipGame.getPlayerOneGameBoard().getAllCells());
 }
