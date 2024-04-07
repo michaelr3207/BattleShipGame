@@ -5,6 +5,11 @@ class Cell {
     constructor(id) {
         this.cellId = id;
         this.shipOnCell = null;
+        this.hasBeenMarked = false;
+    }
+
+    markCell() {
+        this.hasBeenMarked = true;
     }
 
     getCellId() {
@@ -25,6 +30,10 @@ class Cell {
 
     setShipOnCell(selectedShip) {
         this.shipOnCell = selectedShip;
+    }
+
+    getIsMarked() {
+        return this.hasBeenMarked;
     }
 }
 

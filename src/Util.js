@@ -1,3 +1,7 @@
+
+const CELL_TAKEN_ERROR = "ERROR: Cell has been taken.";
+const CELL_TAKEN_MESSAGE = "Cell has been taken successfully.";
+
 const coordinateReader = (coordinates) => {
     const coordinatesLetter = coordinates.charAt(0);
     let finalCalculateTargetPosition;
@@ -19,4 +23,4 @@ const coordinateReader = (coordinates) => {
 const randomNumberGenerator = () =>  Math.floor(Math.random() * (100 - 1 + 1) + 1);
 
 
-export { randomNumberGenerator, coordinateReader};
+export { randomNumberGenerator, coordinateReader, CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE};

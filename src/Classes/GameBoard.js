@@ -1,5 +1,5 @@
 import {Cell} from "./Cell";
-import {coordinateReader} from "../Util";
+import {CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, coordinateReader} from "../Util";
 import {UIDisplay} from "./UIDisplay";
 
 class GameBoard {
@@ -21,23 +21,40 @@ class GameBoard {
         return this.allCells;
     }
 
+    getCellById(cellId) {
+        for(let item of this.allCells)
+            if(item.getCellId().toString() === cellId.toString())
+                return item;
+        return null;
+    }
+
+
+
     attackShip(targetLocation, player) {
         // console.log(`Before testing hit on ship-------------->`);
         // console.log(this.allCells);
         const playerBoard = player.getBoard();
         // console.log(`---------------------->>> ${targetLocation}`);
         for (let item of this.getAllCells()) {
-            console.log(item)
-            console.log(item.getShipOnCell());
-            if (item.getShipOnCell() !== null && targetLocation.toString() === item.getCellId().toString()) {
+            // console.log(item)
+            // console.log(item.getShipOnCell());
+            if (item.getShipOnCell() !== null && targetLocation.toString() === item.getCellId().toString() && !item.getIsMarked()) {
                 if(item.getShipOnCell().getNumberOfHits() === 0)
                     alert('0 detecetdd');
                 console.log('hit!!!!!!!!!!');
                 item.getShipOnCell().hit();
+                item.markCell();
                 break;   // ToDO - add in checks to see if a square has been hit before
             }
+            else if(targetLocation.toString() === item.getCellId().toString()){
+                if(!item.getIsMarked())
+                    item.markCell();
+                else
+                    return CELL_TAKEN_ERROR;
+            }
         }
-        console.log(this.allCells);
+        // console.log(this.allCells);
+        return CELL_TAKEN_MESSAGE;
     }
 
     plotShipOnPlayerGrid(startingPosition, ship, battleShipGame) {

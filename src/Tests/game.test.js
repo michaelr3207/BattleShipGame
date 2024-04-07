@@ -2,7 +2,7 @@ import {Player} from "../Classes/Player";
 import {BattleShipGame} from "../Classes/BattleShipGame";
 import {Boat} from "../Classes/Boat";
 import {GameBoard} from "../Classes/GameBoard";
-import {coordinateReader} from "../Util";
+import {CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, coordinateReader} from "../Util";
 import expect from "expect";
 // import {changeGridColorWithShip, checkShipStartingPosition} from "../index";
 
@@ -41,7 +41,6 @@ test('Test the attack ship method to see if a ship can be hit and destroyed', ()
     const battleShipGame = new BattleShipGame('test BattleShip Game');
     const player1 = new Player('Player', 0);
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
-    const coordinateForTest = 'D4';
     const randomGeneratedShipStaringPosition = 43;
     battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(0);
@@ -52,5 +51,24 @@ test('Test the attack ship method to see if a ship can be hit and destroyed', ()
 });
 
 test('Test to ensure an empty square can be hit', () => {
+    const battleShipGame = new BattleShipGame('test BattleShip Game');
+    const player1 = new Player('Player', 0);
+    const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
+    const coordinateForTest = 'D4';
+    const randomGeneratedShipStaringPosition = 43;
+    expect(battleShipGame.playerOneGameBoard.getCellById(45).getIsMarked()).toBe(false);
+    expect(battleShipGame.playerOneGameBoard.attackShip(45, player1)).toBe(CELL_TAKEN_MESSAGE);
+    console.log(battleShipGame.playerOneGameBoard.getAllCells());
+    expect(battleShipGame.playerOneGameBoard.getCellById(45).getIsMarked()).toBe(true);
+});
 
+test('Test to ensure an already taken square cannot be striked', () => {
+    const battleShipGame = new BattleShipGame('test BattleShip Game');
+    const player1 = new Player('Player', 0);
+    const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
+    const coordinateForTest = 'D4';
+    const randomGeneratedShipStaringPosition = 43;
+    expect(battleShipGame.playerOneGameBoard.getCellById(45).getIsMarked()).toBe(false);
+    battleShipGame.playerOneGameBoard.attackShip(45, player1);
+    expect(battleShipGame.playerOneGameBoard.attackShip(45, player1)).toBe(CELL_TAKEN_ERROR);
 });
