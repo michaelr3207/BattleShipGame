@@ -72,3 +72,18 @@ test('Test to ensure an already taken square cannot be striked', () => {
     battleShipGame.playerOneGameBoard.attackShip(45, player1);
     expect(battleShipGame.playerOneGameBoard.attackShip(45, player1)).toBe(CELL_TAKEN_ERROR);
 });
+
+test('Ensure two boats cannot be placed in the same cells', () => {
+    const battleShipGame = new BattleShipGame('test BattleShip Game');
+    const player1 = new Player('Player', 0);
+    const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
+    const destroyerBoatTwo = new Boat(player1.getName() + 'DestroyerTwo', 5, player1)
+    const randomGeneratedShipStaringPosition = 43;
+    expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame)).toBe("Cell is available");
+    expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoatTwo, battleShipGame)).toBe("ERROR: Cell has been taken.");
+    // expect(destroyerBoat.getNumberOfHits()).toBe(0);
+    // battleShipGame.playerOneGameBoard.attackShip(38, player1);
+    // expect(destroyerBoat.getNumberOfHits()).toBe(1);
+    // battleShipGame.playerOneGameBoard.attackShip(39, player1);
+    // expect(destroyerBoat.getNumberOfHits()).toBe(2);
+});

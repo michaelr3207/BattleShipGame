@@ -8,6 +8,11 @@ class GameBoard {
         this.name = name;
         this.maxNumberOfCells = 100;
         this.allCells = this.createGameCells();
+        this.currentOccupiedGridPoints = [];
+    }
+
+    addPointToOccupiedAreas(occupiedCell) {
+        this.currentOccupiedGridPoints.push(occupiedCell);
     }
 
     createGameCells() {
@@ -60,8 +65,11 @@ class GameBoard {
     plotShipOnPlayerGrid(startingPosition, ship, battleShipGame) {
         let counter = 0;
         startingPosition = startingPosition - ship.getCellSize();
+        if(!this.checkIfGridCellIsAvailable(startingPosition))
+            return CELL_TAKEN_ERROR;
         battleShipGame.getPlayerOneGameBoard().getAllCells().forEach((item) => {
             if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
+                this.addPointToOccupiedAreas((startingPosition + counter));
                 console.log('plotted!!')
                 item.setShipOnCell(ship)
                 counter++;
@@ -69,6 +77,18 @@ class GameBoard {
         });
         console.log('dssddsssssssssssssssssssssssssssssssssssssssssssssssssss')
         console.log(`ddd` + this.allCells);
+        return "Cell is available"
+    }
+
+    checkIfGridCellIsAvailable(startingPosition) {
+        const occupiedCells = this.getOccupiedCells();
+        if(occupiedCells.includes(startingPosition))
+            return false;
+        return true;
+    }
+
+    getOccupiedCells() {
+        return this.currentOccupiedGridPoints;
     }
 }
 
