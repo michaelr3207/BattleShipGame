@@ -81,9 +81,4 @@ test('Ensure two boats cannot be placed in the same cells', () => {
     const randomGeneratedShipStaringPosition = 43;
     expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame)).toBe("Cell is available");
     expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoatTwo, battleShipGame)).toBe("ERROR: Cell has been taken.");
-    // expect(destroyerBoat.getNumberOfHits()).toBe(0);
-    // battleShipGame.playerOneGameBoard.attackShip(38, player1);
-    // expect(destroyerBoat.getNumberOfHits()).toBe(1);
-    // battleShipGame.playerOneGameBoard.attackShip(39, player1);
-    // expect(destroyerBoat.getNumberOfHits()).toBe(2);
 });
