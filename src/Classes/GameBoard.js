@@ -64,7 +64,7 @@ class GameBoard {
 
     plotShipOnPlayerGrid(startingPosition, ship, battleShipGame) {
         let counter = 0;
-        startingPosition = startingPosition - ship.getCellSize();
+        startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
         if(!this.checkIfGridCellIsAvailable(startingPosition))
             return CELL_TAKEN_ERROR;
         battleShipGame.getPlayerOneGameBoard().getAllCells().forEach((item) => {

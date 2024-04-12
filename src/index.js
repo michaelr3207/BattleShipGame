@@ -47,11 +47,14 @@ function createAndAddBoatToUI() {
     const player1 = new Player('Bob', 1);
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
    // const randomGeneratedShipStaringPosition = randomNumberGenerator();
-    const randomGeneratedShipStaringPosition = 43;
+    const randomGeneratedShipStaringPosition = 14;
+    const randomGeneratedShipStaringPosition2 = 9;
     console.log(`Random generated ship starting position ---------->>  ${randomGeneratedShipStaringPosition}`);
-    console.log(`Random generated ship starting position result ---------->>  ${checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat)}`);
-    if(checkShipStartingPosition(randomGeneratedShipStaringPosition, destroyerBoat))
-        changeGridColorWithShip(destroyerBoat, randomGeneratedShipStaringPosition, player1, battleShipGame);
+    console.log(`Random generated ship starting position result ---------->>  ${checkShipStartingPositionXAxis(randomGeneratedShipStaringPosition, destroyerBoat)}`);
+    if(checkShipStartingPositionYAxis(randomGeneratedShipStaringPosition2, destroyerBoat))
+        changeGridColorWithShipYAxis(destroyerBoat, randomGeneratedShipStaringPosition2, player1, battleShipGame);
+    if(checkShipStartingPositionXAxis(randomGeneratedShipStaringPosition, destroyerBoat))
+        changeGridColorWithShipXAxis(destroyerBoat, randomGeneratedShipStaringPosition, player1, battleShipGame);
     playerAttackAnotherPlayersShip(battleShipGame, 'E5', player1, uIDisplay);
     // playerAttackAnotherPlayersShip(battleShipGame, 'E6', player1, uIDisplay);
     // playerAttackAnotherPlayersShip(battleShipGame, 'E7', player1, uIDisplay);
@@ -64,7 +67,7 @@ function playerAttackAnotherPlayersShip(battleShipGame, coordinates, player, uID
 
 }
 
-function checkShipStartingPosition(startingPosition, ship) {
+function checkShipStartingPositionXAxis(startingPosition, ship) {
     const finalPosition = startingPosition + ship.getCellSize();
     if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0))
         return true;
@@ -73,7 +76,22 @@ function checkShipStartingPosition(startingPosition, ship) {
     return false;
 }
 
-function changeGridColorWithShip(ship, startingPosition, player, battleShipGame) {
+function checkShipStartingPositionYAxis(startingPosition, ship) {
+   let counter = 0;
+   while (counter < ship.getCellSize()) {
+       startingPosition = startingPosition + 10;
+       console.log('starting pos: ' + startingPosition)
+        if(startingPosition > 100) {
+            console.log('false')
+            return false;
+        }
+        counter++;
+    }
+   return true;
+}
+
+function changeGridColorWithShipXAxis(ship, startingPosition, player, battleShipGame) {
+    console.log('sdfsdfsdf ff');
     for(let index = 0; index < ship.getCellSize(); index ++) {
         const gridToBeChanged = document.getElementById(player.getGrid() + startingPosition.toString());
         console.log( '------------------??' + player.getGrid() + startingPosition.toString());
@@ -94,6 +112,18 @@ function changeGridColorWithShip(ship, startingPosition, player, battleShipGame)
     // console.log( battleShipGame.getPlayerOneGameBoard().getAllCells());
 }
 
+function changeGridColorWithShipYAxis(ship, startingPosition, player, battleShipGame) {
+    let counter = 0;
+    while (counter < 5) {
+        const gridToBeChanged = document.getElementById(player.getGrid() + startingPosition.toString());
+        console.log( '------------------??' + player.getGrid() + startingPosition.toString());
+        gridToBeChanged.style.background = 'red';
+        startingPosition = startingPosition + 10;
+        counter++;
+    }
+    battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
+}
+
 function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const player = new Player('Player', 1);
@@ -105,6 +135,6 @@ populateBothGrids();
 createAndAddBoatToUI();
 // main();
 
-export  {changeGridColorWithShip, createSquares, createAndAddBoatToUI, checkShipStartingPosition};
+export  {changeGridColorWithShipXAxis, createSquares, createAndAddBoatToUI, checkShipStartingPositionYAxis};
 
 

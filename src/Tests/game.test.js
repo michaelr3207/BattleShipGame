@@ -48,6 +48,12 @@ test('Test the attack ship method to see if a ship can be hit and destroyed', ()
     expect(destroyerBoat.getNumberOfHits()).toBe(1);
     battleShipGame.playerOneGameBoard.attackShip(39, player1);
     expect(destroyerBoat.getNumberOfHits()).toBe(2);
+    battleShipGame.playerOneGameBoard.attackShip(40, player1);
+    expect(destroyerBoat.getNumberOfHits()).toBe(3);
+    battleShipGame.playerOneGameBoard.attackShip(41, player1);
+    expect(destroyerBoat.getNumberOfHits()).toBe(4);
+    battleShipGame.playerOneGameBoard.attackShip(42, player1);
+    expect(destroyerBoat.getNumberOfHits()).toBe(5);
 });
 
 test('Test to ensure an empty square can be hit', () => {
