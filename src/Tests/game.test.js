@@ -42,6 +42,7 @@ test('Test the attack ship method to see if a ship can be hit and destroyed', ()
     const player1 = new Player('Player', 0);
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
     const randomGeneratedShipStaringPosition = 43;
+    expect(destroyerBoat.getIsSunk()).toBe(false);
     battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(0);
     battleShipGame.playerOneGameBoard.attackShip(38, player1);
@@ -53,7 +54,8 @@ test('Test the attack ship method to see if a ship can be hit and destroyed', ()
     battleShipGame.playerOneGameBoard.attackShip(41, player1);
     expect(destroyerBoat.getNumberOfHits()).toBe(4);
     battleShipGame.playerOneGameBoard.attackShip(42, player1);
-    expect(destroyerBoat.getNumberOfHits()).toBe(5);
+    expect(destroyerBoat.getNumberOfHits()).toBe(5);  // sunk after 5 hits to the ship
+    expect(destroyerBoat.getIsSunk()).toBe(true);
 });
 
 test('Test to ensure an empty square can be hit', () => {

@@ -38,7 +38,6 @@ class GameBoard {
     attackShip(targetLocation, player) {
         // console.log(`Before testing hit on ship-------------->`);
         // console.log(this.allCells);
-        const playerBoard = player.getBoard();
         // console.log(`---------------------->>> ${targetLocation}`);
         for (let item of this.getAllCells()) {
             // console.log(item)
@@ -49,6 +48,10 @@ class GameBoard {
                 console.log('hit!!!!!!!!!!');
                 item.getShipOnCell().hit();
                 item.markCell();
+                if(item.getShipOnCell().getIsSunk()) {
+                    if(player.checkForShip(item.getShipOnCell().getShipName()))
+                        player.searchAndRemoveShip(item.getShipOnCell());
+                }
                 break;   // ToDO - add in checks to see if a square has been hit before
             }
             else if(targetLocation.toString() === item.getCellId().toString()){

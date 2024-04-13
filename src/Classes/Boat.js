@@ -23,6 +23,10 @@ class Boat {
         return this.numberOfHits;
     }
 
+    getIsSunk() {
+        return this.isSunk;
+    }
+
     getShipName() {
         return this.shipName;
     }
