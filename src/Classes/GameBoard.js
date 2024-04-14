@@ -49,8 +49,12 @@ class GameBoard {
                 item.getShipOnCell().hit();
                 item.markCell();
                 if(item.getShipOnCell().getIsSunk()) {
-                    if(player.checkForShip(item.getShipOnCell().getShipName()))
-                        player.searchAndRemoveShip(item.getShipOnCell());
+                    player.changeShipStatus(item.getShipOnCell().getShipName());
+                    console.log('first destoryed ship found!!!!');
+                    if(player.checkForShip(item.getShipOnCell().getShipName())) {
+                        console.log('destoryed ship found!!!!');
+                        player.searchAndRemoveShip(item.getShipOnCell().getShipName());
+                    }
                 }
                 break;   // ToDO - add in checks to see if a square has been hit before
             }

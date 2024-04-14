@@ -13,11 +13,11 @@ class Player {
 
     addShipsToPlayer() {
         const allPlayerShips = [];
-        const destroyerShip = new Boat('Destroyer', 5, this);
-        const cruiserShip = new Boat('Cruiser', 4, this);
-        const reconShip = new Boat('Recon', 3, this);
-        const battleShip = new Boat('Battle', 2, this);
-        const corvetteShip = new Boat('Corvette', 1, this);
+        const destroyerShip = new Boat(this.name + 'Destroyer', 5, this);
+        const cruiserShip = new Boat(this.name +'Cruiser', 4, this);
+        const reconShip = new Boat(this.name +'Recon', 3, this);
+        const battleShip = new Boat(this.name +'Battle', 2, this);
+        const corvetteShip = new Boat(this.name +'Corvette', 1, this);
         allPlayerShips.push(destroyerShip);
         allPlayerShips.push(cruiserShip);
         allPlayerShips.push(reconShip);
@@ -27,13 +27,23 @@ class Player {
     }
 
     searchAndRemoveShip(nameOfShipToBeRemoved) {
+        console.log(nameOfShipToBeRemoved);
         for(let index = 0; index < this.playerShips.length; index++ ){
-            if(this.playerShips[index].getName() === nameOfShipToBeRemoved) {
+            if(this.playerShips[index].getShipName() === nameOfShipToBeRemoved && this.playerShips[index].getIsSunk()) {
+                console.log('tryung to reemove the ship!...')
                 this.playerShips.splice(index, 1);
                 this.totalNumberOfSHips--;
             }
         }
     }
+
+    changeShipStatus(nameOfShipToBeChanged) {
+        for(let currentShip of this.playerShips){
+            if(currentShip.getShipName() === nameOfShipToBeChanged)
+                currentShip.sinkShip();
+        }
+    }
+
 
     checkForShip(nameOfShipToBeRemoved) {
         for(let currentShip of this.playerShips)

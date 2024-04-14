@@ -37,11 +37,12 @@ test('Test the attack ship method and coordinate generator', () => {
     expect(coordinateReader(coordinateForTest)).toBe("34");
 });
 
-test('Test the attack ship method to see if a ship can be hit and destroyed', () => {
+test('Test the attack ship method to see if a  destroyer ship can be hit and destroyed', () => {
     const battleShipGame = new BattleShipGame('test BattleShip Game');
     const player1 = new Player('Player', 0);
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
     const randomGeneratedShipStaringPosition = 43;
+    expect(player1.checkForShip(destroyerBoat.getShipName())).toBeTruthy();
     expect(destroyerBoat.getIsSunk()).toBe(false);
     battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(0);
@@ -56,6 +57,29 @@ test('Test the attack ship method to see if a ship can be hit and destroyed', ()
     battleShipGame.playerOneGameBoard.attackShip(42, player1);
     expect(destroyerBoat.getNumberOfHits()).toBe(5);  // sunk after 5 hits to the ship
     expect(destroyerBoat.getIsSunk()).toBe(true);
+    expect(player1.checkForShip(destroyerBoat.getShipName())).toBeFalsy();
+    expect(player1.playerShips.length).toBe(4);
+});
+
+test('Test the attack ship method to see if a recon ship can be hit and destroyed', () => {
+    const battleShipGame = new BattleShipGame('test BattleShip Game');
+    const player1 = new Player('Player', 0);
+    const reconBoat = new Boat(player1.getName() + 'Recon', 3, player1)
+    const randomGeneratedShipStaringPosition = 43;
+    expect(player1.playerShips.length).toBe(5);
+    expect(player1.checkForShip(reconBoat.getShipName())).toBeTruthy();
+    expect(reconBoat.getIsSunk()).toBe(false);
+    battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, reconBoat, battleShipGame);
+    expect(reconBoat.getNumberOfHits()).toBe(0);
+    battleShipGame.playerOneGameBoard.attackShip(40, player1);
+    expect(reconBoat.getNumberOfHits()).toBe(1);
+    battleShipGame.playerOneGameBoard.attackShip(41, player1);
+    expect(reconBoat.getNumberOfHits()).toBe(2);
+    battleShipGame.playerOneGameBoard.attackShip(42, player1);
+    expect(reconBoat.getNumberOfHits()).toBe(3);
+    expect(reconBoat.getIsSunk()).toBe(true);
+    expect(player1.checkForShip(reconBoat.getShipName())).toBeFalsy();
+    expect(player1.playerShips.length).toBe(4);
 });
 
 test('Test to ensure an empty square can be hit', () => {
