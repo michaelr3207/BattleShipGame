@@ -71,11 +71,11 @@ test('Test the attack ship method to see if a recon ship can be hit and destroye
     expect(reconBoat.getIsSunk()).toBe(false);
     battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, reconBoat, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(0);
-    battleShipGame.playerOneGameBoard.attackShip(40, player1);
+    battleShipGame.playerOneGameBoard.attackShip(40, player1, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(1);
-    battleShipGame.playerOneGameBoard.attackShip(41, player1);
+    battleShipGame.playerOneGameBoard.attackShip(41, player1, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(2);
-    battleShipGame.playerOneGameBoard.attackShip(42, player1);
+    battleShipGame.playerOneGameBoard.attackShip(42, player1, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(3);
     expect(reconBoat.getIsSunk()).toBe(true);
     expect(player1.checkForShip(reconBoat.getShipName())).toBeFalsy();

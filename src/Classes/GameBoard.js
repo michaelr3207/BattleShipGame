@@ -35,10 +35,10 @@ class GameBoard {
 
 
 
-    attackShip(targetLocation, player) {
+    attackShip(targetLocation, player, battleShipGame) {
         // console.log(`Before testing hit on ship-------------->`);
         // console.log(this.allCells);
-        // console.log(`---------------------->>> ${targetLocation}`);
+        // console.log(`---------------------->>> ${targetLocation}`);  //ToDO add end game logic
         for (let item of this.getAllCells()) {
             // console.log(item)
             // console.log(item.getShipOnCell());
@@ -54,6 +54,7 @@ class GameBoard {
                     if(player.checkForShip(item.getShipOnCell().getShipName())) {
                         console.log('destoryed ship found!!!!');
                         player.searchAndRemoveShip(item.getShipOnCell().getShipName());
+                        battleShipGame.endTheGame();
                     }
                 }
                 break;   // ToDO - add in checks to see if a square has been hit before

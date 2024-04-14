@@ -14,6 +14,12 @@ class BattleShipGame {
         this.player2Ships = [];
         this.playerOneGameBoard = new GameBoard('Player 1 board');
         this.playerTwoGameBoard = new GameBoard('Player 2 board');
+        this.gameOver = false;
+    }
+
+    endTheGame() {
+        this.gameOver = true;
+        console.log('GAEM OVER!');
     }
 
     addShip(player, ship) {
