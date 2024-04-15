@@ -1,4 +1,5 @@
 import {Boat} from "./Boat";
+import {GameBoard} from "./GameBoard";
 
 
 class Player {
@@ -9,6 +10,11 @@ class Player {
         this.grid = 'grid' + this.getId();
         this.playerShips = this.addShipsToPlayer();
         this.totalNumberOfSHips = 5;
+        this.playerGameBoard = new GameBoard(`Player${id} board`, this);
+    }
+
+    getPlayerGameBoard() {
+        return this.playerGameBoard;
     }
 
     addShipsToPlayer() {
@@ -35,6 +41,15 @@ class Player {
                 this.totalNumberOfSHips--;
             }
         }
+    }
+
+    getShipByName(nameOfShip) {
+        if(!this.checkForShip(nameOfShip))
+            return "";
+        console.log('ship exists')
+        for(let currentShip of this.playerShips)
+            if(currentShip.getShipName() === nameOfShip)
+                return currentShip;
     }
 
     changeShipStatus(nameOfShipToBeChanged) {

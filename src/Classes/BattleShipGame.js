@@ -15,6 +15,16 @@ class BattleShipGame {
         this.playerOneGameBoard = new GameBoard('Player 1 board');
         this.playerTwoGameBoard = new GameBoard('Player 2 board');
         this.gameOver = false;
+        this.player1 = new Player('Player1', 1);
+        this.player2 = new Player('Player2', 2);
+    }
+
+    getPlayer1() {
+        return this.player1;
+    }
+
+    getPlayer2() {
+        return this.player2;
     }
 
     endTheGame() {

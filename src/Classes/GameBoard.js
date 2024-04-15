@@ -4,7 +4,8 @@ import {UIDisplay} from "./UIDisplay";
 
 class GameBoard {
 
-    constructor(name) {
+    constructor(name, player) {
+        this.ownerOfBoard = player
         this.name = name;
         this.maxNumberOfCells = 100;
         this.allCells = this.createGameCells();
@@ -35,12 +36,12 @@ class GameBoard {
 
 
 
-    attackShip(targetLocation, player, battleShipGame) {
+    attackShip(targetLocation, battleShipGame) {
         // console.log(`Before testing hit on ship-------------->`);
         // console.log(this.allCells);
         // console.log(`---------------------->>> ${targetLocation}`);  //ToDO add end game logic
         for (let item of this.getAllCells()) {
-            // console.log(item)
+            // console.log(item);
             // console.log(item.getShipOnCell());
             if (item.getShipOnCell() !== null && targetLocation.toString() === item.getCellId().toString() && !item.getIsMarked()) {
                 if(item.getShipOnCell().getNumberOfHits() === 0)
@@ -49,11 +50,11 @@ class GameBoard {
                 item.getShipOnCell().hit();
                 item.markCell();
                 if(item.getShipOnCell().getIsSunk()) {
-                    player.changeShipStatus(item.getShipOnCell().getShipName());
+                    this.ownerOfBoard.changeShipStatus(item.getShipOnCell().getShipName());
                     console.log('first destoryed ship found!!!!');
-                    if(player.checkForShip(item.getShipOnCell().getShipName())) {
+                    if(this.ownerOfBoard.checkForShip(item.getShipOnCell().getShipName())) {
                         console.log('destoryed ship found!!!!');
-                        player.searchAndRemoveShip(item.getShipOnCell().getShipName());
+                        this.ownerOfBoard.searchAndRemoveShip(item.getShipOnCell().getShipName());
                         battleShipGame.endTheGame();
                     }
                 }
@@ -75,7 +76,7 @@ class GameBoard {
         startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
         if(!this.checkIfGridCellIsAvailable(startingPosition))
             return CELL_TAKEN_ERROR;
-        battleShipGame.getPlayerOneGameBoard().getAllCells().forEach((item) => {
+        battleShipGame.getPlayer1().getPlayerGameBoard().getAllCells().forEach((item) => {
             if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
                 this.addPointToOccupiedAreas((startingPosition + counter));
                 console.log('plotted!!')
