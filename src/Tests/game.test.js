@@ -9,10 +9,7 @@ import expect from "expect";
 test('Test player creation, and add to game', () => {
     const battleShipGame = new BattleShipGame('test game');
     const player1 = new Player('Bob', 1);
-    expect(player1).toEqual({name: 'Bob' , playerId: 1, grid: 'grid1'});
-
-    // battleShipGame.addPlayer(player1);
-    // expect(battleShipGame.getNumberOfPlayers()).toBe(1);
+    expect(player1).toEqual({name: 'Bob' , playerId: 1, grid: 'grid1', playerShips: player1.addShipsToPlayer(), totalNumberOfSHips: 5});
 });
 
 test('Test ship creation and also adding the ship to the game', () => {
@@ -46,15 +43,15 @@ test('Test the attack ship method to see if a  destroyer ship can be hit and des
     expect(destroyerBoat.getIsSunk()).toBe(false);
     battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(0);
-    battleShipGame.playerOneGameBoard.attackShip(38, player1);
+    battleShipGame.playerOneGameBoard.attackShip(38, player1, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(1);
-    battleShipGame.playerOneGameBoard.attackShip(39, player1);
+    battleShipGame.playerOneGameBoard.attackShip(39, player1, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(2);
-    battleShipGame.playerOneGameBoard.attackShip(40, player1);
+    battleShipGame.playerOneGameBoard.attackShip(40, player1, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(3);
-    battleShipGame.playerOneGameBoard.attackShip(41, player1);
+    battleShipGame.playerOneGameBoard.attackShip(41, player1, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(4);
-    battleShipGame.playerOneGameBoard.attackShip(42, player1);
+    battleShipGame.playerOneGameBoard.attackShip(42, player1, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(5);  // sunk after 5 hits to the ship
     expect(destroyerBoat.getIsSunk()).toBe(true);
     expect(player1.checkForShip(destroyerBoat.getShipName())).toBeFalsy();

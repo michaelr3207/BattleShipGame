@@ -8,7 +8,7 @@ class GameBoard {
         this.name = name;
         this.maxNumberOfCells = 100;
         this.allCells = this.createGameCells();
-        this.currentOccupiedGridPoints = [];
+        this.currentOccupiedGridPoints = [];  //ToDo add all ships to here instead of player class,
     }
 
     addPointToOccupiedAreas(occupiedCell) {
