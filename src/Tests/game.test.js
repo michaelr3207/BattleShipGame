@@ -107,4 +107,20 @@ test('Ensure two boats cannot be placed in the same cells', () => {
     const randomGeneratedShipStaringPosition = 43;
     expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame)).toBe("Cell is available");
     expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoatTwo, battleShipGame)).toBe("ERROR: Cell has been taken.");
+    console.log(battleShipGame.playerOneGameBoard.allCells)
+
+});
+
+test('Ensure gameboards can track missed and on target hits from players', () => {
+    const battleShipGame = new BattleShipGame('test BattleShip Game');
+    const startingPositionOfTestShip = 54;
+    battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPositionOfTestShip, battleShipGame.getPlayer1().getShipByName(battleShipGame.getPlayer1().getName() + 'Destroyer'));
+    expect(battleShipGame.playerOneGameBoard.checkForAccurateShot(52)).toBeFalsy();
+    battleShipGame.playerOneGameBoard.attackShip(52, battleShipGame);
+    expect(battleShipGame.playerOneGameBoard.checkForAccurateShot(52)).toBeTruthy();
+    expect(battleShipGame.playerOneGameBoard.checkForMissedShot(52)).toBeFalsy();
+    expect(battleShipGame.playerOneGameBoard.checkForMissedShot(85)).toBeFalsy();
+    battleShipGame.playerOneGameBoard.attackShip(85, battleShipGame);
+    expect(battleShipGame.playerOneGameBoard.checkForMissedShot(85)).toBeTruthy();
+    expect(battleShipGame.playerOneGameBoard.checkForAccurateShot(85)).toBeFalsy();
 });

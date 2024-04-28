@@ -10,10 +10,34 @@ class GameBoard {
         this.maxNumberOfCells = 100;
         this.allCells = this.createGameCells();
         this.currentOccupiedGridPoints = [];  //ToDo add all ships to here instead of player class,
+        this.missedShots = [];
+        this.markedCells = [];
+    }
+
+    checkForMissedShot(targetLocation) {
+        for(let currentShot of this.missedShots)
+            if(currentShot === targetLocation)
+                return true;
+        return false;
+    }
+
+    checkForAccurateShot(targetLocation) {
+       for(let currentShot of this.markedCells)
+           if(currentShot === targetLocation)
+               return true;
+        return false;
     }
 
     addPointToOccupiedAreas(occupiedCell) {
         this.currentOccupiedGridPoints.push(occupiedCell);
+    }
+
+    addMissedShot(targetLocation) {
+        this.missedShots.push(targetLocation);
+    }
+
+    addMarkedShot(targetLocation) {
+        this.markedCells.push(targetLocation);
     }
 
     createGameCells() {
@@ -47,6 +71,7 @@ class GameBoard {
                 if(item.getShipOnCell().getNumberOfHits() === 0)
                     alert('0 detecetdd');
                 console.log('hit!!!!!!!!!!');
+                this.addMarkedShot(targetLocation);
                 item.getShipOnCell().hit();
                 item.markCell();
                 if(item.getShipOnCell().getIsSunk()) {
@@ -61,8 +86,10 @@ class GameBoard {
                 break;   // ToDO - add in checks to see if a square has been hit before
             }
             else if(targetLocation.toString() === item.getCellId().toString()){
-                if(!item.getIsMarked())
+                if(!item.getIsMarked()) {
                     item.markCell();
+                    this.addMissedShot(targetLocation)
+                }
                 else
                     return CELL_TAKEN_ERROR;
             }
@@ -71,12 +98,12 @@ class GameBoard {
         return CELL_TAKEN_MESSAGE;
     }
 
-    plotShipOnPlayerGrid(startingPosition, ship, battleShipGame) {
+    plotShipOnPlayerGrid(startingPosition, ship) {
         let counter = 0;
         startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
         if(!this.checkIfGridCellIsAvailable(startingPosition))
             return CELL_TAKEN_ERROR;
-        battleShipGame.getPlayer1().getPlayerGameBoard().getAllCells().forEach((item) => {
+       this.getAllCells().forEach((item) => {
             if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
                 this.addPointToOccupiedAreas((startingPosition + counter));
                 console.log('plotted!!')
