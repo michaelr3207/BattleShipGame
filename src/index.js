@@ -34,7 +34,7 @@ function createSquares(index){
     }
 }
 
-function populateBothGrids() {
+function populateBothGrids() {  // ToDo add to UI display class on initilization
     const playerOneIndex = 1;
     const playerTwoIndex = 2;
     createSquares(playerOneIndex);
@@ -118,7 +118,7 @@ function changeGridColorWithShipYAxis(ship, startingPosition, player, battleShip
         const gridToBeChanged = document.getElementById(player.getGrid() + startingPosition.toString());
         console.log( '------------------??' + player.getGrid() + startingPosition.toString());
         gridToBeChanged.style.background = 'red';
-        startingPosition = startingPosition + 10;
+        startingPosition = startingPosition + 10;  // changing grid row
         counter++;
     }
     battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
@@ -126,8 +126,7 @@ function changeGridColorWithShipYAxis(ship, startingPosition, player, battleShip
 
 function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
-    const player = new Player('Player', 1);
-    // battleShipGame.playerOneGameBoard.attackShip('J9', player);
+    const uIDisplay = new UIDisplay();
 }
 
 

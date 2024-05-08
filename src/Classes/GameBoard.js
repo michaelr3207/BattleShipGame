@@ -85,24 +85,29 @@ class GameBoard {
                 }
                 break;   // ToDO - add in checks to see if a square has been hit before
             }
-            else if(targetLocation.toString() === item.getCellId().toString()){
+            else if(targetLocation.toString() === item.getCellId().toString()) {
                 if(!item.getIsMarked()) {
                     item.markCell();
                     this.addMissedShot(targetLocation)
                 }
-                else
-                    return CELL_TAKEN_ERROR;
+                else {
+                    console.log(CELL_TAKEN_ERROR);
+                    return false;
+                }
             }
         }
         // console.log(this.allCells);
-        return CELL_TAKEN_MESSAGE;
+        console.log(CELL_TAKEN_MESSAGE);
+        return true;
     }
 
     plotShipOnPlayerGrid(startingPosition, ship) {
         let counter = 0;
         startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
-        if(!this.checkIfGridCellIsAvailable(startingPosition))
-            return CELL_TAKEN_ERROR;
+        if(!this.checkIfGridCellIsAvailable(startingPosition)) {
+            console.log(CELL_TAKEN_ERROR);
+            return false;
+        }
        this.getAllCells().forEach((item) => {
             if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
                 this.addPointToOccupiedAreas((startingPosition + counter));
@@ -113,7 +118,8 @@ class GameBoard {
         });
         console.log('dssddsssssssssssssssssssssssssssssssssssssssssssssssssss')
         console.log(`ddd` + this.allCells);
-        return "Cell is available"
+        console.log('Cell is free!');
+        return true;
     }
 
     checkIfGridCellIsAvailable(startingPosition) {

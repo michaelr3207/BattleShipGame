@@ -82,8 +82,8 @@ test('Test to ensure an empty square can be hit', () => {
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
     const coordinateForTest = 'D4';
     const randomGeneratedShipStaringPosition = 43;
-    expect(battleShipGame.playerOneGameBoard.getCellById(45).getIsMarked()).toBe(false);
-    expect(battleShipGame.playerOneGameBoard.attackShip(45, player1)).toBe(CELL_TAKEN_MESSAGE);
+    expect(battleShipGame.playerOneGameBoard.getCellById(45).getIsMarked()).toBeFalsy();
+    expect(battleShipGame.playerOneGameBoard.attackShip(45, player1)).toBeTruthy();
     console.log(battleShipGame.playerOneGameBoard.getAllCells());
     expect(battleShipGame.playerOneGameBoard.getCellById(45).getIsMarked()).toBe(true);
 });
@@ -94,9 +94,9 @@ test('Test to ensure an already taken square cannot be striked', () => {
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
     const coordinateForTest = 'D4';
     const randomGeneratedShipStaringPosition = 43;
-    expect(battleShipGame.playerOneGameBoard.getCellById(45).getIsMarked()).toBe(false);
+    expect(battleShipGame.playerOneGameBoard.getCellById(45).getIsMarked()).toBeFalsy();
     battleShipGame.playerOneGameBoard.attackShip(45, player1);
-    expect(battleShipGame.playerOneGameBoard.attackShip(45, player1)).toBe(CELL_TAKEN_ERROR);
+    expect(battleShipGame.playerOneGameBoard.attackShip(45, player1)).toBeFalsy();
 });
 
 test('Ensure two boats cannot be placed in the same cells', () => {
@@ -105,8 +105,8 @@ test('Ensure two boats cannot be placed in the same cells', () => {
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
     const destroyerBoatTwo = new Boat(player1.getName() + 'DestroyerTwo', 5, player1)
     const randomGeneratedShipStaringPosition = 43;
-    expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame)).toBe("Cell is available");
-    expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoatTwo, battleShipGame)).toBe("ERROR: Cell has been taken.");
+    expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame)).toBeTruthy();
+    expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoatTwo, battleShipGame)).toBeFalsy();
     console.log(battleShipGame.playerOneGameBoard.allCells)
 
 });
