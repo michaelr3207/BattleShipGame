@@ -67,30 +67,49 @@ function playerAttackAnotherPlayersShip(battleShipGame, coordinates, player, uID
 
 }
 
-function checkShipStartingPositionXAxis(startingPosition, ship) {
+function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, player) {
     startingPosition = Number.parseInt(startingPosition);
     const finalPosition = startingPosition + ship.getCellSize();
     console.log('starting pos is curremt ------------------> X axis: ' + startingPosition);
-    if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0))
+    if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0)) {
+        if(player === battleShipGame.getPlayer1())
+            battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
+        else
+            battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
         return true;
-    else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length))
+    }
+    else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length)) {
+        if(player === battleShipGame.getPlayer1())
+            battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
+        else
+            battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
         return true;
+    }
     console.log('false ------------------------------------>')
     alert('Invalid coordinates');
     return false;
 }
 
-function checkShipStartingPositionYAxis(startingPosition, ship) {
+function checkShipStartingPositionYAxis(startingPosition, ship, battleShipGame, player) {
    let counter = 0;
+   startingPosition = Number.parseInt(startingPosition);
    while (counter < ship.getCellSize()) {
-       startingPosition = startingPosition + 10;
        console.log('starting pos is curremt ------------------>: ' + startingPosition)
         if(startingPosition > 100) {
             console.log('false ------------------------------------>')
+            alert('Invalid coordinates Y axis');
             return false;
         }
+       startingPosition = startingPosition + 10;
         counter++;
     }
+    startingPosition = startingPosition - (ship.getCellSize() * 10);
+    if(player === battleShipGame.getPlayer1()) {
+        battleShipGame.playerOneGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame);
+        console.log('slaintee')
+    }
+    else
+        battleShipGame.playerTwoGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame);
    return true;
 }
 
@@ -114,7 +133,6 @@ function changeGridColorWithShipXAxis(ship, startingPosition, player, battleShip
     //         count++;
     //     }
     // });
-    battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
     // console.log('-----------> efusfdsdd' + battleShipGame.getPlayerOneGameBoard().getAllCells().map(obj => obj.shipOnCell));
     // console.log( battleShipGame.getPlayerOneGameBoard().getAllCells());
 }
@@ -131,28 +149,31 @@ function changeGridColorWithShipYAxis(ship, startingPosition, player, battleShip
         startingPosition = startingPosition + 10;  // changing grid row
         counter++;
     }
-    battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
 }
 
 function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const uIDisplay = new UIDisplay();
     // const playerOneStarterPositions = ["3Y", "34X", "22X", "63Y", "85X"];
-    const playerOneStarterPositions = ["3Y", "44X", "31Y", "70X", "86Y"];
+    const playerOneStarterPositions = ["58Y", "84X"];
     for(let index = 0; index < playerOneStarterPositions.length; index ++) {
         console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXX: ' + playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1));
         if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(playerOneStarterPositions[index], battleShipGame.player1.playerShips[index])) {  // ToDO potential error here
             if(playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1) === 'Y') {
-                if(checkShipStartingPositionYAxis(playerOneStarterPositions[index], battleShipGame.player1.playerShips[index]))
+                console.log('----------------------------------Y is triggerewd ----------------------------------------------->')
+                if(checkShipStartingPositionYAxis(playerOneStarterPositions[index], battleShipGame.player1.playerShips[index], battleShipGame, battleShipGame.player1))
                     changeGridColorWithShipYAxis(battleShipGame.player1.playerShips[index], playerOneStarterPositions[index].substring(0, playerOneStarterPositions[index].length - 1), battleShipGame.player1, battleShipGame)
             }
             else if (playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1) === 'X') {
                 console.log('---------------------------------- Here   ----------------------------------------------->')
-                if(checkShipStartingPositionXAxis(playerOneStarterPositions[index], battleShipGame.player1.playerShips[index]))
+                if(checkShipStartingPositionXAxis(playerOneStarterPositions[index], battleShipGame.player1.playerShips[index], battleShipGame, battleShipGame.player1))
                     changeGridColorWithShipXAxis(battleShipGame.player1.playerShips[index], playerOneStarterPositions[index].substring(0, playerOneStarterPositions[index].length - 1), battleShipGame.player1, battleShipGame)
                 }
         }
     }
+    const allCells = battleShipGame.playerOneGameBoard.getAllCells();
+    console.log(allCells)
+    allCells.forEach(item => {console.log(item)});
 }
 
 
