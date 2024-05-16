@@ -103,6 +103,7 @@ class GameBoard {
 
     plotShipOnPlayerGrid(startingPosition, ship) {
         let counter = 0;
+        startingPosition = Number.parseInt(startingPosition);
         // startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
         if(!this.checkIfGridCellIsAvailable(startingPosition)) {
             console.log(CELL_TAKEN_ERROR);
@@ -113,6 +114,26 @@ class GameBoard {
                 this.addPointToOccupiedAreas((startingPosition + counter));
                 console.log('plotted!!')
                 item.setShipOnCell(ship)
+                counter++;
+            }
+        });
+        // console.log('dssddsssssssssssssssssssssssssssssssssssssssssssssssssss')
+        // console.log(`ddd` + this.allCells);
+        console.log('Cell is free!');
+        return true;
+    }
+
+    checkIfShipFits(startingPosition, ship) {
+        let counter = 0;
+        startingPosition = Number.parseInt(startingPosition);
+        // startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
+        if(!this.checkIfGridCellIsAvailable(startingPosition)) {
+            console.log(CELL_TAKEN_ERROR);
+            return false;
+        }
+        this.getAllCells().forEach((item) => {
+            if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
+                console.log('plotted!!')
                 counter++;
             }
         });
@@ -145,6 +166,7 @@ class GameBoard {
 
 
     checkIfGridCellIsAvailable(startingPosition) {
+        startingPosition = Number.parseInt(startingPosition);
         const occupiedCells = this.getOccupiedCells();
         if(occupiedCells.includes(startingPosition))
             return false;

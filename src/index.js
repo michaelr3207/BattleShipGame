@@ -73,17 +73,24 @@ function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, 
     console.log('starting pos is curremt ------------------> X axis: ' + startingPosition);
     if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0)) {
         if(player === battleShipGame.getPlayer1())
-            battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
+            if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
+                return true;
         else
-            battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
+            if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
+                return true;
         return true;
     }
     else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length)) {
         if(player === battleShipGame.getPlayer1())
-            battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
+            if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
+                return true;
+            else
+                alert('not good');
         else
-            battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame);
-        return true;
+            if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
+                return true;
+            else
+                alert('not good');
     }
     console.log('false ------------------------------------>')
     alert('Invalid coordinates');
@@ -95,22 +102,29 @@ function checkShipStartingPositionYAxis(startingPosition, ship, battleShipGame, 
    startingPosition = Number.parseInt(startingPosition);
    while (counter < ship.getCellSize()) {
        console.log('starting pos is curremt ------------------>: ' + startingPosition)
-        if(startingPosition > 100) {
+        if(startingPosition >= 100) {
             console.log('false ------------------------------------>')
             alert('Invalid coordinates Y axis');
             return false;
         }
        startingPosition = startingPosition + 10;
         counter++;
+        console.log('rounder up starting pos: ' + startingPosition);
     }
     startingPosition = startingPosition - (ship.getCellSize() * 10);
     if(player === battleShipGame.getPlayer1()) {
-        battleShipGame.playerOneGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame);
+        if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame))
+            return true;
+        else
+            alert('not good 1' );
         console.log('slaintee')
     }
     else
-        battleShipGame.playerTwoGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame);
-   return true;
+        if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame))
+            return true;
+        else
+            alert('not good 2');
+
 }
 
 function changeGridColorWithShipXAxis(ship, startingPosition, player, battleShipGame) {
@@ -155,10 +169,10 @@ function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const uIDisplay = new UIDisplay();
     // const playerOneStarterPositions = ["3Y", "34X", "22X", "63Y", "85X"];
-    const playerOneStarterPositions = ["58Y", "84X"];
+    const playerOneStarterPositions = ["50Y", "37Y", "30X", "36X"];
     for(let index = 0; index < playerOneStarterPositions.length; index ++) {
-        console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXX: ' + playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1));
-        if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(playerOneStarterPositions[index], battleShipGame.player1.playerShips[index])) {  // ToDO potential error here
+        console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXX: ' + playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1));  //ToDo add in system that checkc all coordinates for ship to be placed
+        if(battleShipGame.playerOneGameBoard.checkIfGridCellIsAvailable(playerOneStarterPositions[index])) {  // ToDO potential error here
             if(playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1) === 'Y') {
                 console.log('----------------------------------Y is triggerewd ----------------------------------------------->')
                 if(checkShipStartingPositionYAxis(playerOneStarterPositions[index], battleShipGame.player1.playerShips[index], battleShipGame, battleShipGame.player1))
@@ -169,6 +183,9 @@ function main() {
                 if(checkShipStartingPositionXAxis(playerOneStarterPositions[index], battleShipGame.player1.playerShips[index], battleShipGame, battleShipGame.player1))
                     changeGridColorWithShipXAxis(battleShipGame.player1.playerShips[index], playerOneStarterPositions[index].substring(0, playerOneStarterPositions[index].length - 1), battleShipGame.player1, battleShipGame)
                 }
+        }
+        else {
+            alert('that has been taken!!')
         }
     }
     const allCells = battleShipGame.playerOneGameBoard.getAllCells();
