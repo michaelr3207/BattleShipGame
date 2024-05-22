@@ -169,17 +169,20 @@ function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const uIDisplay = new UIDisplay();
     // const playerOneStarterPositions = ["3Y", "34X", "22X", "63Y", "85X"];
-    const playerOneStarterPositions = ["50Y", "37Y", "30X", "36X"];
+    const playerOneStarterPositions = ["10Y", "37Y", "33X", "35X"];
+    console.log('jereeee ======================================' + battleShipGame.player1.playerShips[0]);
     for(let index = 0; index < playerOneStarterPositions.length; index ++) {
         console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXX: ' + playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1));  //ToDo add in system that checkc all coordinates for ship to be placed
-        if(battleShipGame.playerOneGameBoard.checkIfGridCellIsAvailable(playerOneStarterPositions[index])) {  // ToDO potential error here
+        console.log('jereeee ======================================' + battleShipGame.player1.playerShips[index].toString());
+        let currentShip = battleShipGame.player1.playerShips[index];
+        if(battleShipGame.playerOneGameBoard.checkIfGridCellIsAvailable(playerOneStarterPositions[index], currentShip)) {  // ToDO potential error here
             if(playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1) === 'Y') {
                 console.log('----------------------------------Y is triggerewd ----------------------------------------------->')
                 if(checkShipStartingPositionYAxis(playerOneStarterPositions[index], battleShipGame.player1.playerShips[index], battleShipGame, battleShipGame.player1))
                     changeGridColorWithShipYAxis(battleShipGame.player1.playerShips[index], playerOneStarterPositions[index].substring(0, playerOneStarterPositions[index].length - 1), battleShipGame.player1, battleShipGame)
             }
             else if (playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1) === 'X') {
-                console.log('---------------------------------- Here   ----------------------------------------------->')
+                console.log('---------------------------------- X is triggered   ----------------------------------------------->')
                 if(checkShipStartingPositionXAxis(playerOneStarterPositions[index], battleShipGame.player1.playerShips[index], battleShipGame, battleShipGame.player1))
                     changeGridColorWithShipXAxis(battleShipGame.player1.playerShips[index], playerOneStarterPositions[index].substring(0, playerOneStarterPositions[index].length - 1), battleShipGame.player1, battleShipGame)
                 }

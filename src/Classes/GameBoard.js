@@ -105,10 +105,10 @@ class GameBoard {
         let counter = 0;
         startingPosition = Number.parseInt(startingPosition);
         // startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
-        if(!this.checkIfGridCellIsAvailable(startingPosition)) {
-            console.log(CELL_TAKEN_ERROR);
-            return false;
-        }
+        // if(!this.checkIfGridCellIsAvailable(startingPosition)) {
+        //     console.log(CELL_TAKEN_ERROR);
+        //     return false;
+        // }
        this.getAllCells().forEach((item) => {
             if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
                 this.addPointToOccupiedAreas((startingPosition + counter));
@@ -123,34 +123,34 @@ class GameBoard {
         return true;
     }
 
-    checkIfShipFits(startingPosition, ship) {
-        let counter = 0;
-        startingPosition = Number.parseInt(startingPosition);
-        // startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
-        if(!this.checkIfGridCellIsAvailable(startingPosition)) {
-            console.log(CELL_TAKEN_ERROR);
-            return false;
-        }
-        this.getAllCells().forEach((item) => {
-            if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
-                console.log('plotted!!')
-                counter++;
-            }
-        });
-        // console.log('dssddsssssssssssssssssssssssssssssssssssssssssssssssssss')
-        // console.log(`ddd` + this.allCells);
-        console.log('Cell is free!');
-        return true;
-    }
+    // checkIfShipFits(startingPosition, ship) {
+    //     let counter = 0;
+    //     startingPosition = Number.parseInt(startingPosition);
+    //     // startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
+    //     if(!this.checkIfGridCellIsAvailable(startingPosition)) {
+    //         console.log(CELL_TAKEN_ERROR);
+    //         return false;
+    //     }
+    //     this.getAllCells().forEach((item) => {
+    //         if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
+    //             console.log('plotted!!')
+    //             counter++;
+    //         }
+    //     });
+    //     // console.log('dssddsssssssssssssssssssssssssssssssssssssssssssssssssss')
+    //     // console.log(`ddd` + this.allCells);
+    //     console.log('Cell is free!');
+    //     return true;
+    // }
 
     plotShipOnPlayerGridYAxis(startingPosition, ship) {
         console.log('CUrrent brug starting position is: ' + startingPosition)
         let counter = 0;
         startingPosition = Number.parseInt(startingPosition);
-        if(!this.checkIfGridCellIsAvailable(startingPosition)) {
-            console.log(CELL_TAKEN_ERROR);
-            return false;
-        }
+        // if(!this.checkIfGridCellIsAvailable(startingPosition)) {
+        //     console.log(CELL_TAKEN_ERROR);
+        //     return false;
+        // }
         this.getAllCells().forEach((item) => {
             if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < (ship.getCellSize() * 10)){
                 this.addPointToOccupiedAreas((startingPosition + counter));
@@ -165,11 +165,48 @@ class GameBoard {
     }
 
 
-    checkIfGridCellIsAvailable(startingPosition) {
+    checkIfGridCellIsAvailable(startingPosition, currentShip) {
+        console.log(`Current  ship first -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% weird error> ${currentShip.getShipName()}`);
+        console.log(`][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] ${startingPosition.toString()}`);
+        let extractedAxis = startingPosition.charAt(startingPosition.length-1);
+        console.log(`][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] this one ${extractedAxis}`);
         startingPosition = Number.parseInt(startingPosition);
         const occupiedCells = this.getOccupiedCells();
-        if(occupiedCells.includes(startingPosition))
-            return false;
+        if(extractedAxis === 'Y')
+            return this.checkCellAvailabilityYAxis(startingPosition, currentShip, occupiedCells);
+        else
+            return this.checkCellAvailabilityXAxis(startingPosition, currentShip, occupiedCells);
+
+        // if(occupiedCells.includes(startingPosition))
+        //     return false;
+        // return true;
+    }
+
+
+    checkCellAvailabilityYAxis(startingPosition, ship, occupiedCells) {
+        console.log(`Current taken ship positions -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${occupiedCells}`);
+        console.log(`Current  ship  -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${ship}`);
+
+        let counter = 0;
+        while(counter < ship.getCellSize()) {
+            if(occupiedCells.includes(startingPosition))
+                return false;
+            counter ++;
+            startingPosition += 10;
+        }
+        return true;
+    }
+
+    checkCellAvailabilityXAxis(startingPosition, ship, occupiedCells) {
+        console.log(`Current  ship  -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${ship}`);
+        console.log(`Current taken ship positions X axis version -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${occupiedCells}`);
+        let counter = 0;
+        while(counter < ship.getCellSize()) {
+            if(occupiedCells.includes(startingPosition))
+                return false;
+            counter ++;
+            startingPosition += 1;
+        }
         return true;
     }
 
