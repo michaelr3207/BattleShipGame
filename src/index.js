@@ -169,7 +169,7 @@ function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const uIDisplay = new UIDisplay();
     // const playerOneStarterPositions = ["3Y", "34X", "22X", "63Y", "85X"];
-    const playerOneStarterPositions = ["10Y", "37Y", "33X", "35X"];
+    const playerOneStarterPositions = ["10Y", "37Y", "16X", "34X", "90Y"];
     console.log('jereeee ======================================' + battleShipGame.player1.playerShips[0]);
     for(let index = 0; index < playerOneStarterPositions.length; index ++) {
         console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXX: ' + playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1));  //ToDo add in system that checkc all coordinates for ship to be placed
