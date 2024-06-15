@@ -40,6 +40,14 @@ class GameBoard {
         this.markedCells.push(targetLocation);
     }
 
+    checkForShipOnCell(targetLocation) {
+        console.log('this is a test message');
+        const allCells = this.getAllCells();
+        allCells.forEach(item => {console.log(item)});
+        console.log("burger-><<<<<<<<<<<<<<<<<<<<<<<<" + allCells[targetLocation].getShipOnCell().getShipName())
+        return !!allCells[targetLocation].getShipOnCell();
+    }
+
     createGameCells() {
         let gameCells = [];
         for(let index = 0; index < this.maxNumberOfCells; index++)

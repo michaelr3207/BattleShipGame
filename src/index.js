@@ -17,7 +17,7 @@ function createSquares(index){
     let squareId = 0;
     let squares = 10;
     let rows = 10;
-    const container = document.getElementById('grid' + index);
+    const container = document.getElementById('gridPlayer' + index);
     container.style.display = "block";
     for(let i = 0; i < squares; i ++){
         const newRow = document.createElement('div');
@@ -76,7 +76,7 @@ function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, 
             if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
                 return true;
         else
-            if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
+            if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
                 return true;
         return true;
     }
@@ -87,7 +87,7 @@ function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, 
             else
                 alert('not good');
         else
-            if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
+            if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
                 return true;
             else
                 alert('not good');
@@ -168,9 +168,11 @@ function changeGridColorWithShipYAxis(ship, startingPosition, player, battleShip
 function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const uIDisplay = new UIDisplay();
-    const playerTwoStarterPositions = ["3Y", "34X", "22X", "63Y", "85X"];
-    const playerOneStarterPositions = ["10Y", "37Y", "16X", "34X", "90Y"];
+    const playerTwoStarterPositions = ["84X", "34X", "4X", "63Y", "67X"];
+    // const playerTwoStarterPositions = ["84X"];
+    const playerOneStarterPositions = ["10Y", "47Y", "16X", "34X", "98Y"];
     console.log('jereeee ======================================' + battleShipGame.player1.playerShips[0]);
+    let counter = 0;
     for(let index = 0; index < playerOneStarterPositions.length; index ++) {
         console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXX: ' + playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1));  //ToDo add in system that checkc all coordinates for ship to be placed
         console.log('jereeee ======================================' + battleShipGame.player1.playerShips[index].toString());
@@ -191,29 +193,50 @@ function main() {
         else {
             alert('that has been taken!!')
         }
-        if(battleShipGame.playerTwoGameBoard.checkIfGridCellIsAvailable(playerOneStarterPositions[index], currentShip)) {  // ToDO potential error here
-            if(playerTwoStarterPositions[index].charAt(playerTwoStarterPositions[index].length - 1) === 'Y') {
+        console.log('-------------------------------------->HELLO////////////////////////////' + playerTwoStarterPositions[counter] + counter);
+        if(battleShipGame.playerTwoGameBoard.checkIfGridCellIsAvailable(playerTwoStarterPositions[counter], currentShipPlayerTwo)) {  // ToDO potential error here
+            if(playerTwoStarterPositions[counter].charAt(playerTwoStarterPositions[index].length - 1) === 'Y') {
                 console.log('----------------------------------Y is triggerewd ----------------------------------------------->')
-                if(checkShipStartingPositionYAxis(playerOneStarterPositions[index], battleShipGame.player1.playerShips[index], battleShipGame, battleShipGame.player1))
-                    changeGridColorWithShipYAxis(battleShipGame.player2.playerShips[index], playerOneStarterPositions[index].substring(0, playerOneStarterPositions[index].length - 1), battleShipGame.player2, battleShipGame)
+                if(checkShipStartingPositionYAxis(playerTwoStarterPositions[counter], battleShipGame.player2.playerShips[counter], battleShipGame, battleShipGame.player2))
+                    changeGridColorWithShipYAxis(battleShipGame.player2.playerShips[counter], playerTwoStarterPositions[counter].substring(0, playerTwoStarterPositions[counter].length - 1), battleShipGame.player2, battleShipGame)
             }
-            else if (playerTwoStarterPositions[index].charAt(playerTwoStarterPositions[index].length - 1) === 'X') {
+            else if (playerTwoStarterPositions[counter].charAt(playerTwoStarterPositions[index].length - 1) === 'X') {
                 console.log('---------------------------------- X is triggered   ----------------------------------------------->')
-                if(checkShipStartingPositionXAxis(playerTwoStarterPositions[index], battleShipGame.player1.playerShips[index], battleShipGame, battleShipGame.player1))
-                    changeGridColorWithShipXAxis(battleShipGame.player2.playerShips[index], playerOneStarterPositions[index].substring(0, playerOneStarterPositions[index].length - 1), battleShipGame.player2, battleShipGame)
+                if(checkShipStartingPositionXAxis(playerTwoStarterPositions[index], battleShipGame.player2.playerShips[counter], battleShipGame, battleShipGame.player2))
+                    changeGridColorWithShipXAxis(battleShipGame.player2.playerShips[counter], playerTwoStarterPositions[counter].substring(0, playerTwoStarterPositions[counter].length - 1), battleShipGame.player2, battleShipGame)
             }
         }
         else {
             alert('that has been taken!!')
         }
+        counter ++;
 
         //ToDo above code needs to be refactored
     }
     const allCells = battleShipGame.playerOneGameBoard.getAllCells();
     console.log(allCells)
     allCells.forEach(item => {console.log(item)});
+    addEventListenerToPlayerTwoSquares(battleShipGame)
 }
 
+
+function addEventListenerToPlayerTwoSquares(battleshipGame) {
+    const GRID_KEYWORD = 'grid2';   //ToDO add to util class
+    const allCells = battleshipGame.playerTwoGameBoard.getAllCells();
+    console.log(allCells)
+    allCells.forEach(item => {console.log(item)});
+    for(let item = 0; item < 100; item++) {
+        document.getElementById(GRID_KEYWORD + item).addEventListener("click", () => {
+            alert('You have hit grid number ' + item);
+            if(allCells[item].getShipOnCell()) {
+                alert('Found a ship!!!');
+            }
+            else
+                alert('No a ship!!!')
+        });
+    }
+
+}
 
 populateBothGrids();
 // createAndAddBoatToUI();
