@@ -72,12 +72,17 @@ function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, 
     const finalPosition = startingPosition + ship.getCellSize();
     console.log('starting pos is curremt ------------------> X axis: ' + startingPosition);
     if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0)) {
-        if(player === battleShipGame.getPlayer1())
+        console.log('strike!')
+        if(player === battleShipGame.getPlayer1()) {
+            console.log('strike 2')
             if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
                 return true;
-        else
-            if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
-                return true;
+        }
+        else {
+                console.log('strike 3')
+                if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
+                    return true;
+            }
         return true;
     }
     else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length)) {
@@ -195,14 +200,14 @@ function main() {
         }
         console.log('-------------------------------------->HELLO////////////////////////////' + playerTwoStarterPositions[counter] + counter);
         if(battleShipGame.playerTwoGameBoard.checkIfGridCellIsAvailable(playerTwoStarterPositions[counter], currentShipPlayerTwo)) {  // ToDO potential error here
-            if(playerTwoStarterPositions[counter].charAt(playerTwoStarterPositions[index].length - 1) === 'Y') {
+            if(playerTwoStarterPositions[counter].charAt(playerTwoStarterPositions[counter].length - 1) === 'Y') {
                 console.log('----------------------------------Y is triggerewd ----------------------------------------------->')
                 if(checkShipStartingPositionYAxis(playerTwoStarterPositions[counter], battleShipGame.player2.playerShips[counter], battleShipGame, battleShipGame.player2))
                     changeGridColorWithShipYAxis(battleShipGame.player2.playerShips[counter], playerTwoStarterPositions[counter].substring(0, playerTwoStarterPositions[counter].length - 1), battleShipGame.player2, battleShipGame)
             }
-            else if (playerTwoStarterPositions[counter].charAt(playerTwoStarterPositions[index].length - 1) === 'X') {
+            else if (playerTwoStarterPositions[counter].charAt(playerTwoStarterPositions[counter].length - 1) === 'X') {
                 console.log('---------------------------------- X is triggered   ----------------------------------------------->')
-                if(checkShipStartingPositionXAxis(playerTwoStarterPositions[index], battleShipGame.player2.playerShips[counter], battleShipGame, battleShipGame.player2))
+                if(checkShipStartingPositionXAxis(playerTwoStarterPositions[counter], battleShipGame.player2.playerShips[counter], battleShipGame, battleShipGame.player2))
                     changeGridColorWithShipXAxis(battleShipGame.player2.playerShips[counter], playerTwoStarterPositions[counter].substring(0, playerTwoStarterPositions[counter].length - 1), battleShipGame.player2, battleShipGame)
             }
         }

@@ -110,6 +110,7 @@ class GameBoard {
     }
 
     plotShipOnPlayerGrid(startingPosition, ship) {
+        console.log('CUrrent brug X AXIS starting position is: ' + startingPosition)
         let counter = 0;
         startingPosition = Number.parseInt(startingPosition);
         // startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
@@ -194,14 +195,18 @@ class GameBoard {
     checkCellAvailabilityYAxis(startingPosition, ship, occupiedCells) {
         console.log(`Current taken ship positions -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${occupiedCells}`);
         console.log(`Current  ship  -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${ship}`);
+        console.log('--------------> A CELL')
 
         let counter = 0;
         while(counter < ship.getCellSize()) {
-            if(occupiedCells.includes(startingPosition))
+            if(occupiedCells.includes(startingPosition)) {
+                console.log('--------------> ALREADY EXISTS AS A CELL')
                 return false;
+            }
             counter ++;
             startingPosition += 10;
         }
+        console.log('--------------> DONT EXISTS AS A CELL')
         return true;
     }
 
@@ -210,11 +215,15 @@ class GameBoard {
         console.log(`Current taken ship positions X axis version -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${occupiedCells}`);
         let counter = 0;
         while(counter < ship.getCellSize()) {
-            if(occupiedCells.includes(startingPosition))
+            if(occupiedCells.includes(startingPosition)) {
+                console.log('--------------> ALREADY EXISTS AS A CELL');
                 return false;
+            }
+
             counter ++;
             startingPosition += 1;
         }
+        console.log('--------------> DONT EXISTS AS A CELL')
         return true;
     }
 
