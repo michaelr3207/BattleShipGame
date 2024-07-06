@@ -42,15 +42,15 @@ test('Test the attack ship method to see if a  destroyer ship can be hit and des
     expect(destroyerBoat.getIsSunk()).toBe(false);
     battleShipGame.player1.playerGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(0);
-    battleShipGame.player1.playerGameBoard.attackShip(38, battleShipGame);
+    battleShipGame.player1.playerGameBoard.attackShip(43, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(1);
-    battleShipGame.player1.playerGameBoard.attackShip(39, battleShipGame);
+    battleShipGame.player1.playerGameBoard.attackShip(44, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(2);
-    battleShipGame.player1.playerGameBoard.attackShip(40, battleShipGame);
+    battleShipGame.player1.playerGameBoard.attackShip(45, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(3);
-    battleShipGame.player1.playerGameBoard.attackShip(41, battleShipGame);
+    battleShipGame.player1.playerGameBoard.attackShip(46, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(4);
-    battleShipGame.player1.playerGameBoard.attackShip(42, battleShipGame);
+    battleShipGame.player1.playerGameBoard.attackShip(47, battleShipGame);
     expect(destroyerBoat.getNumberOfHits()).toBe(5);  // sunk after 5 hits to the ship
     expect(destroyerBoat.getIsSunk()).toBe(true);
     expect(battleShipGame.getPlayer1().checkForShip(destroyerBoat.getShipName())).toBeFalsy();
@@ -65,11 +65,11 @@ test('Test the attack ship method to see if a recon ship can be hit and destroye
     expect(reconBoat.getIsSunk()).toBe(false);
     battleShipGame.player1.playerGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, reconBoat, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(0);
-    battleShipGame.player1.playerGameBoard.attackShip(27, battleShipGame);
+    battleShipGame.player1.playerGameBoard.attackShip(30, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(1);
-    battleShipGame.player1.playerGameBoard.attackShip(28, battleShipGame);
+    battleShipGame.player1.playerGameBoard.attackShip(31, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(2);
-    battleShipGame.player1.playerGameBoard.attackShip(29, battleShipGame);
+    battleShipGame.player1.playerGameBoard.attackShip(32, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(3);
     expect(reconBoat.getIsSunk()).toBeTruthy();
     expect(battleShipGame.getPlayer1().checkForShip(reconBoat.getShipName())).toBeFalsy();
@@ -104,7 +104,7 @@ test('Ensure two boats cannot be placed in the same cells', () => {
     const player1 = new Player('Player', 0);
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
     const destroyerBoatTwo = new Boat(player1.getName() + 'DestroyerTwo', 5, player1)
-    const randomGeneratedShipStaringPosition = 43;
+    const randomGeneratedShipStaringPosition = "43Y";
     expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame)).toBeTruthy();
     expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoatTwo, battleShipGame)).toBeFalsy();
     console.log(battleShipGame.playerOneGameBoard.allCells)

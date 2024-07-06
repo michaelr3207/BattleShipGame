@@ -72,9 +72,20 @@ class GameBoard {
         // console.log(`Before testing hit on ship-------------->`);
         // console.log(this.allCells);
         // console.log(`---------------------->>> ${targetLocation}`);  //ToDO add end game logic
-        for (let item of this.getAllCells()) {
+
+        for (let item of this.allCells) {
+            console.log(Number.parseInt(targetLocation));
+            console.log('---');
+            console.log(Number.parseInt(item.getCellId()));
+            if(item.getShipOnCell() !== null  && !item.getIsMarked()) {
+                if(Number.parseInt(targetLocation) === Number.parseInt(item.getCellId())){
+                    console.log('Success!!!!------------------------------------------------------');
+                }
+            }
             // console.log(item);
             // console.log(item.getShipOnCell());
+            // this.allCells.forEach(item => {console.log(item)});
+            console.log('attempting to strike ship...');
             if (item.getShipOnCell() !== null && targetLocation.toString() === item.getCellId().toString() && !item.getIsMarked()) {
                 if(item.getShipOnCell().getNumberOfHits() === 0)
                     alert('0 detecetdd');
@@ -112,12 +123,12 @@ class GameBoard {
     plotShipOnPlayerGrid(startingPosition, ship) {
         console.log('CUrrent brug X AXIS starting position is: ' + startingPosition)
         let counter = 0;
-        startingPosition = Number.parseInt(startingPosition);
-        // startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
-        // if(!this.checkIfGridCellIsAvailable(startingPosition)) {
+        // if(!this.checkIfGridCellIsAvailable(startingPosition, ship)) {
         //     console.log(CELL_TAKEN_ERROR);
         //     return false;
         // }
+        startingPosition = Number.parseInt(startingPosition);
+        startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
        this.getAllCells().forEach((item) => {
             if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
                 this.addPointToOccupiedAreas((startingPosition + counter));

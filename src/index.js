@@ -86,16 +86,18 @@ function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, 
         return true;
     }
     else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length)) {
-        if(player === battleShipGame.getPlayer1())
+        if(player === battleShipGame.getPlayer1()) {
             if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
                 return true;
             else
                 alert('not good');
-        else
+        }
+        else {
             if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
                 return true;
             else
                 alert('not good');
+        }
     }
     console.log('false ------------------------------------>')
     alert('Invalid coordinates');
@@ -173,7 +175,7 @@ function changeGridColorWithShipYAxis(ship, startingPosition, player, battleShip
 function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const uIDisplay = new UIDisplay();
-    const playerTwoStarterPositions = ["84X", "34X", "4X", "63Y", "67X"];
+    const playerTwoStarterPositions = ["84X", "15X", "4X", "63Y", "65X"];
     // const playerTwoStarterPositions = ["84X"];
     const playerOneStarterPositions = ["10Y", "47Y", "16X", "34X", "98Y"];
     console.log('jereeee ======================================' + battleShipGame.player1.playerShips[0]);
@@ -231,16 +233,27 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
     console.log(allCells)
     allCells.forEach(item => {console.log(item)});
     for(let item = 0; item < 100; item++) {
-        document.getElementById(GRID_KEYWORD + item).addEventListener("click", () => {
+        document.getElementById(GRID_KEYWORD + item).addEventListener("click", (event) => {
             alert('You have hit grid number ' + item);
             if(allCells[item].getShipOnCell()) {
                 alert('Found a ship!!!');
+                let extractedGridCoordinates = extractGridCoordinatesFromGridTitle(event.target.id.toString());
+                battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame);
+                console.log('updated player two board after strike: \n ' + allCells);
+                allCells.forEach(item => {console.log(item)});
             }
             else
                 alert('No a ship!!!')
         });
     }
 
+}
+
+function extractGridCoordinatesFromGridTitle(event) {
+    if(event.length === 6)
+        return event.slice(-1);
+    else
+        return event.slice(-2);
 }
 
 populateBothGrids();
