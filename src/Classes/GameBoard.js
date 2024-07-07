@@ -96,11 +96,12 @@ class GameBoard {
                 if(item.getShipOnCell().getIsSunk()) {
                     console.log('Owner of board ' + this.ownerOfBoard);
                     this.ownerOfBoard.changeShipStatus(item.getShipOnCell().getShipName());
-                    console.log('first destoryed ship found!!!!');
+                    console.log(this.ownerOfBoard + 'ship has been successfully destoryed!');
                     if(this.ownerOfBoard.checkForShip(item.getShipOnCell().getShipName())) {
-                        console.log('destoryed ship found!!!!');
+                        console.log('Now removing the destoyed ship from ' + this.ownerOfBoard + 'ship list.');
                         this.ownerOfBoard.searchAndRemoveShip(item.getShipOnCell().getShipName());
-                        battleShipGame.endTheGame();
+                        // battleShipGame.endTheGame();
+                        this.removeSunkenShipFromGameBoard();
                     }
                 }
                 break;   // ToDO - add in checks to see if a square has been hit before
@@ -203,6 +204,19 @@ class GameBoard {
         // return true;
     }
 
+    removeSunkenShipFromGameBoard() {
+        // this.allCells.forEach((currentGameBoardCell) => {
+        //     if(currentGameBoardCell.getShipOnCell().getIsSunk())
+        //         currentGameBoardCell.setShipOnCell(null);
+        // });
+        const allGameCells = this.getAllCells();
+        for(let currentCell of allGameCells) {
+            console.log('------->');
+            console.log(currentCell);
+            if(currentCell.getShipOnCell() !== null && currentCell.getShipOnCell().getIsSunk())
+                currentCell.setShipOnCell(null);
+        }
+    }
 
     checkCellAvailabilityYAxis(startingPosition, ship, occupiedCells) {
         console.log(`Current taken ship positions -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${occupiedCells}`);
