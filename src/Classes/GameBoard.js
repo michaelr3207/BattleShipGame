@@ -5,7 +5,7 @@ import {UIDisplay} from "./UIDisplay";
 class GameBoard {
 
     constructor(name, player) {
-        this.ownerOfBoard = player
+        this.ownerOfBoard = player;
         this.name = name;
         this.maxNumberOfCells = 100;
         this.allCells = this.createGameCells();
@@ -94,6 +94,7 @@ class GameBoard {
                 item.getShipOnCell().hit();
                 item.markCell();
                 if(item.getShipOnCell().getIsSunk()) {
+                    console.log('Owner of board ' + this.ownerOfBoard);
                     this.ownerOfBoard.changeShipStatus(item.getShipOnCell().getShipName());
                     console.log('first destoryed ship found!!!!');
                     if(this.ownerOfBoard.checkForShip(item.getShipOnCell().getShipName())) {

@@ -86,7 +86,7 @@ function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, 
         return true;
     }
     else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length)) {
-        if(player === battleShipGame.getPlayer1()) {
+        if(player === battleShipGame.getPlayer1()) {  // ToDo fix this?
             if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
                 return true;
             else
@@ -135,7 +135,7 @@ function checkShipStartingPositionYAxis(startingPosition, ship, battleShipGame, 
 }
 
 function changeGridColorWithShipXAxis(ship, startingPosition, player, battleShipGame) {
-    startingPosition = Number.parseInt(startingPosition);
+    startingPosition = Number.parseInt(startingPosition) - ship.getCellSize();
     console.log('starting pos now X ' + startingPosition);
     console.log('starting ship now X ' + ship.shipName);
     console.log('sdfsdfsdf ff');
@@ -143,7 +143,7 @@ function changeGridColorWithShipXAxis(ship, startingPosition, player, battleShip
         const gridToBeChanged = document.getElementById(player.getGrid() + startingPosition.toString());
         console.log( '------------------??' + player.getGrid() + startingPosition.toString());
         gridToBeChanged.style.background = 'red';
-        startingPosition ++;
+        startingPosition++;
     }
     // let count = 0;
     // startingPosition = startingPosition - ship.getCellSize();
@@ -221,10 +221,12 @@ function main() {
         //ToDo above code needs to be refactored
     }
     const allCells = battleShipGame.playerOneGameBoard.getAllCells();
-    console.log(allCells)
-    allCells.forEach(item => {console.log(item)});
+    console.log('Player one cells');
+    printCells(allCells);
     addEventListenerToPlayerTwoSquares(battleShipGame)
 }
+
+const printCells = (allCells) => allCells.forEach(item => {console.log(item)});
 
 
 function addEventListenerToPlayerTwoSquares(battleshipGame) {

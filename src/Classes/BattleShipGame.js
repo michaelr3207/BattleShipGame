@@ -12,11 +12,11 @@ class BattleShipGame {
         this.totalNumberOfShips = 0;
         this.player1Ships = [];
         this.player2Ships = [];
-        this.playerOneGameBoard = new GameBoard('Player 1 board');
-        this.playerTwoGameBoard = new GameBoard('Player 2 board');
         this.gameOver = false;
         this.player1 = new Player('Player1', 1);
         this.player2 = new Player('Player2', 2);
+        this.playerOneGameBoard = new GameBoard('Player 1 board', this.player1);
+        this.playerTwoGameBoard = new GameBoard('Player 2 board', this.player2);
     }
 
     getPlayer1() {
