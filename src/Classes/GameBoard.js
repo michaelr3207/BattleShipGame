@@ -120,7 +120,7 @@ class GameBoard {
         // console.log(this.allCells);
         console.log(CELL_TAKEN_MESSAGE);
         return true;
-    }
+    } // random comment
 
     plotShipOnPlayerGrid(startingPosition, ship) {
         console.log('CUrrent brug X AXIS starting position is: ' + startingPosition)
