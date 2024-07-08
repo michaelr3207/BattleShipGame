@@ -69,22 +69,14 @@ class GameBoard {
 
 
     attackShip(targetLocation, battleShipGame, uiDisplay) {
-        // console.log(`Before testing hit on ship-------------->`);
-        // console.log(this.allCells);
-        // console.log(`---------------------->>> ${targetLocation}`);  //ToDO add end game logic
+          //ToDO add end game logic
 
         for (let item of this.allCells) {
-            console.log(Number.parseInt(targetLocation));
-            console.log('---');
-            console.log(Number.parseInt(item.getCellId()));
             if(item.getShipOnCell() !== null  && !item.getIsMarked()) {
                 if(Number.parseInt(targetLocation) === Number.parseInt(item.getCellId())){
                     console.log('Success!!!!------------------------------------------------------');
                 }
             }
-            // console.log(item);
-            // console.log(item.getShipOnCell());
-            // this.allCells.forEach(item => {console.log(item)});
             console.log('attempting to strike ship...');
             if (item.getShipOnCell() !== null && targetLocation.toString() === item.getCellId().toString() && !item.getIsMarked()) {
                 if(item.getShipOnCell().getNumberOfHits() === 0)
@@ -96,7 +88,6 @@ class GameBoard {
                 uiDisplay.markAttackedSquare(Number.parseInt(targetLocation));
                 if(item.getShipOnCell().getIsSunk()) {
                     console.log('Owner of board ' + this.ownerOfBoard);
-                    // uiDisplay.removeDestroyedPlayer2ShipFromUI(battleShipGame);
                     this.ownerOfBoard.changeShipStatus(item.getShipOnCell().getShipName());
                     console.log(this.ownerOfBoard + 'ship has been successfully destoryed!');
                     if(this.ownerOfBoard.checkForShip(item.getShipOnCell().getShipName())) {
@@ -104,6 +95,7 @@ class GameBoard {
                         this.ownerOfBoard.searchAndRemoveShip(item.getShipOnCell().getShipName());
                         // battleShipGame.endTheGame();
                         this.removeSunkenShipFromGameBoard();
+                        // uiDisplay.removeDestroyedPlayer2ShipFromUI(battleShipGame);
                     }
                 }
                 break;   // ToDO - add in checks to see if a square has been hit before
@@ -114,6 +106,7 @@ class GameBoard {
                     this.addMissedShot(targetLocation)
                 }
                 else {
+                    alert('Cannot shoot there!');
                     console.log(CELL_TAKEN_ERROR);
                     return false;
                 }
@@ -122,9 +115,9 @@ class GameBoard {
         // console.log(this.allCells);
         console.log(CELL_TAKEN_MESSAGE);
         return true;
-    } // random comment dd
+    }
 
-    plotShipOnPlayerGrid(startingPosition, ship) {
+    plotShipOnPlayerGrid(startingPosition, ship) {  //ToDo rename
         console.log('CUrrent brug X AXIS starting position is: ' + startingPosition)
         let counter = 0;
         // if(!this.checkIfGridCellIsAvailable(startingPosition, ship)) {

@@ -36,7 +36,7 @@ class Player {
         console.log(nameOfShipToBeRemoved);
         for(let index = 0; index < this.playerShips.length; index++ ){
             if(this.playerShips[index].getShipName() === nameOfShipToBeRemoved && this.playerShips[index].getIsSunk()) {
-                console.log('tryung to reemove the ship!...')
+                console.log('trying to reemove the ship!...')
                 console.log('Total number of ships before: ' + this.totalNumberOfSHips);
                 this.playerShips.splice(index, 1);
                 this.totalNumberOfSHips--;

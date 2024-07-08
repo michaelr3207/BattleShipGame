@@ -26,9 +26,14 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
         return this.boardPlayer2;
     }
 
-    removeDestroyedPlayer2ShipFromUI(battleshipGame) {
-        console.log('allCells after destroyed ship' + printCells(battleshipGame.playerTwoGameBoard.allCells));
-        battleshipGame.playerTwoGameBoard.allCells.forEach((currentCell) => {
+    removeDestroyedPlayer2ShipFromUI(battleShipGame) {
+        for(let item of battleShipGame.playerTwoGameBoard.allCells){
+            if(item.getShipOnCell !== null){
+                console.log( 'test2' + item.getShipOnCell());
+            }
+        }
+        console.log('allCells after destroyed ship' + printCells(battleShipGame.playerTwoGameBoard.allCells));
+        battleShipGame.playerTwoGameBoard.allCells.forEach((currentCell) => {
            if(currentCell !== null && currentCell.getShipOnCell().getIsSunk()) {
                const gridSquareToBeErased = document.getElementById('grid2' + currentCell.getCellId());
                gridSquareToBeErased.style.background = 'black';
