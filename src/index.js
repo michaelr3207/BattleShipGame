@@ -229,7 +229,7 @@ function main() {
 const printCells = (allCells) => allCells.forEach(item => {console.log(item)});
 
 
-function addEventListenerToPlayerTwoSquares(battleshipGame, uIDisplay) {
+function addEventListenerToPlayerTwoSquares(battleshipGame, uiDisplay) {
     const GRID_KEYWORD = 'grid2';   //ToDO add to util class
     const allCells = battleshipGame.playerTwoGameBoard.getAllCells();
     console.log(allCells)
@@ -240,7 +240,7 @@ function addEventListenerToPlayerTwoSquares(battleshipGame, uIDisplay) {
             if(allCells[item].getShipOnCell()) {
                 alert('Found a ship!!!');
                 let extractedGridCoordinates = extractGridCoordinatesFromGridTitle(event.target.id.toString());
-                battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame, uIDisplay );
+                battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame, uiDisplay);
                 console.log('updated player two board after strike: \n ' + allCells);
                 allCells.forEach(item => {console.log(item)});
             }

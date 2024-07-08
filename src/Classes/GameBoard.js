@@ -94,8 +94,10 @@ class GameBoard {
                         console.log('Now removing the destoyed ship from ' + this.ownerOfBoard + 'ship list.');
                         this.ownerOfBoard.searchAndRemoveShip(item.getShipOnCell().getShipName());
                         // battleShipGame.endTheGame();
+                        uiDisplay.removeDestroyedPlayer2ShipFromUI(this.allCells);
                         this.removeSunkenShipFromGameBoard();
-                        // uiDisplay.removeDestroyedPlayer2ShipFromUI(battleShipGame);
+                        console.log('DIsplaying content before passed to UI');
+                        console.log(this.allCells);
                     }
                 }
                 break;   // ToDO - add in checks to see if a square has been hit before
