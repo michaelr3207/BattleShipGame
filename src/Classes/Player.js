@@ -43,6 +43,8 @@ class Player {
                 console.log('Total number of ships after: ' + this.totalNumberOfSHips);
             }
         }
+        if(this.totalNumberOfSHips === 0)
+            alert('GAME OVER!')
     }
 
     getShipByName(nameOfShip) {

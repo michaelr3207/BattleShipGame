@@ -1,6 +1,7 @@
+import {printCells} from "../index";
 
 
-class  UIDisplay {
+class  UIDisplay {  //ToDO add to game class (battleshipgame object)
 
     constructor() {
         this.boardPlayer1 = document.getElementById('grid1');
@@ -23,6 +24,21 @@ class  UIDisplay {
 
     getPlayer2Board() {
         return this.boardPlayer2;
+    }
+
+    removeDestroyedPlayer2ShipFromUI(battleshipGame) {
+        console.log('allCells after destroyed ship' + printCells(battleshipGame.playerTwoGameBoard.allCells));
+        battleshipGame.playerTwoGameBoard.allCells.forEach((currentCell) => {
+           if(currentCell !== null && currentCell.getShipOnCell().getIsSunk()) {
+               const gridSquareToBeErased = document.getElementById('grid2' + currentCell.getCellId());
+               gridSquareToBeErased.style.background = 'black';
+           }
+        });
+    }
+
+    markAttackedSquare(targetLocation) {
+        const gridSquareToBeErased = document.getElementById('grid2' + targetLocation);
+        gridSquareToBeErased.style.background = 'black';
     }
 }
 

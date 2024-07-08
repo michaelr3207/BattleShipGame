@@ -68,7 +68,7 @@ class GameBoard {
 
 
 
-    attackShip(targetLocation, battleShipGame) {
+    attackShip(targetLocation, battleShipGame, uiDisplay) {
         // console.log(`Before testing hit on ship-------------->`);
         // console.log(this.allCells);
         // console.log(`---------------------->>> ${targetLocation}`);  //ToDO add end game logic
@@ -93,8 +93,10 @@ class GameBoard {
                 this.addMarkedShot(targetLocation);
                 item.getShipOnCell().hit();
                 item.markCell();
+                uiDisplay.markAttackedSquare(Number.parseInt(targetLocation));
                 if(item.getShipOnCell().getIsSunk()) {
                     console.log('Owner of board ' + this.ownerOfBoard);
+                    // uiDisplay.removeDestroyedPlayer2ShipFromUI(battleShipGame);
                     this.ownerOfBoard.changeShipStatus(item.getShipOnCell().getShipName());
                     console.log(this.ownerOfBoard + 'ship has been successfully destoryed!');
                     if(this.ownerOfBoard.checkForShip(item.getShipOnCell().getShipName())) {
