@@ -20,6 +20,18 @@ class BattleShipGame {
         this.currentPlayerTurn = this.player1;
     }
 
+    setPlayerToPlayer1() {
+        this.currentPlayerTurn = this.player1;
+    }
+
+    setPlayerToPlayer2() {
+        this.currentPlayerTurn = this.player2;
+    }
+
+    getCurrentPlayerTurn() {
+        return this.currentPlayerTurn;
+    }
+
     getPlayer1() {
         return this.player1;
     }

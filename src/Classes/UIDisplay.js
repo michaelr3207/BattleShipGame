@@ -48,9 +48,14 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
         }
     }
 
-    markAttackedSquare(targetLocation) {
+    markAttackedSquareWithShipPresent(targetLocation) {
         const gridSquareToBeErased = document.getElementById('grid2' + targetLocation);
         gridSquareToBeErased.style.background = 'orange';
+    }
+
+    markAttackedSquareWithoutAnyShipPresent(targetLocation) {
+        const gridSquareToBeErased = document.getElementById('grid2' + targetLocation);
+        gridSquareToBeErased.style.background = 'black';
     }
 }
 

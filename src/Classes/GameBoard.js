@@ -85,7 +85,7 @@ class GameBoard {
                 this.addMarkedShot(targetLocation);
                 item.getShipOnCell().hit();
                 item.markCell();
-                uiDisplay.markAttackedSquare(Number.parseInt(targetLocation));
+                uiDisplay.markAttackedSquareWithShipPresent(Number.parseInt(targetLocation));
                 if(item.getShipOnCell().getIsSunk()) {
                     console.log('Owner of board ' + this.ownerOfBoard);
                     this.ownerOfBoard.changeShipStatus(item.getShipOnCell().getShipName());
@@ -105,16 +105,19 @@ class GameBoard {
             else if(targetLocation.toString() === item.getCellId().toString()) {
                 if(!item.getIsMarked()) {
                     item.markCell();
-                    this.addMissedShot(targetLocation)
+                    uiDisplay.markAttackedSquareWithoutAnyShipPresent(targetLocation);
+                    this.addMissedShot(targetLocation);
+                    alert('Missed Shot!');
                 }
                 else {
-                    alert('Cannot shoot there!');
+                    alert('Cannot shoot there! SPot taken');
                     console.log(CELL_TAKEN_ERROR);
                     return false;
                 }
             }
         }
         // console.log(this.allCells);
+        // alert('MISS!!');
         console.log(CELL_TAKEN_MESSAGE);
         return true;
     }

@@ -136,9 +136,8 @@ function checkShipStartingPositionYAxis(startingPosition, ship, battleShipGame, 
 
 function changeGridColorWithShipXAxis(ship, startingPosition, player, battleShipGame) {
     startingPosition = Number.parseInt(startingPosition) - ship.getCellSize();
-    console.log('starting pos now X ' + startingPosition);
-    console.log('starting ship now X ' + ship.shipName);
-    console.log('sdfsdfsdf ff');
+    console.log('------------->starting pos now:  ' + startingPosition);
+    console.log('------------->starting ship now: ' + ship.shipName);
     for(let index = 0; index < ship.getCellSize(); index ++) {
         const gridToBeChanged = document.getElementById(player.getGrid() + startingPosition.toString());
         console.log( '------------------??' + player.getGrid() + startingPosition.toString());
@@ -230,22 +229,28 @@ const printCells = (allCells) => allCells.forEach(item => {console.log(item)});
 
 
 function addEventListenerToPlayerTwoSquares(battleshipGame, uiDisplay) {
+    alert('Current game player is: ' + battleshipGame.getCurrentPlayerTurn().getName());
     const GRID_KEYWORD = 'grid2';   //ToDO add to util class
     const allCells = battleshipGame.playerTwoGameBoard.getAllCells();
     console.log(allCells)
     allCells.forEach(item => {console.log(item)});
     for(let item = 0; item < 100; item++) {
         document.getElementById(GRID_KEYWORD + item).addEventListener("click", (event) => {
-            alert('You have hit grid number ' + item);
-            if(allCells[item].getShipOnCell()) {
-                alert('Found a ship!!!');
+            if(battleshipGame.getCurrentPlayerTurn() === battleshipGame.getPlayer1()) {
                 let extractedGridCoordinates = extractGridCoordinatesFromGridTitle(event.target.id.toString());
-                battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame, uiDisplay);
-                console.log('updated player two board after strike: \n ' + allCells);
-                allCells.forEach(item => {console.log(item)});
+                if(allCells[item].getShipOnCell()) {
+                    alert('Found a ship!!!');
+                    battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame, uiDisplay);
+                    console.log('updated player two board after strike: \n ' + allCells);
+                    allCells.forEach(item => {console.log(item)});
+                }
+                else {
+                    alert('No a ship!!!');
+                    battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame, uiDisplay);
+                }
+                battleshipGame.setPlayerToPlayer2();
+                alert('Current game player is: ' + battleshipGame.getCurrentPlayerTurn().getName());
             }
-            else
-                alert('No a ship!!!')
         });
     }
 
