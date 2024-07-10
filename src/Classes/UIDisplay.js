@@ -34,12 +34,6 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
             }
         }
         console.log('allCells after destroyed ship' + printCells(gameboard));
-        // gameboard.forEach((currentCell) => {
-        //    if(currentCell !== null && currentCell.getShipOnCell().getIsSunk()) {
-        //        const gridSquareToBeErased = document.getElementById('grid2' + currentCell.getCellId());
-        //        gridSquareToBeErased.style.background = 'black';
-        //    }
-        // });
         for(let item of gameboard){
             if(item.getShipOnCell() !== null && item.getShipOnCell().getIsSunk()) {
                 const gridSquareToBeErased = document.getElementById('grid2' + item.getCellId());

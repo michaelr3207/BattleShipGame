@@ -43,9 +43,6 @@ class Boat {
         return this.cellSize;
     }
 
-    setCellSize(value) {
-        this.cellSize = value;
-    }
 }
 
 export {Boat};

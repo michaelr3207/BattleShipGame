@@ -1,6 +1,5 @@
 import {Cell} from "./Cell";
 import {CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, coordinateReader} from "../Util";
-import {UIDisplay} from "./UIDisplay";
 
 class GameBoard {
 
@@ -139,8 +138,7 @@ class GameBoard {
                 counter++;
             }
         });
-        // console.log('dssddsssssssssssssssssssssssssssssssssssssssssssssssssss')
-        // console.log(`ddd` + this.allCells);
+
         console.log('Cell is free!');
         return true;
     }
@@ -199,16 +197,9 @@ class GameBoard {
         else
             return this.checkCellAvailabilityXAxis(startingPosition, currentShip, occupiedCells);
 
-        // if(occupiedCells.includes(startingPosition))
-        //     return false;
-        // return true;
     }
 
     removeSunkenShipFromGameBoard() {
-        // this.allCells.forEach((currentGameBoardCell) => {
-        //     if(currentGameBoardCell.getShipOnCell().getIsSunk())
-        //         currentGameBoardCell.setShipOnCell(null);
-        // });
         const allGameCells = this.getAllCells();
         for(let currentCell of allGameCells) {
             console.log('------->');
@@ -219,10 +210,6 @@ class GameBoard {
     }
 
     checkCellAvailabilityYAxis(startingPosition, ship, occupiedCells) {
-        console.log(`Current taken ship positions -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${occupiedCells}`);
-        console.log(`Current  ship  -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${ship}`);
-        console.log('--------------> A CELL')
-
         let counter = 0;
         while(counter < ship.getCellSize()) {
             if(occupiedCells.includes(startingPosition)) {
@@ -237,15 +224,12 @@ class GameBoard {
     }
 
     checkCellAvailabilityXAxis(startingPosition, ship, occupiedCells) {
-        console.log(`Current  ship  -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${ship}`);
-        console.log(`Current taken ship positions X axis version -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% > ${occupiedCells}`);
         let counter = 0;
         while(counter < ship.getCellSize()) {
             if(occupiedCells.includes(startingPosition)) {
                 console.log('--------------> ALREADY EXISTS AS A CELL');
                 return false;
             }
-
             counter ++;
             startingPosition += 1;
         }
