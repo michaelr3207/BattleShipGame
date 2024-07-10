@@ -12,6 +12,8 @@ test('Test player creation', () => {
     expect(player1).toEqual({name: 'Bob' , playerId: 1, grid: 'grid1', playerShips: player1.addShipsToPlayer(), totalNumberOfSHips: 5, playerGameBoard: player1.getPlayerGameBoard()});
 });
 
+//tess
+
 test('Test ship creation and also adding the ship to the game', () => {
     const battleShipGame = new BattleShipGame('test game');
     const player1 = battleShipGame.createPlayer('Bob');
