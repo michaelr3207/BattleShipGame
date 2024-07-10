@@ -63,7 +63,7 @@ function createAndAddBoatToUI() {
 function playerAttackAnotherPlayersShip(battleShipGame, coordinates, player, uIDisplay) {
     const targetLocation = coordinateReader(coordinates);
     battleShipGame.playerOneGameBoard.attackShip(targetLocation, player);
-    uIDisplay.markAttackedTargetOnGrid(targetLocation, player);
+    battleShipGame.uIDisplay.markAttackedTargetOnGrid(targetLocation, player);
 
 }
 
@@ -173,7 +173,7 @@ function changeGridColorWithShipYAxis(ship, startingPosition, player, battleShip
 
 function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
-    const uIDisplay = new UIDisplay();
+    // const uIDisplay = new UIDisplay();
     const playerTwoStarterPositions = ["84X", "15X", "4X", "63Y", "65X"];
     // const playerTwoStarterPositions = ["84X"];
     const playerOneStarterPositions = ["10Y", "47Y", "16X", "34X", "98Y"];
@@ -222,13 +222,13 @@ function main() {
     const allCells = battleShipGame.playerOneGameBoard.getAllCells();
     console.log('Player one cells');
     printCells(allCells);
-    addEventListenerToPlayerTwoSquares(battleShipGame, uIDisplay);
+    addEventListenerToPlayerTwoSquares(battleShipGame);
 }
 
 const printCells = (allCells) => allCells.forEach(item => {console.log(item)});
 
 
-function addEventListenerToPlayerTwoSquares(battleshipGame, uiDisplay) {
+function addEventListenerToPlayerTwoSquares(battleshipGame) {
     alert('Current game player is: ' + battleshipGame.getCurrentPlayerTurn().getName());
     const GRID_KEYWORD = 'grid2';   //ToDO add to util class
     const allCells = battleshipGame.playerTwoGameBoard.getAllCells();
@@ -240,13 +240,13 @@ function addEventListenerToPlayerTwoSquares(battleshipGame, uiDisplay) {
                 let extractedGridCoordinates = extractGridCoordinatesFromGridTitle(event.target.id.toString());
                 if(allCells[item].getShipOnCell()) {
                     alert('Found a ship!!!');
-                    battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame, uiDisplay);
+                    battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame);
                     console.log('updated player two board after strike: \n ' + allCells);
                     allCells.forEach(item => {console.log(item)});
                 }
                 else {
                     alert('No a ship!!!');
-                    battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame, uiDisplay);
+                    battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame);
                 }
                 battleshipGame.setPlayerToPlayer2();
                 alert('Current game player is: ' + battleshipGame.getCurrentPlayerTurn().getName());

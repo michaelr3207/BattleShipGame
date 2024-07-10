@@ -68,7 +68,7 @@ class GameBoard {
 
 
 
-    attackShip(targetLocation, battleShipGame, uiDisplay) {
+    attackShip(targetLocation, battleShipGame) {
           //ToDO add end game logic
 
         for (let item of this.allCells) {
@@ -85,7 +85,7 @@ class GameBoard {
                 this.addMarkedShot(targetLocation);
                 item.getShipOnCell().hit();
                 item.markCell();
-                uiDisplay.markAttackedSquareWithShipPresent(Number.parseInt(targetLocation));
+                battleShipGame.uIDisplay.markAttackedSquareWithShipPresent(Number.parseInt(targetLocation));
                 if(item.getShipOnCell().getIsSunk()) {
                     console.log('Owner of board ' + this.ownerOfBoard);
                     this.ownerOfBoard.changeShipStatus(item.getShipOnCell().getShipName());
@@ -94,7 +94,7 @@ class GameBoard {
                         console.log('Now removing the destoyed ship from ' + this.ownerOfBoard + 'ship list.');
                         this.ownerOfBoard.searchAndRemoveShip(item.getShipOnCell().getShipName());
                         // battleShipGame.endTheGame();
-                        uiDisplay.removeDestroyedPlayer2ShipFromUI(this.allCells);
+                        battleShipGame.uIDisplay.removeDestroyedPlayer2ShipFromUI(this.allCells);
                         this.removeSunkenShipFromGameBoard();
                         console.log('DIsplaying content before passed to UI');
                         console.log(this.allCells);
@@ -105,7 +105,7 @@ class GameBoard {
             else if(targetLocation.toString() === item.getCellId().toString()) {
                 if(!item.getIsMarked()) {
                     item.markCell();
-                    uiDisplay.markAttackedSquareWithoutAnyShipPresent(targetLocation);
+                    battleShipGame.uIDisplay.markAttackedSquareWithoutAnyShipPresent(targetLocation);
                     this.addMissedShot(targetLocation);
                     alert('Missed Shot!');
                 }

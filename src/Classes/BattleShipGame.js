@@ -18,6 +18,7 @@ class BattleShipGame {
         this.playerOneGameBoard = new GameBoard('Player 1 board', this.player1);
         this.playerTwoGameBoard = new GameBoard('Player 2 board', this.player2);
         this.currentPlayerTurn = this.player1;
+        this.uIDisplay = new UIDisplay();
     }
 
     setPlayerToPlayer1() {
