@@ -31,7 +31,7 @@ class  UIDisplay {
                 console.log( 'test2' + item.getShipOnCell().getIsSunk());
             }
         }
-        console.log('allCells after destroyed ship' + printCells(gameboard));
+        // console.log('allCells after destroyed ship' + printCells(gameboard));
         // gameboard.forEach((currentCell) => {
         //    if(currentCell !== null && currentCell.getShipOnCell().getIsSunk()) {
         //        const gridSquareToBeErased = document.getElementById('grid2' + currentCell.getCellId());
