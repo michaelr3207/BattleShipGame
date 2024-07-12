@@ -84,7 +84,6 @@ class GameBoard {
                 this.addMarkedShot(targetLocation);
                 item.getShipOnCell().hit();
                 item.markCell();
-                battleShipGame.uIDisplay.markAttackedSquareWithShipPresent(Number.parseInt(targetLocation));
                 if(item.getShipOnCell().getIsSunk()) {
                     console.log('Owner of board ' + this.ownerOfBoard);
                     this.ownerOfBoard.changeShipStatus(item.getShipOnCell().getShipName());
@@ -93,7 +92,7 @@ class GameBoard {
                         console.log('Now removing the destoyed ship from ' + this.ownerOfBoard + 'ship list.');
                         this.ownerOfBoard.searchAndRemoveShip(item.getShipOnCell().getShipName());
                         // battleShipGame.endTheGame();
-                        battleShipGame.uIDisplay.removeDestroyedPlayer2ShipFromUI(this.allCells);
+                        battleShipGame.uIDisplay.removeDestroyedPlayer2ShipFromUI(this.allCells);  //ToDo separate DOM functions from these objects, as they are breaking tests
                         this.removeSunkenShipFromGameBoard();
                         console.log('DIsplaying content before passed to UI');
                         console.log(this.allCells);

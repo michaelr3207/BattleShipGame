@@ -203,6 +203,7 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
                 if(allCells[item].getShipOnCell()) {
                     alert('Found a ship!!!');
                     battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame);
+                    battleshipGame.uIDisplay.markAttackedSquareWithShipPresent(Number.parseInt(extractedGridCoordinates));
                     console.log('updated player two board after strike: \n ' + allCells);
                     allCells.forEach(item => {console.log(item)});
                 }
