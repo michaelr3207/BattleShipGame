@@ -24,6 +24,26 @@ class  UIDisplay {
     getPlayer2Board() {
         return this.boardPlayer2;
     }
+
+    removeDestroyedPlayer2ShipFromUI(battleShipGame) {
+        for(let item of battleShipGame.playerTwoGameBoard.allCells){
+            if(item.getShipOnCell !== null){
+                console.log( 'test2' + item.getShipOnCell());
+            }
+        }
+        console.log('allCells after destroyed ship' + printCells(battleShipGame.playerTwoGameBoard.allCells));
+        battleShipGame.playerTwoGameBoard.allCells.forEach((currentCell) => {
+            if(currentCell !== null && currentCell.getShipOnCell().getIsSunk()) {
+                const gridSquareToBeErased = document.getElementById('grid2' + currentCell.getCellId());
+                gridSquareToBeErased.style.background = 'black';
+            }
+        });
+    }
+
+    markAttackedSquare(targetLocation) {
+        const gridSquareToBeErased = document.getElementById('grid2' + targetLocation);
+        gridSquareToBeErased.style.background = 'black';
+    }
 }
 
 export {UIDisplay};

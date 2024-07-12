@@ -223,13 +223,13 @@ function main() {
     const allCells = battleShipGame.playerOneGameBoard.getAllCells();
     console.log('Player one cells');
     printCells(allCells);
-    addEventListenerToPlayerTwoSquares(battleShipGame)
+    addEventListenerToPlayerTwoSquares(battleShipGame, uIDisplay)
 }
 
 const printCells = (allCells) => allCells.forEach(item => {console.log(item)});
 
 
-function addEventListenerToPlayerTwoSquares(battleshipGame) {
+function addEventListenerToPlayerTwoSquares(battleshipGame, uIDisplay) {
     const GRID_KEYWORD = 'grid2';   //ToDO add to util class
     const allCells = battleshipGame.playerTwoGameBoard.getAllCells();
     console.log(allCells)
@@ -240,7 +240,7 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
             if(allCells[item].getShipOnCell()) {
                 alert('Found a ship!!!');
                 let extractedGridCoordinates = extractGridCoordinatesFromGridTitle(event.target.id.toString());
-                battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame);
+                battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame, uIDisplay);
                 console.log('updated player two board after strike: \n ' + allCells);
                 allCells.forEach(item => {console.log(item)});
             }
@@ -262,6 +262,6 @@ populateBothGrids();
 // createAndAddBoatToUI();
 main();
 
-export  {changeGridColorWithShipXAxis, createSquares, createAndAddBoatToUI, checkShipStartingPositionYAxis};
+export  {changeGridColorWithShipXAxis, createSquares, createAndAddBoatToUI, checkShipStartingPositionYAxis, printCells};
 
 
