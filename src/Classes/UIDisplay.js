@@ -25,24 +25,30 @@ class  UIDisplay {
         return this.boardPlayer2;
     }
 
-    removeDestroyedPlayer2ShipFromUI(battleShipGame) {
-        for(let item of battleShipGame.playerTwoGameBoard.allCells){
-            if(item.getShipOnCell !== null){
-                console.log( 'test2' + item.getShipOnCell());
+    removeDestroyedPlayer2ShipFromUI(gameboard) {
+        for(let item of gameboard){
+            if(item.getShipOnCell() !== null){
+                console.log( 'test2' + item.getShipOnCell().getIsSunk());
             }
         }
-        console.log('allCells after destroyed ship' + printCells(battleShipGame.playerTwoGameBoard.allCells));
-        battleShipGame.playerTwoGameBoard.allCells.forEach((currentCell) => {
-            if(currentCell !== null && currentCell.getShipOnCell().getIsSunk()) {
-                const gridSquareToBeErased = document.getElementById('grid2' + currentCell.getCellId());
+        console.log('allCells after destroyed ship' + printCells(gameboard));
+        // gameboard.forEach((currentCell) => {
+        //    if(currentCell !== null && currentCell.getShipOnCell().getIsSunk()) {
+        //        const gridSquareToBeErased = document.getElementById('grid2' + currentCell.getCellId());
+        //        gridSquareToBeErased.style.background = 'black';
+        //    }
+        // });
+        for(let item of gameboard){
+            if(item.getShipOnCell() !== null && item.getShipOnCell().getIsSunk()) {
+                const gridSquareToBeErased = document.getElementById('grid2' + item.getCellId());
                 gridSquareToBeErased.style.background = 'black';
             }
-        });
+        }
     }
 
     markAttackedSquare(targetLocation) {
         const gridSquareToBeErased = document.getElementById('grid2' + targetLocation);
-        gridSquareToBeErased.style.background = 'black';
+        gridSquareToBeErased.style.background = 'orange';
     }
 }
 
