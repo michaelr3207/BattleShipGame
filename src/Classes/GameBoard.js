@@ -102,7 +102,7 @@ class GameBoard {
                         console.log('Now removing the destoyed ship from ' + this.ownerOfBoard + 'ship list.');
                         this.ownerOfBoard.searchAndRemoveShip(item.getShipOnCell().getShipName());
                         // battleShipGame.endTheGame();
-                        uiDisplay.removeDestroyedPlayer2ShipFromUI(battleShipGame);;
+                        uiDisplay.removeDestroyedPlayer2ShipFromUI(this.allCells);  //ToDo add if statement to detect if player 1 or 2
                         this.removeSunkenShipFromGameBoard();
                         console.log('DIsplaying content before passed to UI');
                         console.log(this.allCells);
