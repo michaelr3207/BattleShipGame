@@ -35,19 +35,46 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
         }
         for(let item of gameboard){
             if(item.getShipOnCell() !== null && item.getShipOnCell().getIsSunk()) {
+                console.log('found destroyed ship!!!');
                 const gridSquareToBeErased = document.getElementById('grid2' + item.getCellId());
                 gridSquareToBeErased.style.background = 'black';
             }
         }
     }
 
-    markAttackedSquareWithShipPresent(targetLocation) {
+    removeDestroyedPlayer1ShipFromUI(gameboard) {
+        for(let item of gameboard){
+            if(item.getShipOnCell() !== null){
+                console.log( 'test2' + item.getShipOnCell().getIsSunk());
+            }
+        }
+        for(let item of gameboard){
+            if(item.getShipOnCell() !== null && item.getShipOnCell().getIsSunk()) {
+                console.log('found destroyed ship!!!');
+                const gridSquareToBeErased = document.getElementById('grid1' + item.getCellId());
+                gridSquareToBeErased.style.background = 'black';
+            }
+        }
+    }
+
+    markAttackedSquareWithShipPresentPlayer2Grid(targetLocation) {
         const gridSquareToBeErased = document.getElementById('grid2' + targetLocation);
         gridSquareToBeErased.style.background = 'orange';
     }
 
-    markAttackedSquareWithoutAnyShipPresent(targetLocation) {
+    markAttackedSquareWithoutAnyShipPresentPlayer2Grid(targetLocation) {
         const gridSquareToBeErased = document.getElementById('grid2' + targetLocation);
+        gridSquareToBeErased.style.background = 'black';
+    }
+
+
+    markAttackedSquareWithShipPresentPlayer1Grid(targetLocation) {
+        const gridSquareToBeErased = document.getElementById('grid1' + targetLocation);
+        gridSquareToBeErased.style.background = 'orange';
+    }
+
+    markAttackedSquareWithoutAnyShipPresentPlayer1Grid(targetLocation) {
+        const gridSquareToBeErased = document.getElementById('grid1' + targetLocation);
         gridSquareToBeErased.style.background = 'black';
     }
 }

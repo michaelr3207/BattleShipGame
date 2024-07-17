@@ -17,6 +17,10 @@ class Player {
         return this.playerGameBoard;
     }
 
+    getNumberOfPlayerShips() {
+        return this.playerShips.length;
+    }
+
     addShipsToPlayer() {
         const allPlayerShips = [];
         const destroyerShip = new Boat(this.name + 'Destroyer', 5, this);

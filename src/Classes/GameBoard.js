@@ -79,7 +79,7 @@ class GameBoard {
             console.log('attempting to strike ship...');
             if (item.getShipOnCell() !== null && targetLocation.toString() === item.getCellId().toString() && !item.getIsMarked()) {
                 if(item.getShipOnCell().getNumberOfHits() === 0)
-                    alert('0 detecetdd');
+                    // alert('0 detecetdd');
                 console.log('hit!!!!!!!!!!');
                 this.addMarkedShot(targetLocation);
                 item.getShipOnCell().hit();
@@ -89,11 +89,10 @@ class GameBoard {
                     this.ownerOfBoard.changeShipStatus(item.getShipOnCell().getShipName());
                     console.log(this.ownerOfBoard + 'ship has been successfully destoryed!');
                     if(this.ownerOfBoard.checkForShip(item.getShipOnCell().getShipName())) {
-                        console.log('Now removing the destoyed ship from ' + this.ownerOfBoard + 'ship list.');
+                        console.log('Now removing the destoyed ship from ' + this.ownerOfBoard.getName() + 'ship list.');
                         this.ownerOfBoard.searchAndRemoveShip(item.getShipOnCell().getShipName());
                         // battleShipGame.endTheGame();
-                        battleShipGame.uIDisplay.removeDestroyedPlayer2ShipFromUI(this.allCells);  //ToDo separate DOM functions from these objects, as they are breaking tests
-                        this.removeSunkenShipFromGameBoard();
+                        // this.removeSunkenShipFromGameBoard();
                         console.log('DIsplaying content before passed to UI');
                         console.log(this.allCells);
                     }
@@ -103,12 +102,12 @@ class GameBoard {
             else if(targetLocation.toString() === item.getCellId().toString()) {
                 if(!item.getIsMarked()) {
                     item.markCell();
-                    battleShipGame.uIDisplay.markAttackedSquareWithoutAnyShipPresent(targetLocation);
                     this.addMissedShot(targetLocation);
-                    alert('Missed Shot!');
+                    // alert('Missed Shot!');
+                    return false;
                 }
                 else {
-                    alert('Cannot shoot there! SPot taken');
+                    // alert('Cannot shoot there! SPot taken');
                     console.log(CELL_TAKEN_ERROR);
                     return false;
                 }
@@ -166,7 +165,7 @@ class GameBoard {
         console.log('CUrrent brug starting position is: ' + startingPosition)
         let counter = 0;
         startingPosition = Number.parseInt(startingPosition);
-        // if(!this.checkIfGridCellIsAvailable(startingPosition)) {
+        // if(!this.checkIfGridCellIsAvailable(startingPosition, ship)) {
         //     console.log(CELL_TAKEN_ERROR);
         //     return false;
         // }

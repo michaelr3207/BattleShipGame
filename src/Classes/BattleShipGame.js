@@ -1,6 +1,7 @@
 import {Player} from "./Player";
 import {GameBoard} from "./GameBoard";
 import {UIDisplay} from "./UIDisplay";
+import {AIBot} from "./AIBot";
 
 
 class BattleShipGame {
@@ -19,6 +20,7 @@ class BattleShipGame {
         this.playerTwoGameBoard = new GameBoard('Player 2 board', this.player2);
         this.currentPlayerTurn = this.player1;
         this.uIDisplay = new UIDisplay();
+        this.AIBot = new AIBot('Player Two bot', this);
     }
 
     setPlayerToPlayer1() {

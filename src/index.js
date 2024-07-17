@@ -201,18 +201,25 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
             if(battleshipGame.getCurrentPlayerTurn() === battleshipGame.getPlayer1()) {
                 let extractedGridCoordinates = extractGridCoordinatesFromGridTitle(event.target.id.toString());
                 if(allCells[item].getShipOnCell()) {
-                    alert('Found a ship!!!');
+                    let currentNumberOfPlayerTwoShipsLeft = battleshipGame.getPlayer2().getNumberOfPlayerShips();
+                    // alert('Found a ship!!!');
                     battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame);
-                    battleshipGame.uIDisplay.markAttackedSquareWithShipPresent(Number.parseInt(extractedGridCoordinates));
+                    battleshipGame.uIDisplay.markAttackedSquareWithShipPresentPlayer2Grid(Number.parseInt(extractedGridCoordinates));
+                    if(battleshipGame.getPlayer2().getNumberOfPlayerShips() === (currentNumberOfPlayerTwoShipsLeft - 1)) {
+                        console.log('Ship has been destroyed by player 1!!!!!');
+                        battleshipGame.uIDisplay.removeDestroyedPlayer2ShipFromUI(battleshipGame.playerTwoGameBoard.getAllCells());
+                    }
                     console.log('updated player two board after strike: \n ' + allCells);
                     allCells.forEach(item => {console.log(item)});
                 }
                 else {
-                    alert('No a ship!!!');
+                    // alert('No a ship!!!');
                     battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame);
+                    battleshipGame.uIDisplay.markAttackedSquareWithoutAnyShipPresentPlayer2Grid(extractedGridCoordinates);
                 }
                 battleshipGame.setPlayerToPlayer2();
-                alert('Current game player is: ' + battleshipGame.getCurrentPlayerTurn().getName());
+                battleshipGame.AIBot.attackRandomPlayerOnePosition();
+                // alert('Current game player is: ' + battleshipGame.getCurrentPlayerTurn().getName());
             }
         });
     }

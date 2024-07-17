@@ -105,8 +105,8 @@ test('Ensure two boats cannot be placed in the same cells', () => {
     const destroyerBoat = new Boat(player1.getName() + 'Destroyer', 5, player1)
     const destroyerBoatTwo = new Boat(player1.getName() + 'DestroyerTwo', 5, player1)
     const randomGeneratedShipStaringPosition = "43Y";
-    expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame)).toBeTruthy();
-    expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, destroyerBoatTwo, battleShipGame)).toBeFalsy();
+    expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGridYAxis(randomGeneratedShipStaringPosition, destroyerBoat, battleShipGame)).toBeTruthy();
+    expect(battleShipGame.playerOneGameBoard.plotShipOnPlayerGridYAxis(randomGeneratedShipStaringPosition, destroyerBoatTwo, battleShipGame)).toBeFalsy();
     console.log(battleShipGame.playerOneGameBoard.allCells)
 
 });
