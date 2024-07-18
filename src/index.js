@@ -139,7 +139,6 @@ function main() {
     const battleShipGame = new BattleShipGame('Simple BattleShip Game');
     const playerTwoStarterPositions = ["84X", "15X", "4X", "63Y", "65X"];
     const playerOneStarterPositions = ["10Y", "47Y", "16X", "34X", "98Y"];
-    console.log('jereeee ======================================' + battleShipGame.player1.playerShips[0]);
     let counter = 0;
     for(let index = 0; index < playerOneStarterPositions.length; index ++) {
         console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXX: ' + playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1));  //ToDo add in system that checkc all coordinates for ship to be placed
@@ -203,18 +202,21 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
                 if(allCells[item].getShipOnCell()) {
                     let currentNumberOfPlayerTwoShipsLeft = battleshipGame.getPlayer2().getNumberOfPlayerShips();
                     // alert('Found a ship!!!');
-                    battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame);
+                    battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates);
                     battleshipGame.uIDisplay.markAttackedSquareWithShipPresentPlayer2Grid(Number.parseInt(extractedGridCoordinates));
                     if(battleshipGame.getPlayer2().getNumberOfPlayerShips() === (currentNumberOfPlayerTwoShipsLeft - 1)) {
                         console.log('Ship has been destroyed by player 1!!!!!');
                         battleshipGame.uIDisplay.removeDestroyedPlayer2ShipFromUI(battleshipGame.playerTwoGameBoard.getAllCells());
+                    }
+                    if((battleshipGame.getPlayer2().getNumberOfPlayerShips() === 0)) {
+                        battleshipGame.uIDisplay.showGameOverScreen();
                     }
                     console.log('updated player two board after strike: \n ' + allCells);
                     allCells.forEach(item => {console.log(item)});
                 }
                 else {
                     // alert('No a ship!!!');
-                    battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates, battleshipGame);
+                    battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates);
                     battleshipGame.uIDisplay.markAttackedSquareWithoutAnyShipPresentPlayer2Grid(extractedGridCoordinates);
                 }
                 battleshipGame.setPlayerToPlayer2();

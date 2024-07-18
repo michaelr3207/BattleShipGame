@@ -71,6 +71,18 @@ body, html {
     border: 1px solid rgba(0, 0, 0, 0.74);
 }
 
+
+.gameOverContainer {
+    margin: auto;
+    width: 50%;
+    height: 50%;
+    background: red;
+}
+
+.hide {
+    display: none;
+}
+
 .square:hover {
     background: red;
 }

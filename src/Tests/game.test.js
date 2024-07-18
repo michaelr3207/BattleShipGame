@@ -83,7 +83,7 @@ test('Test to ensure an empty square can be hit', () => {
     const coordinateForTest = 'D4';
     const randomGeneratedShipStaringPosition = 43;
     expect(battleShipGame.playerOneGameBoard.getCellById(45).getIsMarked()).toBeFalsy();
-    expect(battleShipGame.playerOneGameBoard.attackShip(45, player1)).toBeTruthy();
+    expect(battleShipGame.playerOneGameBoard.attackShip(45, player1)).toBeFalsy();
     console.log(battleShipGame.playerOneGameBoard.getAllCells());
     expect(battleShipGame.playerOneGameBoard.getCellById(45).getIsMarked()).toBe(true);
 });

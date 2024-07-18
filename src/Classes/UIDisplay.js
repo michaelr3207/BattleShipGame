@@ -37,7 +37,7 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
             if(item.getShipOnCell() !== null && item.getShipOnCell().getIsSunk()) {
                 console.log('found destroyed ship!!!');
                 const gridSquareToBeErased = document.getElementById('grid2' + item.getCellId());
-                gridSquareToBeErased.style.background = 'black';
+                gridSquareToBeErased.style.background = 'yellow';
             }
         }
     }
@@ -52,7 +52,7 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
             if(item.getShipOnCell() !== null && item.getShipOnCell().getIsSunk()) {
                 console.log('found destroyed ship!!!');
                 const gridSquareToBeErased = document.getElementById('grid1' + item.getCellId());
-                gridSquareToBeErased.style.background = 'black';
+                gridSquareToBeErased.style.background = 'yellow';
             }
         }
     }
@@ -76,6 +76,11 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
     markAttackedSquareWithoutAnyShipPresentPlayer1Grid(targetLocation) {
         const gridSquareToBeErased = document.getElementById('grid1' + targetLocation);
         gridSquareToBeErased.style.background = 'black';
+    }
+
+    showGameOverScreen() {
+        document.getElementById('contentBox').className = 'hide';
+        document.getElementById('gameOverScreen').className = 'gameOverContainer';
     }
 }
 

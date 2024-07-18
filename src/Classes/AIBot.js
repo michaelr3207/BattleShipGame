@@ -2,11 +2,16 @@
 
 class AIBot {
 
-    constructor(name, battleShipGame) {
+    constructor(name, battleShipGame, player1) {
         this.name = name;
         this.numberOfTurns = 0;
         this.game = battleShipGame;
         this.currentAttackedCoordinates = [];
+        // ToDO attributes below to be used to make AI more difficult
+        this.currentStatusOfPlayer1 = player1;
+        this.currentDestroyingPlayerOneShip = false;
+        this.previousAttackHitShip = false;
+        this.currentAttackHitShip = false;
     }
 
     generateRandomAttackCoordinates() {

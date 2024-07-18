@@ -67,7 +67,7 @@ class GameBoard {
 
 
 
-    attackShip(targetLocation, battleShipGame) {
+    attackShip(targetLocation) {
           //ToDO add end game logic
 
         for (let item of this.allCells) {
