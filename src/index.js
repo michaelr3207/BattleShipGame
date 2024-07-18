@@ -13,7 +13,6 @@ function createSquares(index){
         playerGrid = 'grid1';
     else
         playerGrid = 'grid2';
-
     let squareId = 0;
     let squares = 10;
     let rows = 10;
