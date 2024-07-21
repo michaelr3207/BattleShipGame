@@ -141,25 +141,6 @@ class GameBoard {
         return true;
     }
 
-    // checkIfShipFits(startingPosition, ship) {
-    //     let counter = 0;
-    //     startingPosition = Number.parseInt(startingPosition);
-    //     // startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
-    //     if(!this.checkIfGridCellIsAvailable(startingPosition)) {
-    //         console.log(CELL_TAKEN_ERROR);
-    //         return false;
-    //     }
-    //     this.getAllCells().forEach((item) => {
-    //         if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
-    //             console.log('plotted!!')
-    //             counter++;
-    //         }
-    //     });
-    //     // console.log('dssddsssssssssssssssssssssssssssssssssssssssssssssssssss')
-    //     // console.log(`ddd` + this.allCells);
-    //     console.log('Cell is free!');
-    //     return true;
-    // }
 
     plotShipOnPlayerGridYAxis(startingPosition, ship) {
         console.log('CUrrent brug starting position is: ' + startingPosition)
@@ -197,15 +178,6 @@ class GameBoard {
 
     }
 
-    removeSunkenShipFromGameBoard() {
-        const allGameCells = this.getAllCells();
-        for(let currentCell of allGameCells) {
-            console.log('------->');
-            console.log(currentCell);
-            if(currentCell.getShipOnCell() !== null && currentCell.getShipOnCell().getIsSunk())
-                currentCell.setShipOnCell(null);
-        }
-    }
 
     checkCellAvailabilityYAxis(startingPosition, ship, occupiedCells) {
         let counter = 0;

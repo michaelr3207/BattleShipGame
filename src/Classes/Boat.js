@@ -31,14 +31,6 @@ class Boat {
         return this.shipName;
     }
 
-    getShipOwner() {
-        return this.shipOwner;
-    }
-
-    setName(value) {
-        this.name = value;
-    }
-
     getCellSize() {
         return this.cellSize;
     }

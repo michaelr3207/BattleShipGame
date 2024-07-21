@@ -29,6 +29,7 @@ class BattleShipGame {
     }
 
     setGameWinner(winningPlayer) {
+        this.endTheGame();
         this.gameWinner = winningPlayer;
     }
 
@@ -97,9 +98,6 @@ class BattleShipGame {
         return new Player(name, 1);
     }
 
-    getNumberOfPlayers() {
-        return this.noOfPlayers;
-    }
 
     getNumberOfShips() {
         return this.totalNumberOfShips;

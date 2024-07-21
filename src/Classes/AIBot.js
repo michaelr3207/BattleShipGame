@@ -9,7 +9,7 @@ class AIBot {
         this.currentAttackedCoordinates = [];
         // ToDO attributes below to be used to make AI more difficult
         this.currentStatusOfPlayer1 = player1;
-        this.currentDestroyingPlayerOneShip = false;
+        this.currentlyDestroyingPlayerOneShip = false;
         this.previousAttackHitShip = false;
         this.currentAttackHitShip = false;
     }
@@ -43,6 +43,7 @@ class AIBot {
 
     attackLocationUsingCoordinates(randomAttackPosition, currentNumberOfPlayerOneShipsLeft) {
         if(this.game.playerOneGameBoard.attackShip(randomAttackPosition)){
+            this.currentlyDestroyingPlayerOneShip = true;
             this.game.uIDisplay.markAttackedSquareWithShipPresentPlayer1Grid(randomAttackPosition);
         }
         else{
@@ -54,6 +55,7 @@ class AIBot {
 
     checkIfPlayerOneShipWasDestroyedAfterLastAttack(currentNumberOfPlayerOneShipsLeft) {
         if(this.game.getPlayer1().getNumberOfPlayerShips() === (currentNumberOfPlayerOneShipsLeft - 1)) {
+            this.currentlyDestroyingPlayerOneShip = false;
             console.log('Ship has been destroyed by player 2!!!!!');
             this.game.uIDisplay.removeDestroyedPlayer1ShipFromUI(this.game.playerOneGameBoard.getAllCells());
         }

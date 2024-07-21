@@ -68,7 +68,6 @@ class Player {
         }
     }
 
-
     checkForShip(nameOfShipToBeRemoved) {
         for(let currentShip of this.playerShips)
             if(currentShip.getShipName() === nameOfShipToBeRemoved)
@@ -80,16 +79,8 @@ class Player {
         return this.name;
     }
 
-    setName(value) {
-        this.name = value;
-    }
-
     getId() {
         return this.playerId;
-    }
-
-    setId(value) {
-        this.id = value;
     }
 
     getGrid() {
