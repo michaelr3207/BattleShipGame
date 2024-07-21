@@ -74,9 +74,21 @@ body, html {
 
 .gameOverContainer {
     margin: auto;
+    margin-top: 7%;
     width: 50%;
     height: 50%;
-    background: red;
+    background: rgba(166, 122, 122, 0.55);
+    flex-direction: row;
+    align-content: center;
+}
+
+.gameResult {
+    /*border: 2px solid green;*/
+    height: 15%;
+    color: white;
+    font-size: 400%;
+    font-family: monospace;
+    text-align: center;
 }
 
 .hide {

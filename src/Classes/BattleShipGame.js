@@ -19,8 +19,17 @@ class BattleShipGame {
         this.playerOneGameBoard = new GameBoard('Player 1 board', this.player1);
         this.playerTwoGameBoard = new GameBoard('Player 2 board', this.player2);
         this.currentPlayerTurn = this.player1;
-        this.uIDisplay = new UIDisplay();
+        this.uIDisplay = new UIDisplay(this);
         this.AIBot = new AIBot('Player Two bot', this);
+        this.gameWinner = null;
+    }
+
+    getGameWinner() {
+        return this.gameWinner;
+    }
+
+    setGameWinner(winningPlayer) {
+        this.gameWinner = winningPlayer;
     }
 
     setPlayerToPlayer1() {

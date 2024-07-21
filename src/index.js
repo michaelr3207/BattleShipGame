@@ -208,6 +208,7 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
                         battleshipGame.uIDisplay.removeDestroyedPlayer2ShipFromUI(battleshipGame.playerTwoGameBoard.getAllCells());
                     }
                     if((battleshipGame.getPlayer2().getNumberOfPlayerShips() === 0)) {
+                        battleshipGame.setGameWinner(battleshipGame.getPlayer1().getName());
                         battleshipGame.uIDisplay.showGameOverScreen();
                     }
                     console.log('updated player two board after strike: \n ' + allCells);

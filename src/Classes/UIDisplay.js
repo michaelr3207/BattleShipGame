@@ -4,9 +4,10 @@ import {GameBoard} from "./GameBoard";
 
 class  UIDisplay {  //ToDO add to game class (battleshipgame object)
 
-    constructor() {
+    constructor(battleShipGame) {
         this.boardPlayer1 = document.getElementById('grid1');
         this.boardPlayer2 = document.getElementById('grid2');
+        this.battleShipGame = battleShipGame;
     }
 
     markAttackedTargetOnGrid(targetLocation, player) {
@@ -81,6 +82,11 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
     showGameOverScreen() {
         document.getElementById('contentBox').className = 'hide';
         document.getElementById('gameOverScreen').className = 'gameOverContainer';
+        this.displayTheGameWinnerOnTheUIAfterGameEnds();
+    }
+
+    displayTheGameWinnerOnTheUIAfterGameEnds() {
+        document.getElementById('gameResultDiv').innerHTML = 'The Game Winner Is: ' + this.battleShipGame.getGameWinner()
     }
 }
 

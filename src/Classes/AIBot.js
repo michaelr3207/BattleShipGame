@@ -59,6 +59,7 @@ class AIBot {
         }
         if(this.game.getPlayer1().getNumberOfPlayerShips() === 0) {
             console.log('AI bot has won the game!')
+            this.game.setGameWinner(this.game.getPlayer2().getName());
             this.game.uIDisplay.showGameOverScreen();
         }
     }
