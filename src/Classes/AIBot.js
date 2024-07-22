@@ -75,6 +75,7 @@ class AIBot {
             case "-10" : this.currentCoordinatedAttackOnDamagedShip -= 10; break;
         }
         console.log('Next planned attack! : ' + this.currentCoordinatedAttackOnDamagedShip);
+        this.currentAttackedCoordinates.push(this.currentCoordinatedAttackOnDamagedShip);
         return this.attackLocationUsingCoordinates(this.currentCoordinatedAttackOnDamagedShip, currentNumberOfPlayerOneShipsLeft);
     }
 
@@ -91,6 +92,7 @@ class AIBot {
             case "-10" : adjustedTarget -= 10; break;
         }
         console.log('Next planned corrected attack! : ' + adjustedTarget);
+        this.currentAttackedCoordinates.push(adjustedTarget);
         return this.attackLocationUsingCoordinates(adjustedTarget, currentNumberOfPlayerOneShipsLeft);
     }
 
