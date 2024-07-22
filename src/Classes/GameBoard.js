@@ -39,13 +39,6 @@ class GameBoard {
         this.markedCells.push(targetLocation);
     }
 
-    checkForShipOnCell(targetLocation) {
-        console.log('this is a test message');
-        const allCells = this.getAllCells();
-        allCells.forEach(item => {console.log(item)});
-        console.log("burger-><<<<<<<<<<<<<<<<<<<<<<<<" + allCells[targetLocation].getShipOnCell().getShipName())
-        return !!allCells[targetLocation].getShipOnCell();
-    }
 
     createGameCells() {
         let gameCells = [];
@@ -71,15 +64,8 @@ class GameBoard {
           //ToDO add end game logic
 
         for (let item of this.allCells) {
-            if(item.getShipOnCell() !== null  && !item.getIsMarked()) {
-                if(Number.parseInt(targetLocation) === Number.parseInt(item.getCellId())){
-                    console.log('Success!!!!------------------------------------------------------');
-                }
-            }
             console.log('attempting to strike ship...');
             if (item.getShipOnCell() !== null && targetLocation.toString() === item.getCellId().toString() && !item.getIsMarked()) {
-                if(item.getShipOnCell().getNumberOfHits() === 0)
-                    // alert('0 detecetdd');
                 console.log('hit!!!!!!!!!!');
                 this.addMarkedShot(targetLocation);
                 item.getShipOnCell().hit();

@@ -56,7 +56,7 @@ class AIBot {
     attemptToAnotherSuccessfulStrikeOnAShipThatIsCurrentBeingDestroyed(currentNumberOfPlayerOneShipsLeft) {
         if(this.previousAttackHitShip) {
             console.log('AIBot: There has been a previous successful attack on this ship.')
-            this.translatePlannedMoveIntoAnAttack(currentNumberOfPlayerOneShipsLeft);
+            this.translateFollowUpAttackAfterPreviousSuccessfulAttack(currentNumberOfPlayerOneShipsLeft);
         }
         else {
             console.log('AIBot: Last shot missed, changing target location.')
@@ -66,7 +66,7 @@ class AIBot {
         }
     }
 
-    translatePlannedMoveIntoAnAttack(currentNumberOfPlayerOneShipsLeft) {
+    translateFollowUpAttackAfterPreviousSuccessfulAttack(currentNumberOfPlayerOneShipsLeft) {
         this.currentCoordinatedAttackOnDamagedShip = this.coordinatesOfLastSuccesfulAttack;
         switch (this.currentPlannedMove) {
             case "+1" : this.currentCoordinatedAttackOnDamagedShip ++; break;
@@ -92,12 +92,8 @@ class AIBot {
 
     attackLocationUsingCoordinates(randomAttackPosition, currentNumberOfPlayerOneShipsLeft) {
         if(this.game.playerOneGameBoard.attackShip(randomAttackPosition)) {
-            console.log('AIBOt: Attack was successfull!!!');
-            if(!this.currentlyDestroyingPlayerOneShip) {
-                console.log('AIBot: Coordinates of first successful attack on boat are: ' + randomAttackPosition);
-                this.coordinatesOfFirstSuccessfulAttackOnEnemyShip = randomAttackPosition;
-                this.currentlyDestroyingPlayerOneShip = true;
-            }
+            console.log('AIBOt: Attack was successful!!!');
+            this.checkIfAttackWasFirstStrikeOnEnemyBoat(randomAttackPosition);
             this.coordinatesOfLastSuccesfulAttack = randomAttackPosition;
             this.previousAttackHitShip = true;
             this.game.uIDisplay.markAttackedSquareWithShipPresentPlayer1Grid(randomAttackPosition);
@@ -110,12 +106,23 @@ class AIBot {
         this.game.setPlayerToPlayer1();
     }
 
+    checkIfAttackWasFirstStrikeOnEnemyBoat(randomAttackPosition) {
+        if(!this.currentlyDestroyingPlayerOneShip) {
+            console.log('AIBot: Coordinates of first successful attack on boat are: ' + randomAttackPosition);
+            this.coordinatesOfFirstSuccessfulAttackOnEnemyShip = randomAttackPosition;
+            this.currentlyDestroyingPlayerOneShip = true;
+        }
+        else {
+            console.log('AIBot: This is not the fist strike to take place on this enemy boat.: ');
+        }
+    }
+
     checkIfPlayerOneShipWasDestroyedAfterLastAttack(currentNumberOfPlayerOneShipsLeft) {
         if(this.game.getPlayer1().getNumberOfPlayerShips() === (currentNumberOfPlayerOneShipsLeft - 1)) {
             this.currentlyDestroyingPlayerOneShip = false;
             this.indexOfCurrentAttackOptions = 0;
-            this.coordinatesOfFirstSuccessfulAttackOnEnemyShip = null;
-            this.currentCoordinatedAttackOnDamagedShip = null;
+            // this.coordinatesOfFirstSuccessfulAttackOnEnemyShip = null;
+            // this.currentCoordinatedAttackOnDamagedShip = null;
             this.currentPlannedMove = '+1';
             console.log('Ship has been destroyed by player 2!!!!!');
             this.game.uIDisplay.removeDestroyedPlayer1ShipFromUI(this.game.playerOneGameBoard.getAllCells());
