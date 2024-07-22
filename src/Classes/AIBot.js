@@ -78,6 +78,10 @@ class AIBot {
         return this.attackLocationUsingCoordinates(this.currentCoordinatedAttackOnDamagedShip, currentNumberOfPlayerOneShipsLeft);
     }
 
+    /*
+    This method will be triggered if the AI failed on its previous shot when trying to destroy a boat that is damaged,
+    the code allows the original successful strike to be altered to ensure the targeted boat is eventually sunk.
+    * */
     translateCorrectedMoveIntoAnAttack(currentNumberOfPlayerOneShipsLeft) {
         let adjustedTarget = this.coordinatesOfFirstSuccessfulAttackOnEnemyShip;
         switch (this.currentPlannedMove) {
