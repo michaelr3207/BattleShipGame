@@ -220,7 +220,7 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
                     battleshipGame.uIDisplay.markAttackedSquareWithoutAnyShipPresentPlayer2Grid(extractedGridCoordinates);
                 }
                 battleshipGame.setPlayerToPlayer2();
-                battleshipGame.AIBot.attackRandomPlayerOnePosition();
+                battleshipGame.AIBot.attackPlayerOnePosition();
                 // alert('Current game player is: ' + battleshipGame.getCurrentPlayerTurn().getName());
             }
         });
