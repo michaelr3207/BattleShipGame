@@ -59,6 +59,12 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
         this.displayTheGameWinnerOnTheUIAfterGameEnds();
     }
 
+    hideGameOverScreen() {
+        document.getElementById('contentBox').className = 'appContainer';
+        document.getElementById('gameOverScreen').className = 'hide';
+        this.displayTheGameWinnerOnTheUIAfterGameEnds();
+    }
+
     displayTheGameWinnerOnTheUIAfterGameEnds() {
         document.getElementById('gameResultDiv').innerHTML = 'The Game Winner Is: ' + this.battleShipGame.getGameWinner()
     }

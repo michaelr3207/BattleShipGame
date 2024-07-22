@@ -182,6 +182,7 @@ function main() {
     const allCells = battleShipGame.playerOneGameBoard.getAllCells();
     console.log('Player one cells');
     printCells(allCells);
+    addEventListenerToRestartBtn(battleShipGame);
     addEventListenerToPlayerTwoSquares(battleShipGame);
 }
 
@@ -233,6 +234,14 @@ function extractGridCoordinatesFromGridTitle(event) {
         return event.slice(-1);
     else
         return event.slice(-2);
+}
+
+function addEventListenerToRestartBtn(battleShipGame) {
+    const restartBtn = document.getElementById('restartBtn');
+    restartBtn.addEventListener("click", () => {
+       main();
+       battleShipGame.uIDisplay.hideGameOverScreen();
+    });
 }
 
 populateBothGrids();
