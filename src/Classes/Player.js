@@ -9,7 +9,7 @@ class Player {
         this.name = name;
         this.grid = 'grid' + this.getId();
         this.playerShips = null;
-        this.totalNumberOfSHips = 5;
+        this.totalNumberOfSHips = null;
         this.playerGameBoard = new GameBoard(`Player${id} board`, this);
         this.addShipsToPlayer();
     }
@@ -34,6 +34,7 @@ class Player {
         allPlayerShips.push(reconShip);
         allPlayerShips.push(battleShip);
         allPlayerShips.push(corvetteShip);
+        this.totalNumberOfSHips = allPlayerShips.length;
         this.playerShips = allPlayerShips;
     }
 
