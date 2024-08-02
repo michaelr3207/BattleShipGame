@@ -8,9 +8,10 @@ class Player {
         this.playerId = id;
         this.name = name;
         this.grid = 'grid' + this.getId();
-        this.playerShips = this.addShipsToPlayer();
+        this.playerShips = null;
         this.totalNumberOfSHips = 5;
         this.playerGameBoard = new GameBoard(`Player${id} board`, this);
+        this.addShipsToPlayer();
     }
 
     getPlayerGameBoard() {
@@ -33,7 +34,7 @@ class Player {
         allPlayerShips.push(reconShip);
         allPlayerShips.push(battleShip);
         allPlayerShips.push(corvetteShip);
-        return allPlayerShips;
+        this.playerShips = allPlayerShips;
     }
 
     searchAndRemoveShip(nameOfShipToBeRemoved) {

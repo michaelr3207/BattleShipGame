@@ -6,6 +6,10 @@ import {Cell} from "./Classes/Cell";
 import {coordinateReader, randomNumberGenerator} from "./Util";
 import {UIDisplay} from "./Classes/UIDisplay";
 import {GameBoard} from "./Classes/GameBoard";
+import {AIBot} from "./Classes/AIBot";
+
+
+let battleShipGame = new BattleShipGame('Battleship game');
 
 function createSquares(index){
     let playerGrid;
@@ -109,6 +113,7 @@ function checkShipStartingPositionYAxis(startingPosition, ship, battleShipGame, 
 }
 
 function changeGridColorWithShipXAxis(ship, startingPosition, player, battleShipGame) {
+    console.log('Trying to change place ship colour - X AXIS');
     startingPosition = Number.parseInt(startingPosition) - ship.getCellSize();
     console.log('------------->starting pos now:  ' + startingPosition);
     console.log('------------->starting ship now: ' + ship.shipName);
@@ -121,6 +126,7 @@ function changeGridColorWithShipXAxis(ship, startingPosition, player, battleShip
 }
 
 function changeGridColorWithShipYAxis(ship, startingPosition, player, battleShipGame) {
+    console.log('Trying to change place ship colour - Y AXIS');
     let counter = 0;
     startingPosition = Number.parseInt(startingPosition);
     console.log('starting pos now ' + startingPosition);
@@ -131,11 +137,12 @@ function changeGridColorWithShipYAxis(ship, startingPosition, player, battleShip
         gridToBeChanged.style.background = 'red';
         startingPosition = startingPosition + 10;  // changing grid row
         counter++;
+        console.log('GRID COLOUR SUCCESSFULLY CHANGED -----------------------------------------');
     }
 }
 
 function main() {
-    const battleShipGame = new BattleShipGame('Simple BattleShip Game');
+    console.log('Start if the game ------------------------------------------------------------------------------>>>');
     const playerTwoStarterPositions = ["84X", "15X", "4X", "63Y", "65X"];
     const playerOneStarterPositions = ["10Y", "47Y", "16X", "34X", "98Y"];
     let counter = 0;
@@ -182,8 +189,6 @@ function main() {
     const allCells = battleShipGame.playerOneGameBoard.getAllCells();
     console.log('Player one cells');
     printCells(allCells);
-    addEventListenerToRestartBtn(battleShipGame);
-    addEventListenerToPlayerTwoSquares(battleShipGame);
 }
 
 const printCells = (allCells) => allCells.forEach(item => {console.log(item)});
@@ -201,6 +206,7 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
                 let extractedGridCoordinates = extractGridCoordinatesFromGridTitle(event.target.id.toString());
                 if(allCells[item].getShipOnCell()) {
                     let currentNumberOfPlayerTwoShipsLeft = battleshipGame.getPlayer2().getNumberOfPlayerShips();
+                    console.log('looking to attack a ship!!!!!!!!!!!!!!!!!!!!!!!!!!!');
                     // alert('Found a ship!!!');
                     battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates);
                     battleshipGame.uIDisplay.markAttackedSquareWithShipPresentPlayer2Grid(Number.parseInt(extractedGridCoordinates));
@@ -220,8 +226,10 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
                     battleshipGame.playerTwoGameBoard.attackShip(extractedGridCoordinates);
                     battleshipGame.uIDisplay.markAttackedSquareWithoutAnyShipPresentPlayer2Grid(extractedGridCoordinates);
                 }
-                battleshipGame.setPlayerToPlayer2();
-                battleshipGame.AIBot.attackPlayerOnePosition();
+                if(!battleShipGame.gameOver) {
+                    battleshipGame.setPlayerToPlayer2();
+                    battleshipGame.AIBot.attackPlayerOnePosition();
+                }
                 // alert('Current game player is: ' + battleshipGame.getCurrentPlayerTurn().getName());
             }
         });
@@ -239,14 +247,19 @@ function extractGridCoordinatesFromGridTitle(event) {
 function addEventListenerToRestartBtn(battleShipGame) {
     const restartBtn = document.getElementById('restartBtn');
     restartBtn.addEventListener("click", () => {
-       main();
-       battleShipGame.uIDisplay.hideGameOverScreen();
+        battleShipGame.uIDisplay.hideGameOverScreen();
+        battleShipGame.gameOver = false;
+        battleShipGame.AIBot = new AIBot('New game bot', battleShipGame, battleShipGame.getPlayer1());
+        main();
     });
 }
 
-populateBothGrids();
+
 // createAndAddBoatToUI();
+populateBothGrids();
 main();
+addEventListenerToRestartBtn(battleShipGame);
+addEventListenerToPlayerTwoSquares(battleShipGame);
 
 export  {changeGridColorWithShipXAxis, createSquares, checkShipStartingPositionYAxis, printCells};
 

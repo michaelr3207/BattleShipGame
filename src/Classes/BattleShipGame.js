@@ -41,6 +41,12 @@ class BattleShipGame {
         this.currentPlayerTurn = this.player2;
     }
 
+    resetBothPlayerBoards() {
+        this.playerOneGameBoard.resetBoard();
+        this.playerTwoGameBoard.resetBoard();
+        this.currentPlayerTurn = this.getPlayer1();
+    }
+
     getCurrentPlayerTurn() {
         return this.currentPlayerTurn;
     }
@@ -56,6 +62,9 @@ class BattleShipGame {
     endTheGame() {
         this.gameOver = true;
         console.log('GAEM OVER!');
+        this.getPlayer1().addShipsToPlayer();
+        this.getPlayer2().addShipsToPlayer();
+        this.resetBothPlayerBoards();
     }
 
     addShip(player, ship) {

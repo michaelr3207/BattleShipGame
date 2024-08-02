@@ -13,6 +13,12 @@ class GameBoard {
         this.markedCells = [];
     }
 
+    clearBoardData() {
+        this.currentOccupiedGridPoints = [];
+        this.missedShots = [];
+        this.markedCells = [];
+    }
+
     checkForMissedShot(targetLocation) {
         for(let currentShot of this.missedShots)
             if(currentShot === targetLocation)
@@ -49,6 +55,14 @@ class GameBoard {
 
     getAllCells() {
         return this.allCells;
+    }
+
+    resetBoard() {
+        this.getAllCells().forEach((currentCell) => {
+           currentCell.shipOnCell = null;
+           currentCell.hasBeenMarked = false;
+        });
+        this.clearBoardData();
     }
 
     getCellById(cellId) {
