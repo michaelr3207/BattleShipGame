@@ -75,8 +75,6 @@ class GameBoard {
 
 
     attackShip(targetLocation) {
-          //ToDO add end game logic
-
         for (let item of this.allCells) {
             console.log('attempting to strike ship...');
             if (item.getShipOnCell() !== null && targetLocation.toString() === item.getCellId().toString() && !item.getIsMarked()) {
@@ -91,8 +89,6 @@ class GameBoard {
                     if(this.ownerOfBoard.checkForShip(item.getShipOnCell().getShipName())) {
                         console.log('Now removing the destoyed ship from ' + this.ownerOfBoard.getName() + 'ship list.');
                         this.ownerOfBoard.searchAndRemoveShip(item.getShipOnCell().getShipName());
-                        // battleShipGame.endTheGame();
-                        // this.removeSunkenShipFromGameBoard();
                         console.log('DIsplaying content before passed to UI');
                         console.log(this.allCells);
                     }
@@ -113,7 +109,6 @@ class GameBoard {
                 }
             }
         }
-        // console.log(this.allCells);
         // alert('MISS!!');
         console.log(CELL_TAKEN_MESSAGE);
         return true;
@@ -122,10 +117,6 @@ class GameBoard {
     plotShipOnPlayerGrid(startingPosition, ship) {  //ToDo rename
         console.log('CUrrent brug X AXIS starting position is: ' + startingPosition)
         let counter = 0;
-        // if(!this.checkIfGridCellIsAvailable(startingPosition, ship)) {
-        //     console.log(CELL_TAKEN_ERROR);
-        //     return false;
-        // }
         startingPosition = Number.parseInt(startingPosition);
         startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
        this.getAllCells().forEach((item) => {
@@ -146,10 +137,6 @@ class GameBoard {
         console.log('CUrrent brug starting position is: ' + startingPosition)
         let counter = 0;
         startingPosition = Number.parseInt(startingPosition);
-        // if(!this.checkIfGridCellIsAvailable(startingPosition, ship)) {
-        //     console.log(CELL_TAKEN_ERROR);
-        //     return false;
-        // }
         this.getAllCells().forEach((item) => {
             if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < (ship.getCellSize() * 10)){
                 this.addPointToOccupiedAreas((startingPosition + counter));
@@ -175,7 +162,6 @@ class GameBoard {
             return this.checkCellAvailabilityYAxis(startingPosition, currentShip, occupiedCells);
         else
             return this.checkCellAvailabilityXAxis(startingPosition, currentShip, occupiedCells);
-
     }
 
 

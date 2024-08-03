@@ -1,11 +1,5 @@
 import './style.css';
-import {Boat} from "./Classes/Boat";
 import {BattleShipGame} from "./Classes/BattleShipGame";
-import {Player} from "./Classes/Player";
-import {Cell} from "./Classes/Cell";
-import {coordinateReader, randomNumberGenerator} from "./Util";
-import {UIDisplay} from "./Classes/UIDisplay";
-import {GameBoard} from "./Classes/GameBoard";
 import {AIBot} from "./Classes/AIBot";
 
 

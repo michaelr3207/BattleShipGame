@@ -20,10 +20,6 @@ class Cell {
         return this.cellId;
     }
 
-    setI(value) {
-        this.cellId = value;
-    }
-
     getShipOnCell() {
         return this.shipOnCell;
     }

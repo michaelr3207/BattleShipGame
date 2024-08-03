@@ -70,20 +70,10 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
     }
 
     clearPreviousGameDataOnUI() {
-        for(let index = 0; index <= 99; index ++) {
-            const player1Grid = document.getElementById('gridPlayer1');
-            const player2Grid = document.getElementById('gridPlayer2');
-        }
         let allSquares = document.getElementsByClassName('square');
         for(let currentSquare of allSquares) {
-            currentSquare.style.background = null;
+            currentSquare.style.background = null;  // clearing the board UI for the next round
         }
-        // for(let index = 0; index <= NUMBER_OF_SQUARES; index ++) {
-        //     document.getElementById('grid1' + index).style.background = 'blue';
-        //     document.getElementById('grid2' + index).style.background = 'blue';
-        // }
-        // document.getElementById('gridPlayer1').innerHTML = '';
-        // document.getElementById('gridPlayer2').innerHTML = '';
     }
 }
 

@@ -4,14 +4,12 @@ class AIBot {
 
     constructor(name, battleShipGame, player1) {
         this.name = name;
-        this.numberOfTurns = 0;
         this.game = battleShipGame;
         this.currentAttackedCoordinates = [];
-        // ToDO attributes below to be used to make AI more difficult
-        this.currentStatusOfPlayer1 = player1;
+
+        // attributes below to be used to make AI more difficult
         this.currentlyDestroyingPlayerOneShip = false;
         this.previousAttackHitShip = false;
-        this.currentAttackHitShip = false;
         this.currentPlannedMove = "+1"
         this.coordinatesOfLastSuccesfulAttack = null;
         this.nextAttackOptions = ["+1", "-1", "+10", "-10"];
@@ -127,8 +125,6 @@ class AIBot {
         if(this.game.getPlayer1().getNumberOfPlayerShips() === (currentNumberOfPlayerOneShipsLeft - 1)) {
             this.currentlyDestroyingPlayerOneShip = false;
             this.indexOfCurrentAttackOptions = 0;
-            // this.coordinatesOfFirstSuccessfulAttackOnEnemyShip = null;
-            // this.currentCoordinatedAttackOnDamagedShip = null;
             this.currentPlannedMove = '+1';
             console.log('Ship has been destroyed by player 2!!!!!');
             this.game.uIDisplay.removeDestroyedPlayer1ShipFromUI(this.game.playerOneGameBoard.getAllCells());
@@ -139,8 +135,6 @@ class AIBot {
             this.game.uIDisplay.showGameOverScreen();
         }
     }
-
-
 }
 
 export {AIBot};
