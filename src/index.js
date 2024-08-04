@@ -248,8 +248,25 @@ function addEventListenerToRestartBtn(battleShipGame) {
     });
 }
 
+function addEventListenersToBoatSelectorButtons() {
+    const axisButton = document.getElementById('axisBtn');
+
+    axisButton.addEventListener("click", (event) => {
+        console.log('axis btn has been clicked!');
+        if(event.target.value === 'Y') {
+            event.target.value = 'X';
+            event.target.innerHTML = 'X'
+        }
+        else {
+            event.target.value = 'Y';
+            event.target.innerHTML = 'Y'
+        }
+    });
+}
+
 
 // createAndAddBoatToUI();
+addEventListenersToBoatSelectorButtons();
 populateBothGrids();
 main();
 addEventListenerToRestartBtn(battleShipGame);

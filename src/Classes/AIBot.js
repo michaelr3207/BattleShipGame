@@ -7,7 +7,7 @@ class AIBot {
         this.game = battleShipGame;
         this.currentAttackedCoordinates = [];
 
-        // attributes below to be used to make AI more difficult
+        // attributes below to be used to make AI more intelligent
         this.currentlyDestroyingPlayerOneShip = false;
         this.previousAttackHitShip = false;
         this.currentPlannedMove = "+1"
