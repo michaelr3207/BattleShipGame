@@ -144,10 +144,13 @@ body, html {
     /*border: 2px solid blue;*/
     display: flex;
     flex-direction: row;
-    width: 13%;
+    width: auto;
     height: 20%;
 }
 
+.boatUiContainer:hover {
+    border: 4px solid blue;
+}
 
 
 .uiBoatCell {
@@ -156,9 +159,9 @@ body, html {
     width: 25px;
 }
 
-.uiBoatCell:hover {
-   background: green;
-}
+/*.uiBoatCell:hover {*/
+/*   background: green;*/
+/*}*/
 
 .boatSelectorButtonContainer {
     margin: auto;

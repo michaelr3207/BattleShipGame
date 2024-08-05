@@ -41,7 +41,7 @@ function populateBothGrids() {  // ToDo add to UI display class on initilization
 
 function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, player) {
     startingPosition = Number.parseInt(startingPosition);
-    const finalPosition = startingPosition + ship.getCellSize();
+    const finalPosition = startingPosition - ship.getCellSize();
     console.log('starting pos is curremt ------------------> X axis: ' + startingPosition);
     if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0)) {
         console.log('strike!')
@@ -55,7 +55,7 @@ function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, 
                 if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
                     return true;
             }
-        return true;
+        // return true;
     }
     else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length)) {
         if(player === battleShipGame.getPlayer1()) {  // ToDo fix this?
@@ -137,7 +137,7 @@ function changeGridColorWithShipYAxis(ship, startingPosition, player, battleShip
 
 function main() {
     console.log('Start if the game ------------------------------------------------------------------------------>>>');
-    const playerTwoStarterPositions = ["84X", "15X", "4X", "63Y", "65X"];
+    const playerTwoStarterPositions = ["85X", "15X", "4X", "63Y", "65X"];
     const playerOneStarterPositions = ["10Y", "47Y", "16X", "34X", "98Y"];
     let counter = 0;
     for(let index = 0; index < playerOneStarterPositions.length; index ++) {
