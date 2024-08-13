@@ -22,6 +22,28 @@ class BattleShipGame {
         this.uIDisplay = new UIDisplay(this);
         this.AIBot = new AIBot('Player Two bot', this);
         this.gameWinner = null;
+        this.indexOfCurrentPlayer1SelectedBoat = 0;
+        this.currentPlayer1SelectedBoat = this.player1.playerShips[this.indexOfCurrentPlayer1SelectedBoat];
+        this.hasGameStarted = false;
+    }
+
+
+    resetPlayer1BoatSelection() {
+        this.indexOfCurrentPlayer1SelectedBoat = 0;
+        this.currentPlayer1SelectedBoat = this.player1.playerShips[this.indexOfCurrentPlayer1SelectedBoat];
+    }
+
+    changePlayer1BoatSelection() {
+        this.indexOfCurrentPlayer1SelectedBoat ++;
+        this.currentPlayer1SelectedBoat = this.player1.playerShips[this.indexOfCurrentPlayer1SelectedBoat];
+    }
+
+    getCurrentPlayer1SelectedBoat() {
+        return this.currentPlayer1SelectedBoat;
+    }
+
+    getHasGameStarted() {
+        return this.hasGameStarted;
     }
 
     getGameWinner() {

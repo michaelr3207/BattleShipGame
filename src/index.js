@@ -96,14 +96,12 @@ function checkShipStartingPositionYAxis(startingPosition, ship, battleShipGame, 
             return true;
         else
             alert('not good 1' );
-        console.log('slaintee')
     }
     else
         if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame))
             return true;
         else
             alert('not good 2');
-
 }
 
 function changeGridColorWithShipXAxis(ship, startingPosition, player, battleShipGame) {
@@ -133,6 +131,10 @@ function changeGridColorWithShipYAxis(ship, startingPosition, player, battleShip
         counter++;
         console.log('GRID COLOUR SUCCESSFULLY CHANGED -----------------------------------------');
     }
+}
+
+function getPlayer1BoatSelection() {
+
 }
 
 function main() {
@@ -264,10 +266,44 @@ function addEventListenersToBoatSelectorButtons() {
     });
 }
 
+function addEventListenerToPlayerOneSquares(battleShipGame) {
+    alert('Current game player is: ' + battleShipGame.getCurrentPlayerTurn().getName());
+    const GRID_KEYWORD = 'grid1';
+    const allCells = battleShipGame.playerOneGameBoard.getAllCells();
+    allCells.forEach(item => {console.log(item)});
+    for(let item = 0; item < 100; item++) {
+        document.getElementById(GRID_KEYWORD + item).addEventListener("click", (event) => {
+            if(!battleShipGame.getHasGameStarted()) {
+                const currentSelectedAxis = document.getElementById('axisBtn').value;
+                const extractedCoordinate = event.target.id.slice(-2) + currentSelectedAxis;
+                console.log(extractedCoordinate + '<---------------------');
+                if(currentSelectedAxis === 'Y') {
+                    if(checkShipStartingPositionYAxis(extractedCoordinate, battleShipGame.getCurrentPlayer1SelectedBoat(), battleShipGame, battleShipGame.player1)) {
+                        console.log('Player 1 boat placed succesfully!!!');
+                        battleShipGame.changePlayer1BoatSelection();
+                        console.log(allCells)
+                    }
+                    else {
+                        console.log('Player 1 boat failure');
+                        battleShipGame.resetPlayer1BoatSelection();
+                        console.log(allCells)
+
+                    }
+                }
+                else {
+
+                }
+            }
+        });
+    }
+
+}
+
 
 // createAndAddBoatToUI();
 addEventListenersToBoatSelectorButtons();
 populateBothGrids();
+// addEventListenerToPlayerOneSquares(battleShipGame);
 main();
 addEventListenerToRestartBtn(battleShipGame);
 addEventListenerToPlayerTwoSquares(battleShipGame);

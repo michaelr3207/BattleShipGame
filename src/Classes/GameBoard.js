@@ -138,11 +138,17 @@ class GameBoard {
         let counter = 0;
         startingPosition = Number.parseInt(startingPosition);
         this.getAllCells().forEach((item) => {
-            if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < (ship.getCellSize() * 10)){
-                this.addPointToOccupiedAreas((startingPosition + counter));
+            if((item.getCellId().toString() === startingPosition.toString()) && counter < (ship.getCellSize() * 10)){
+                if(this.currentOccupiedGridPoints.includes(startingPosition)) {
+                    console.log('ERROR : These coordinates are taken!')
+                    return false;
+                }
+                this.addPointToOccupiedAreas(startingPosition);
                 console.log('plotted!!')
+                console.log('current started pos new '  +  startingPosition);
                 item.setShipOnCell(ship)
-                counter = counter + 10;
+                counter += 10;
+                startingPosition += counter;
                 // startingPosition = startingPosition + 10;
             }
         });
