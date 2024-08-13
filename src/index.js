@@ -90,18 +90,23 @@ function checkShipStartingPositionYAxis(startingPosition, ship, battleShipGame, 
         counter++;
         console.log('rounder up starting pos: ' + startingPosition);
     }
+    // console.log('Result of ccall:' + battleShipGame.playerOneGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame));
     startingPosition = startingPosition - (ship.getCellSize() * 10);
     if(player === battleShipGame.getPlayer1()) {
-        if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame))
+        if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame)) {
             return true;
-        else
-            alert('not good 1' );
+        }
+        else {
+            console.log('Ship placement failed!!!!!')
+        }
     }
     else
-        if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame))
+        if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame)) {
             return true;
-        else
+        }
+        else {
             alert('not good 2');
+        }
 }
 
 function changeGridColorWithShipXAxis(ship, startingPosition, player, battleShipGame) {
@@ -140,7 +145,7 @@ function getPlayer1BoatSelection() {
 function main() {
     console.log('Start if the game ------------------------------------------------------------------------------>>>');
     const playerTwoStarterPositions = ["85X", "15X", "4X", "63Y", "65X"];
-    const playerOneStarterPositions = ["10Y", "47Y", "16X", "34X", "98Y"];
+    const playerOneStarterPositions = ["0Y", "47Y", "16X", "34X", "98Y"];
     let counter = 0;
     for(let index = 0; index < playerOneStarterPositions.length; index ++) {
         console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXX: ' + playerOneStarterPositions[index].charAt(playerOneStarterPositions[index].length - 1));  //ToDo add in system that checkc all coordinates for ship to be placed
@@ -275,7 +280,11 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
         document.getElementById(GRID_KEYWORD + item).addEventListener("click", (event) => {
             if(!battleShipGame.getHasGameStarted()) {
                 const currentSelectedAxis = document.getElementById('axisBtn').value;
-                const extractedCoordinate = event.target.id.slice(-2) + currentSelectedAxis;
+                let extractedCoordinate;
+                if(event.target.id.length === 7)
+                     extractedCoordinate = event.target.id.slice(-2) + currentSelectedAxis;
+                else
+                    extractedCoordinate = event.target.id.slice(-1) + currentSelectedAxis;
                 console.log(extractedCoordinate + '<---------------------');
                 if(currentSelectedAxis === 'Y') {
                     if(checkShipStartingPositionYAxis(extractedCoordinate, battleShipGame.getCurrentPlayer1SelectedBoat(), battleShipGame, battleShipGame.player1)) {
@@ -291,7 +300,16 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
                     }
                 }
                 else {
-
+                    if(checkShipStartingPositionXAxis(extractedCoordinate, battleShipGame.getCurrentPlayer1SelectedBoat(), battleShipGame, battleShipGame.player1)) {
+                        console.log('Player 1 boat placed succesfully!!!');
+                        battleShipGame.changePlayer1BoatSelection();
+                        console.log(allCells)
+                    }
+                    else {
+                        console.log('Player 1 boat failure');
+                        battleShipGame.resetPlayer1BoatSelection();
+                        console.log(allCells)
+                    }
                 }
             }
         });
@@ -304,7 +322,7 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
 addEventListenersToBoatSelectorButtons();
 populateBothGrids();
 addEventListenerToPlayerOneSquares(battleShipGame);
-main();
+// main();
 addEventListenerToRestartBtn(battleShipGame);
 addEventListenerToPlayerTwoSquares(battleShipGame);
 
