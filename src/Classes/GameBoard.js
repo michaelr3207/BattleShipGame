@@ -137,18 +137,19 @@ class GameBoard {
         console.log('CUrrent brug starting position is: ' + startingPosition)
         let counter = 0;
         startingPosition = Number.parseInt(startingPosition);
+        let currentPosition = startingPosition;
         this.getAllCells().forEach((item) => {
-            if((item.getCellId().toString() === startingPosition.toString()) && counter < (ship.getCellSize() * 10)){
-                if(this.currentOccupiedGridPoints.includes(startingPosition)) {
+            if((item.getCellId().toString() ===  (startingPosition + counter).toString()) && counter < (ship.getCellSize() * 10)){
+                if(this.currentOccupiedGridPoints.includes(currentPosition)) {
                     console.log('ERROR : These coordinates are taken!')
                     return false;
                 }
-                this.addPointToOccupiedAreas(startingPosition);
+                this.addPointToOccupiedAreas(currentPosition);
                 console.log('plotted!!')
                 console.log('current started pos new '  +  startingPosition);
                 item.setShipOnCell(ship)
                 counter += 10;
-                startingPosition += counter;
+                currentPosition += counter;
                 // startingPosition = startingPosition + 10;
             }
         });

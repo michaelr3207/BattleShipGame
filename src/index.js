@@ -303,7 +303,7 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
 // createAndAddBoatToUI();
 addEventListenersToBoatSelectorButtons();
 populateBothGrids();
-// addEventListenerToPlayerOneSquares(battleShipGame);
+addEventListenerToPlayerOneSquares(battleShipGame);
 main();
 addEventListenerToRestartBtn(battleShipGame);
 addEventListenerToPlayerTwoSquares(battleShipGame);
