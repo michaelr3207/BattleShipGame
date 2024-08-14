@@ -311,6 +311,9 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
                         console.log(allCells)
                     }
                 }
+                if(battleShipGame.indexOfCurrentPlayer1SelectedBoat === 5) {
+                    alert('All player 1 boats successfully placed!');
+                }
             }
         });
     }
