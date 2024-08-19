@@ -61,14 +61,18 @@ function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, 
         if(player === battleShipGame.getPlayer1()) {  // ToDo fix this?
             if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
                 return true;
-            else
+            else {
                 alert('not good');
+                return false;
+            }
         }
         else {
             if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
                 return true;
-            else
+            else {
                 alert('not good');
+                return false;
+            }
         }
     }
     console.log('false ------------------------------------>')

@@ -32,7 +32,7 @@ class AIBot {
             console.log('Random build up coordinate: ' + builtUpCoordinate);
             if(randomGeneratedAxis === 'Y') {
                 if(checkShipStartingPositionYAxis(builtUpCoordinate, this.game.getCurrentPlayer2SelectedBoat(), this.game, this.game.player2)) {
-                    console.log('Player 1 boat placed succesfully!!!');
+                    console.log('Player 2 boat placed succesfully!!!');
                     this.game.changePlayer2BoatSelection();
                     index ++;
                     console.log(allCells)
