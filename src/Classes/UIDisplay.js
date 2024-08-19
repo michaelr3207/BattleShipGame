@@ -49,6 +49,7 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
     markAttackedSquareWithoutAnyShipPresentPlayer2Grid(targetLocation) {
         const gridSquareToBeErased = document.getElementById('grid2' + targetLocation);
         gridSquareToBeErased.style.background = 'black';
+        gridSquareToBeErased.style.border = '1px solid white'
     }
 
 
@@ -60,6 +61,7 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
     markAttackedSquareWithoutAnyShipPresentPlayer1Grid(targetLocation) {
         const gridSquareToBeErased = document.getElementById('grid1' + targetLocation);
         gridSquareToBeErased.style.background = 'black';
+        gridSquareToBeErased.style.border = '1px solid white'
     }
 
     showGameOverScreen() {
@@ -71,17 +73,18 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
     hideGameOverScreen() {
         document.getElementById('contentBox').className = 'appContainer';
         document.getElementById('gameOverScreen').className = 'hide';
-        this.clearPreviousGameDataOnUI();
+        this.clearBothPlayerBoards();
     }
 
     displayTheGameWinnerOnTheUIAfterGameEnds() {
         document.getElementById('gameResultDiv').innerHTML = 'The Game Winner Is: ' + this.battleShipGame.getGameWinner();
     }
 
-    clearPreviousGameDataOnUI() {
+    clearBothPlayerBoards() {
         let allSquares = document.getElementsByClassName('square');
         for(let currentSquare of allSquares) {
             currentSquare.style.background = null;  // clearing the board UI for the next round
+            currentSquare.style.border = '1px solid black';
         }
     }
 
