@@ -24,5 +24,10 @@ const coordinateReader = (coordinates) => {
 
 const randomNumberGenerator = () =>  Math.floor(Math.random() * (100 - 1 + 1) + 1);
 
+const pickARandomAxis = () => {
+    const gameAxis = ['Y', 'X'];
+    return gameAxis[Math.floor(Math.random() * gameAxis.length)];
+};
 
-export { randomNumberGenerator, coordinateReader, CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, NUMBER_OF_SQUARES};
+
+export {pickARandomAxis ,randomNumberGenerator, coordinateReader, CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, NUMBER_OF_SQUARES};

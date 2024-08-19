@@ -83,7 +83,7 @@ function checkShipStartingPositionYAxis(startingPosition, ship, battleShipGame, 
        console.log('starting pos is curremt ------------------>: ' + startingPosition)
         if(startingPosition >= 100) {
             console.log('false ------------------------------------>')
-            alert('Invalid coordinates Y axis');
+            // alert('Invalid coordinates Y axis');
             return false;
         }
        startingPosition = startingPosition + 10;
@@ -314,6 +314,7 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
                 if(battleShipGame.indexOfCurrentPlayer1SelectedBoat === 5) {
                     alert('All player 1 boats successfully placed!');
                     battleShipGame.uIDisplay.addShipsToPlayerOneGrid();
+                    battleShipGame.AIBot.generateRandomPlayer2Boats();
                 }
             }
         });
@@ -330,6 +331,6 @@ addEventListenerToPlayerOneSquares(battleShipGame);
 addEventListenerToRestartBtn(battleShipGame);
 addEventListenerToPlayerTwoSquares(battleShipGame);
 
-export  {changeGridColorWithShipXAxis, createSquares, checkShipStartingPositionYAxis, printCells};
+export  {changeGridColorWithShipXAxis, createSquares, checkShipStartingPositionYAxis, printCells, checkShipStartingPositionXAxis};
 
 

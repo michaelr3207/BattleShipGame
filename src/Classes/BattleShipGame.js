@@ -23,7 +23,9 @@ class BattleShipGame {
         this.AIBot = new AIBot('Player Two bot', this);
         this.gameWinner = null;
         this.indexOfCurrentPlayer1SelectedBoat = 0;
+        this.indexOfCurrentPlayer2SelectedBoat = 0;
         this.currentPlayer1SelectedBoat = this.player1.playerShips[this.indexOfCurrentPlayer1SelectedBoat];
+        this.currentPlayer2SelectedBoat = this.player2.playerShips[this.indexOfCurrentPlayer2SelectedBoat];
         this.hasGameStarted = false;
     }
 
@@ -34,13 +36,29 @@ class BattleShipGame {
         this.playerOneGameBoard.resetBoard();
     }
 
+    resetPlayer2BoatSelection() {
+        this.indexOfCurrentPlayer2SelectedBoat = 0;
+        this.currentPlayer2SelectedBoat = this.player2.playerShips[this.indexOfCurrentPlayer2SelectedBoat];
+        this.playerTwoGameBoard.resetBoard();
+    }
+
     changePlayer1BoatSelection() {
         this.indexOfCurrentPlayer1SelectedBoat ++;
         this.currentPlayer1SelectedBoat = this.player1.playerShips[this.indexOfCurrentPlayer1SelectedBoat];
     }
 
+    changePlayer2BoatSelection() {
+        this.indexOfCurrentPlayer2SelectedBoat ++;
+        this.currentPlayer2SelectedBoat = this.player2.playerShips[this.indexOfCurrentPlayer2SelectedBoat];
+    }
+
+
     getCurrentPlayer1SelectedBoat() {
         return this.currentPlayer1SelectedBoat;
+    }
+
+    getCurrentPlayer2SelectedBoat() {
+        return this.currentPlayer2SelectedBoat;
     }
 
     getHasGameStarted() {
@@ -134,6 +152,7 @@ class BattleShipGame {
     getNumberOfShips() {
         return this.totalNumberOfShips;
     }
+
 }
 
 export {BattleShipGame};

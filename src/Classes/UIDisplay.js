@@ -84,6 +84,15 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
           }
        });
     }
+
+    addShipsToPlayerTwoGrid() {
+        this.battleShipGame.playerTwoGameBoard.getAllCells().forEach((item) => {
+            if(item.getShipOnCell()) {
+                const gridSquareToBeChanged = document.getElementById('grid2' + item.getCellId());
+                gridSquareToBeChanged.style.background = 'red';
+            }
+        });
+    }
 }
 
 export {UIDisplay};
