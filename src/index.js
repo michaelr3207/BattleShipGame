@@ -313,6 +313,7 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
                 }
                 if(battleShipGame.indexOfCurrentPlayer1SelectedBoat === 5) {
                     alert('All player 1 boats successfully placed!');
+                    battleShipGame.uIDisplay.addShipsToPlayerOneGrid();
                 }
             }
         });

@@ -75,6 +75,15 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
             currentSquare.style.background = null;  // clearing the board UI for the next round
         }
     }
+
+    addShipsToPlayerOneGrid() {
+       this.battleShipGame.playerOneGameBoard.getAllCells().forEach((item) => {
+          if(item.getShipOnCell()) {
+              const gridSquareToBeChanged = document.getElementById('grid1' + item.getCellId());
+              gridSquareToBeChanged.style.background = 'red';
+          }
+       });
+    }
 }
 
 export {UIDisplay};
