@@ -255,7 +255,6 @@ function addEventListenerToRestartBtn(battleShipGame) {
         battleShipGame.uIDisplay.hideGameOverScreen();
         battleShipGame.gameOver = false;
         battleShipGame.AIBot = new AIBot('New game bot', battleShipGame, battleShipGame.getPlayer1());
-        main();
     });
 }
 
@@ -283,6 +282,8 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
     for(let item = 0; item < 100; item++) {
         document.getElementById(GRID_KEYWORD + item).addEventListener("click", (event) => {
             if(!battleShipGame.getHasGameStarted()) {
+                console.log('attempting to add player 1 ship through UI...');
+                console.log('current player 1 selected boat' + battleShipGame.getCurrentPlayer1SelectedBoat().getShipName());
                 const currentSelectedAxis = document.getElementById('axisBtn').value;
                 let extractedCoordinate;
                 if(event.target.id.length === 7)

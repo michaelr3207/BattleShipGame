@@ -36,6 +36,13 @@ class BattleShipGame {
         this.playerOneGameBoard.resetBoard();
     }
 
+    resetBothPlayerBoatSelection() {
+        this.resetPlayer1BoatSelection();
+        this.resetPlayer2BoatSelection();
+        this.player1.addShipsToPlayer();
+        this.player2.addShipsToPlayer();
+    }
+
     resetPlayer2BoatSelection() {
         this.indexOfCurrentPlayer2SelectedBoat = 0;
         this.currentPlayer2SelectedBoat = this.player2.playerShips[this.indexOfCurrentPlayer2SelectedBoat];
@@ -103,8 +110,9 @@ class BattleShipGame {
     endTheGame() {
         this.gameOver = true;
         console.log('GAEM OVER!');
-        this.getPlayer1().addShipsToPlayer();
-        this.getPlayer2().addShipsToPlayer();
+        this.player1.addShipsToPlayer();
+        this.player2.addShipsToPlayer();
+        this.resetBothPlayerBoatSelection();
         this.resetBothPlayerBoards();
     }
 
