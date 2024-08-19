@@ -126,7 +126,12 @@ class AIBot {
             case "-10" : this.currentCoordinatedAttackOnDamagedShip -= 10; break;
         }
         console.log('Next planned attack! : ' + this.currentCoordinatedAttackOnDamagedShip);
-        this.currentAttackedCoordinates.push(this.currentCoordinatedAttackOnDamagedShip);
+        if(this.currentAttackedCoordinates.includes(this.currentCoordinatedAttackOnDamagedShip)  || this.currentCoordinatedAttackOnDamagedShip < 0 || this.currentCoordinatedAttackOnDamagedShip > 99) {
+            this.currentCoordinatedAttackOnDamagedShip = this.generateRandomAttackCoordinates();
+        }
+        else {
+            this.currentAttackedCoordinates.push(this.currentCoordinatedAttackOnDamagedShip);
+        }
         return this.attackLocationUsingCoordinates(this.currentCoordinatedAttackOnDamagedShip, currentNumberOfPlayerOneShipsLeft);
     }
 
@@ -143,7 +148,12 @@ class AIBot {
             case "-10" : adjustedTarget -= 10; break;
         }
         console.log('Next planned corrected attack! : ' + adjustedTarget);
-        this.currentAttackedCoordinates.push(adjustedTarget);
+        if(this.currentAttackedCoordinates.includes(adjustedTarget) || adjustedTarget < 0 || adjustedTarget > 99 ) {
+            adjustedTarget = this.generateRandomAttackCoordinates();
+        }
+        else {
+            this.currentAttackedCoordinates.push(adjustedTarget);
+        }
         return this.attackLocationUsingCoordinates(adjustedTarget, currentNumberOfPlayerOneShipsLeft);
     }
 
