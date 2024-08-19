@@ -29,5 +29,10 @@ const pickARandomAxis = () => {
     return gameAxis[Math.floor(Math.random() * gameAxis.length)];
 };
 
+function getCurrentSelectedAxisFromButton() {
+    const axisButton = document.getElementById('axisBtn');
+    return axisButton.value;
+}
 
-export {pickARandomAxis ,randomNumberGenerator, coordinateReader, CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, NUMBER_OF_SQUARES};
+
+export {pickARandomAxis ,randomNumberGenerator, coordinateReader, CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, NUMBER_OF_SQUARES, getCurrentSelectedAxisFromButton};

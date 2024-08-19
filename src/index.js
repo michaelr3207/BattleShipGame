@@ -266,10 +266,12 @@ function addEventListenersToBoatSelectorButtons() {
         if(event.target.value === 'Y') {
             event.target.value = 'X';
             event.target.innerHTML = 'X'
+            battleShipGame.uIDisplay.getCurrentAxisButtonValue();
         }
         else {
             event.target.value = 'Y';
             event.target.innerHTML = 'Y'
+            battleShipGame.uIDisplay.getCurrentAxisButtonValue();
         }
     });
 }
@@ -282,6 +284,7 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
     for(let item = 0; item < 100; item++) {
         document.getElementById(GRID_KEYWORD + item).addEventListener("click", (event) => {
             if(!battleShipGame.getHasGameStarted()) {
+                battleShipGame.uIDisplay.highlightCurrentSelectedShip();
                 console.log('attempting to add player 1 ship through UI...');
                 console.log('current player 1 selected boat' + battleShipGame.getCurrentPlayer1SelectedBoat().getShipName());
                 const currentSelectedAxis = document.getElementById('axisBtn').value;
@@ -295,6 +298,7 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
                     if(checkShipStartingPositionYAxis(extractedCoordinate, battleShipGame.getCurrentPlayer1SelectedBoat(), battleShipGame, battleShipGame.player1)) {
                         console.log('Player 1 boat placed succesfully!!!');
                         battleShipGame.changePlayer1BoatSelection();
+                        battleShipGame.uIDisplay.addShipsToPlayerOneGrid();
                         console.log(allCells)
                     }
                     else {
@@ -308,6 +312,7 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
                     if(checkShipStartingPositionXAxis(extractedCoordinate, battleShipGame.getCurrentPlayer1SelectedBoat(), battleShipGame, battleShipGame.player1)) {
                         console.log('Player 1 boat placed succesfully!!!');
                         battleShipGame.changePlayer1BoatSelection();
+                        battleShipGame.uIDisplay.addShipsToPlayerOneGrid();
                         console.log(allCells)
                     }
                     else {
@@ -318,7 +323,6 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
                 }
                 if(battleShipGame.indexOfCurrentPlayer1SelectedBoat === 5) {
                     alert('All player 1 boats successfully placed!');
-                    battleShipGame.uIDisplay.addShipsToPlayerOneGrid();
                     battleShipGame.AIBot.generateRandomPlayer2Boats();
                 }
             }

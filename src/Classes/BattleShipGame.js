@@ -34,6 +34,7 @@ class BattleShipGame {
         this.indexOfCurrentPlayer1SelectedBoat = 0;
         this.currentPlayer1SelectedBoat = this.player1.playerShips[this.indexOfCurrentPlayer1SelectedBoat];
         this.playerOneGameBoard.resetBoard();
+        this.uIDisplay.clearAllHighlightedShips();
     }
 
     resetBothPlayerBoatSelection() {

@@ -1,10 +1,11 @@
-import {NUMBER_OF_SQUARES} from "../Util";
+import {getCurrentSelectedAxisFromButton, NUMBER_OF_SQUARES} from "../Util";
 
 
 class  UIDisplay {  //ToDO add to game class (battleshipgame object)
 
     constructor(battleShipGame) {
         this.battleShipGame = battleShipGame;
+        this.currentSelectedAxis = getCurrentSelectedAxisFromButton();
     }
 
     removeDestroyedPlayer2ShipFromUI(allGameBoardCells) {
@@ -15,6 +16,14 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
                 gridSquareToBeErased.style.background = 'yellow';
             }
         }
+    }
+
+    getCurrentAxisButtonValue() {
+        this.currentSelectedAxis = getCurrentSelectedAxisFromButton();
+    }
+
+    enableSelectedPlayerOneBoatToBeHighlightedOnBoard() {
+
     }
 
     removeDestroyedPlayer1ShipFromUI(gameboard) {
@@ -83,6 +92,27 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
               gridSquareToBeChanged.style.background = 'red';
           }
        });
+    }
+
+    highlightCurrentSelectedShip() {
+        switch (this.battleShipGame.currentPlayer1SelectedBoat.getShipName()) {
+            case "Player1Destroyer" : this.highlightPlayerOneShipOnBoatSelectionMenu(document.getElementById('5CellBoat')); break;
+            case "Player1Cruiser" : this.highlightPlayerOneShipOnBoatSelectionMenu(document.getElementById('4CellBoat')); break;
+            case "Player1Recon" : this.highlightPlayerOneShipOnBoatSelectionMenu(document.getElementById('3CellBoat')); break;
+            case "Player1Battle" : this.highlightPlayerOneShipOnBoatSelectionMenu(document.getElementById('2CellBoat')); break;
+            case "Player1Corvette" : this.highlightPlayerOneShipOnBoatSelectionMenu(document.getElementById('1CellBoat')); break;
+        }
+    }
+
+    clearAllHighlightedShips() {
+        for(let index = 1; index < 6; index ++) {
+            const highlightedBoat = document.getElementById(index + 'CellBoat');
+            highlightedBoat.style.border = 'black';
+        }
+    }
+
+    highlightPlayerOneShipOnBoatSelectionMenu(shipToBeHighlighted) {
+        shipToBeHighlighted.style.border = '2px solid blue'
     }
 
     addShipsToPlayerTwoGrid() {

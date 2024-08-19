@@ -96,7 +96,7 @@ body, html {
 }
 
 .square:hover {
-    background: red;
+    border: 1px solid red;
 }
 
 .restartBtnDiv {
