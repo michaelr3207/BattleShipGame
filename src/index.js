@@ -123,7 +123,7 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
     allCells.forEach(item => {console.log(item)});
     for(let item = 0; item < 100; item++) {
         document.getElementById(GRID_KEYWORD + item).addEventListener("click", (event) => {
-            if(battleshipGame.getCurrentPlayerTurn() === battleshipGame.getPlayer1()) {
+            if(battleshipGame.getCurrentPlayerTurn() === battleshipGame.getPlayer1() && battleShipGame.hasGameStarted) {
                 let extractedGridCoordinates = extractGridCoordinatesFromGridTitle(event.target.id.toString());
                 if(allCells[item].getShipOnCell()) {
                     let currentNumberOfPlayerTwoShipsLeft = battleshipGame.getPlayer2().getNumberOfPlayerShips();
@@ -152,6 +152,9 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
                     battleshipGame.AIBot.attackPlayerOnePosition();
                 }
                 // alert('Current game player is: ' + battleshipGame.getCurrentPlayerTurn().getName());
+            }
+            else {
+                alert('Game has not started!')
             }
         });
     }
@@ -242,6 +245,9 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
                     alert('All player 1 boats successfully placed!');
                     battleShipGame.AIBot.generateRandomPlayer2Boats();
                 }
+            }
+            else {
+                alert('Player 1 boats have already been placed');
             }
         });
     }

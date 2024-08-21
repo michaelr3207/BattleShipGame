@@ -115,6 +115,7 @@ class BattleShipGame {
         this.player2.addShipsToPlayer();
         this.resetBothPlayerBoatSelection();
         this.resetBothPlayerBoards();
+        this.hasGameStarted = false;
     }
 
     addShip(player, ship) {

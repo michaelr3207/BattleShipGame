@@ -63,6 +63,7 @@ class AIBot {
             }
             if(this.game.indexOfCurrentPlayer2SelectedBoat === 5) {
                 alert('All player 2 boats successfully placed!');
+                this.game.hasGameStarted = true;
                 // this.game.uIDisplay.addShipsToPlayerTwoGrid();
                 break;
             }
