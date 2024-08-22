@@ -1,5 +1,5 @@
 import {pickARandomAxis} from "../Util";
-import {checkShipStartingPositionXAxis, checkShipStartingPositionYAxis} from "../index";
+import {checkShipStartingPositionXAxis, checkShipStartingPositionYAxis} from "../index"; // ToDo add to UiDIsplay class
 
 
 class AIBot {
@@ -133,7 +133,7 @@ class AIBot {
         else {
             this.currentAttackedCoordinates.push(this.currentCoordinatedAttackOnDamagedShip);
         }
-        return this.attackLocationUsingCoordinates(this.currentCoordinatedAttackOnDamagedShip, currentNumberOfPlayerOneShipsLeft);
+        this.attackLocationUsingCoordinates(this.currentCoordinatedAttackOnDamagedShip, currentNumberOfPlayerOneShipsLeft);
     }
 
     /*
@@ -155,7 +155,7 @@ class AIBot {
         else {
             this.currentAttackedCoordinates.push(adjustedTarget);
         }
-        return this.attackLocationUsingCoordinates(adjustedTarget, currentNumberOfPlayerOneShipsLeft);
+        this.attackLocationUsingCoordinates(adjustedTarget, currentNumberOfPlayerOneShipsLeft);
     }
 
     attackLocationUsingCoordinates(randomAttackPosition, currentNumberOfPlayerOneShipsLeft) {

@@ -85,6 +85,7 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
         for(let currentSquare of allSquares) {
             currentSquare.style.background = null;  // clearing the board UI for the next round
             currentSquare.style.border = '1px solid black';
+            currentSquare.style.borderRadius = '0%';
         }
     }
 
@@ -93,6 +94,7 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
           if(item.getShipOnCell()) {
               const gridSquareToBeChanged = document.getElementById('grid1' + item.getCellId());
               gridSquareToBeChanged.style.background = 'red';
+              gridSquareToBeChanged.style.borderRadius = '35%';
           }
        });
     }
@@ -122,7 +124,9 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
         this.battleShipGame.playerTwoGameBoard.getAllCells().forEach((item) => {
             if(item.getShipOnCell()) {
                 const gridSquareToBeChanged = document.getElementById('grid2' + item.getCellId());
-                gridSquareToBeChanged.style.background = 'red';
+                // gridSquareToBeChanged.style.background = 'red';
+                // gridSquareToBeChanged.style.borderRadius = '35%';
+                // gridSquareToBeChanged.style.border = 'none';
             }
         });
     }

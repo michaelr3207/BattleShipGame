@@ -39,7 +39,7 @@ function populateBothGrids() {  // ToDo add to UI display class on initilization
 }
 
 
-function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, player) {
+function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, player) { // ToDo add to Battleship class
     startingPosition = Number.parseInt(startingPosition);
     const finalPosition = startingPosition - ship.getCellSize();
     console.log('starting pos is curremt ------------------> X axis: ' + startingPosition);
@@ -244,6 +244,7 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
                 if(battleShipGame.indexOfCurrentPlayer1SelectedBoat === 5) {
                     alert('All player 1 boats successfully placed!');
                     battleShipGame.AIBot.generateRandomPlayer2Boats();
+                    battleShipGame.uIDisplay.addShipsToPlayerTwoGrid();
                 }
             }
             else {
