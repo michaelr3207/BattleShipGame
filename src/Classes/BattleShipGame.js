@@ -22,6 +22,55 @@ class BattleShipGame {
         this.uIDisplay = new UIDisplay(this);
         this.AIBot = new AIBot('Player Two bot', this);
         this.gameWinner = null;
+        this.indexOfCurrentPlayer1SelectedBoat = 0;
+        this.indexOfCurrentPlayer2SelectedBoat = 0;
+        this.currentPlayer1SelectedBoat = this.player1.playerShips[this.indexOfCurrentPlayer1SelectedBoat];
+        this.currentPlayer2SelectedBoat = this.player2.playerShips[this.indexOfCurrentPlayer2SelectedBoat];
+        this.hasGameStarted = false;
+    }
+
+
+    resetPlayer1BoatSelection() {
+        this.indexOfCurrentPlayer1SelectedBoat = 0;
+        this.currentPlayer1SelectedBoat = this.player1.playerShips[this.indexOfCurrentPlayer1SelectedBoat];
+        this.playerOneGameBoard.resetBoard();
+        this.uIDisplay.clearAllHighlightedShips();
+    }
+
+    resetBothPlayerBoatSelection() {
+        this.resetPlayer1BoatSelection();
+        this.resetPlayer2BoatSelection();
+        this.player1.addShipsToPlayer();
+        this.player2.addShipsToPlayer();
+    }
+
+    resetPlayer2BoatSelection() {
+        this.indexOfCurrentPlayer2SelectedBoat = 0;
+        this.currentPlayer2SelectedBoat = this.player2.playerShips[this.indexOfCurrentPlayer2SelectedBoat];
+        this.playerTwoGameBoard.resetBoard();
+    }
+
+    changePlayer1BoatSelection() {
+        this.indexOfCurrentPlayer1SelectedBoat ++;
+        this.currentPlayer1SelectedBoat = this.player1.playerShips[this.indexOfCurrentPlayer1SelectedBoat];
+    }
+
+    changePlayer2BoatSelection() {
+        this.indexOfCurrentPlayer2SelectedBoat ++;
+        this.currentPlayer2SelectedBoat = this.player2.playerShips[this.indexOfCurrentPlayer2SelectedBoat];
+    }
+
+
+    getCurrentPlayer1SelectedBoat() {
+        return this.currentPlayer1SelectedBoat;
+    }
+
+    getCurrentPlayer2SelectedBoat() {
+        return this.currentPlayer2SelectedBoat;
+    }
+
+    getHasGameStarted() {
+        return this.hasGameStarted;
     }
 
     getGameWinner() {
@@ -62,9 +111,11 @@ class BattleShipGame {
     endTheGame() {
         this.gameOver = true;
         console.log('GAEM OVER!');
-        this.getPlayer1().addShipsToPlayer();
-        this.getPlayer2().addShipsToPlayer();
+        this.player1.addShipsToPlayer();
+        this.player2.addShipsToPlayer();
+        this.resetBothPlayerBoatSelection();
         this.resetBothPlayerBoards();
+        this.hasGameStarted = false;
     }
 
     addShip(player, ship) {
@@ -111,6 +162,7 @@ class BattleShipGame {
     getNumberOfShips() {
         return this.totalNumberOfShips;
     }
+
 }
 
 export {BattleShipGame};

@@ -119,35 +119,51 @@ class GameBoard {
         let counter = 0;
         startingPosition = Number.parseInt(startingPosition);
         startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
+        let currentPosition = startingPosition;
+        let isShipAvailable = true;
        this.getAllCells().forEach((item) => {
             if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < ship.getCellSize()){
+                if(this.currentOccupiedGridPoints.includes(currentPosition)) {
+                    console.log('ERROR : These coordinates are taken! Returning false!');
+                    isShipAvailable = false;
+                }
                 this.addPointToOccupiedAreas((startingPosition + counter));
                 console.log('plotted!!')
                 item.setShipOnCell(ship)
                 counter++;
+                currentPosition += counter;
             }
         });
 
-        console.log('Cell is free!');
-        return true;
+        console.log('Cell is free X Grid!');
+        return isShipAvailable;
     }
 
 
     plotShipOnPlayerGridYAxis(startingPosition, ship) {
+        console.log('Current occupied coordinates: ' + this.currentOccupiedGridPoints.toString())
         console.log('CUrrent brug starting position is: ' + startingPosition)
         let counter = 0;
+        let isShipAvailable = true;
         startingPosition = Number.parseInt(startingPosition);
+        let currentPosition = startingPosition;
         this.getAllCells().forEach((item) => {
-            if((item.getCellId().toString() === (startingPosition + counter).toString()) && counter < (ship.getCellSize() * 10)){
-                this.addPointToOccupiedAreas((startingPosition + counter));
+            if((item.getCellId().toString() ===  (startingPosition + counter).toString()) && counter < (ship.getCellSize() * 10)){
+                if(this.currentOccupiedGridPoints.includes(currentPosition)) {
+                    console.log('ERROR : These coordinates are taken! Returning false!');
+                    isShipAvailable = false;
+                }
+                this.addPointToOccupiedAreas(startingPosition + counter);
                 console.log('plotted!!')
+                console.log('current started pos new '  +  startingPosition);
                 item.setShipOnCell(ship)
-                counter = counter + 10;
+                counter += 10;
+                currentPosition += counter;
                 // startingPosition = startingPosition + 10;
             }
         });
-        console.log('Cell is free! X grid');
-        return true;
+        console.log('Cell is free! Y grid');
+        return isShipAvailable;
     }
 
 

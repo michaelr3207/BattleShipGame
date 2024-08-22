@@ -1,10 +1,11 @@
-import {NUMBER_OF_SQUARES} from "../Util";
+import {getCurrentSelectedAxisFromButton, NUMBER_OF_SQUARES} from "../Util";
 
 
 class  UIDisplay {  //ToDO add to game class (battleshipgame object)
 
     constructor(battleShipGame) {
         this.battleShipGame = battleShipGame;
+        this.currentSelectedAxis = getCurrentSelectedAxisFromButton();
     }
 
     removeDestroyedPlayer2ShipFromUI(allGameBoardCells) {
@@ -15,6 +16,14 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
                 gridSquareToBeErased.style.background = 'yellow';
             }
         }
+    }
+
+    getCurrentAxisButtonValue() {
+        this.currentSelectedAxis = getCurrentSelectedAxisFromButton();
+    }
+
+    enableSelectedPlayerOneBoatToBeHighlightedOnBoard() {
+
     }
 
     removeDestroyedPlayer1ShipFromUI(gameboard) {
@@ -40,6 +49,7 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
     markAttackedSquareWithoutAnyShipPresentPlayer2Grid(targetLocation) {
         const gridSquareToBeErased = document.getElementById('grid2' + targetLocation);
         gridSquareToBeErased.style.background = 'black';
+        gridSquareToBeErased.style.border = '1px solid white'
     }
 
 
@@ -51,6 +61,7 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
     markAttackedSquareWithoutAnyShipPresentPlayer1Grid(targetLocation) {
         const gridSquareToBeErased = document.getElementById('grid1' + targetLocation);
         gridSquareToBeErased.style.background = 'black';
+        gridSquareToBeErased.style.border = '1px solid white'
     }
 
     showGameOverScreen() {
@@ -62,18 +73,62 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
     hideGameOverScreen() {
         document.getElementById('contentBox').className = 'appContainer';
         document.getElementById('gameOverScreen').className = 'hide';
-        this.clearPreviousGameDataOnUI();
+        this.clearBothPlayerBoards();
     }
 
     displayTheGameWinnerOnTheUIAfterGameEnds() {
         document.getElementById('gameResultDiv').innerHTML = 'The Game Winner Is: ' + this.battleShipGame.getGameWinner();
     }
 
-    clearPreviousGameDataOnUI() {
+    clearBothPlayerBoards() {
         let allSquares = document.getElementsByClassName('square');
         for(let currentSquare of allSquares) {
             currentSquare.style.background = null;  // clearing the board UI for the next round
+            currentSquare.style.border = '1px solid black';
+            currentSquare.style.borderRadius = '0%';
         }
+    }
+
+    addShipsToPlayerOneGrid() {
+       this.battleShipGame.playerOneGameBoard.getAllCells().forEach((item) => {
+          if(item.getShipOnCell()) {
+              const gridSquareToBeChanged = document.getElementById('grid1' + item.getCellId());
+              gridSquareToBeChanged.style.background = 'red';
+              gridSquareToBeChanged.style.borderRadius = '35%';
+          }
+       });
+    }
+
+    highlightCurrentSelectedShip() {
+        switch (this.battleShipGame.currentPlayer1SelectedBoat.getShipName()) {
+            case "Player1Destroyer" : this.highlightPlayerOneShipOnBoatSelectionMenu(document.getElementById('5CellBoat')); break;
+            case "Player1Cruiser" : this.highlightPlayerOneShipOnBoatSelectionMenu(document.getElementById('4CellBoat')); break;
+            case "Player1Recon" : this.highlightPlayerOneShipOnBoatSelectionMenu(document.getElementById('3CellBoat')); break;
+            case "Player1Battle" : this.highlightPlayerOneShipOnBoatSelectionMenu(document.getElementById('2CellBoat')); break;
+            case "Player1Corvette" : this.highlightPlayerOneShipOnBoatSelectionMenu(document.getElementById('1CellBoat')); break;
+        }
+    }
+
+    clearAllHighlightedShips() {
+        for(let index = 1; index < 6; index ++) {
+            const highlightedBoat = document.getElementById(index + 'CellBoat');
+            highlightedBoat.style.border = 'black';
+        }
+    }
+
+    highlightPlayerOneShipOnBoatSelectionMenu(shipToBeHighlighted) {
+        shipToBeHighlighted.style.border = '2px solid blue'
+    }
+
+    addShipsToPlayerTwoGrid() {
+        this.battleShipGame.playerTwoGameBoard.getAllCells().forEach((item) => {
+            if(item.getShipOnCell()) {
+                const gridSquareToBeChanged = document.getElementById('grid2' + item.getCellId());
+                // gridSquareToBeChanged.style.background = 'red';
+                // gridSquareToBeChanged.style.borderRadius = '35%';
+                // gridSquareToBeChanged.style.border = 'none';
+            }
+        });
     }
 }
 

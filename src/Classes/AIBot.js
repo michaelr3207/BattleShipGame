@@ -1,3 +1,5 @@
+import {pickARandomAxis} from "../Util";
+import {checkShipStartingPositionXAxis, checkShipStartingPositionYAxis} from "../index"; // ToDo add to UiDIsplay class
 
 
 class AIBot {
@@ -17,6 +19,58 @@ class AIBot {
        this.currentCoordinatedAttackOnDamagedShip = null;
        this.coordinatesOfFirstSuccessfulAttackOnEnemyShip = null;
     }
+
+
+    generateRandomPlayer2Boats() {
+        console.log('AIBOT: Attempting to generate random player 2 boats.')
+        let randomGeneratedAxis = 'Y';
+        const allCells = this.game.playerTwoGameBoard.getAllCells();
+        let index = 0;
+        do {
+            const randomGeneratedNumber = Math.floor(Math.random() * 99);
+            const builtUpCoordinate = randomGeneratedNumber + randomGeneratedAxis;
+            console.log('Random build up coordinate: ' + builtUpCoordinate);
+            if(randomGeneratedAxis === 'Y') {
+                if(checkShipStartingPositionYAxis(builtUpCoordinate, this.game.getCurrentPlayer2SelectedBoat(), this.game, this.game.player2)) {
+                    console.log('Player 2 boat placed succesfully!!!');
+                    this.game.changePlayer2BoatSelection();
+                    index ++;
+                    console.log(allCells)
+                    randomGeneratedAxis = 'X'
+                }
+                else {
+                    console.log('Player 2 boat failure');
+                    index = 0;
+                    this.game.resetPlayer2BoatSelection();
+                    console.log(allCells)
+
+                }
+            }
+            else {
+                if(checkShipStartingPositionXAxis(builtUpCoordinate, this.game.getCurrentPlayer2SelectedBoat(), this.game, this.game.player2)) {
+                    console.log('Player 2 boat placed succesfully!!!');
+                    this.game.changePlayer2BoatSelection();
+                    index ++;
+                    console.log(allCells)
+                    randomGeneratedAxis = 'Y'
+                }
+                else {
+                    console.log('Player 2 boat failure');
+                    this.game.resetPlayer2BoatSelection();
+                    index = 0;
+                    console.log(allCells)
+                }
+            }
+            if(this.game.indexOfCurrentPlayer2SelectedBoat === 5) {
+                alert('All player 2 boats successfully placed!');
+                this.game.hasGameStarted = true;
+                // this.game.uIDisplay.addShipsToPlayerTwoGrid();
+                break;
+            }
+        }
+        while (true);
+    }
+
 
     generateRandomAttackCoordinates() {
         const randomNumber = Math.floor(Math.random() * 99);
@@ -73,8 +127,13 @@ class AIBot {
             case "-10" : this.currentCoordinatedAttackOnDamagedShip -= 10; break;
         }
         console.log('Next planned attack! : ' + this.currentCoordinatedAttackOnDamagedShip);
-        this.currentAttackedCoordinates.push(this.currentCoordinatedAttackOnDamagedShip);
-        return this.attackLocationUsingCoordinates(this.currentCoordinatedAttackOnDamagedShip, currentNumberOfPlayerOneShipsLeft);
+        if(this.currentAttackedCoordinates.includes(this.currentCoordinatedAttackOnDamagedShip)  || this.currentCoordinatedAttackOnDamagedShip < 0 || this.currentCoordinatedAttackOnDamagedShip > 99) {
+            this.currentCoordinatedAttackOnDamagedShip = this.generateRandomAttackCoordinates();
+        }
+        else {
+            this.currentAttackedCoordinates.push(this.currentCoordinatedAttackOnDamagedShip);
+        }
+        this.attackLocationUsingCoordinates(this.currentCoordinatedAttackOnDamagedShip, currentNumberOfPlayerOneShipsLeft);
     }
 
     /*
@@ -90,8 +149,13 @@ class AIBot {
             case "-10" : adjustedTarget -= 10; break;
         }
         console.log('Next planned corrected attack! : ' + adjustedTarget);
-        this.currentAttackedCoordinates.push(adjustedTarget);
-        return this.attackLocationUsingCoordinates(adjustedTarget, currentNumberOfPlayerOneShipsLeft);
+        if(this.currentAttackedCoordinates.includes(adjustedTarget) || adjustedTarget < 0 || adjustedTarget > 99 ) {
+            adjustedTarget = this.generateRandomAttackCoordinates();
+        }
+        else {
+            this.currentAttackedCoordinates.push(adjustedTarget);
+        }
+        this.attackLocationUsingCoordinates(adjustedTarget, currentNumberOfPlayerOneShipsLeft);
     }
 
     attackLocationUsingCoordinates(randomAttackPosition, currentNumberOfPlayerOneShipsLeft) {
