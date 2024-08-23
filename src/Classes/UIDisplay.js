@@ -5,7 +5,6 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
 
     constructor(battleShipGame) {
         this.battleShipGame = battleShipGame;
-        this.currentSelectedAxis = getCurrentSelectedAxisFromButton();
     }
 
     removeDestroyedPlayer2ShipFromUI(allGameBoardCells) {

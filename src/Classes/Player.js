@@ -10,13 +10,8 @@ class Player {
         this.grid = 'grid' + this.getId();
         this.playerShips = null;
         this.totalNumberOfSHips = null;
-        this.playerGameBoard = new GameBoard(`Player${id} board`, this);
-        this.addShipsToPlayer();
     }
 
-    getPlayerGameBoard() {
-        return this.playerGameBoard;
-    }
 
     getNumberOfPlayerShips() {
         return this.playerShips.length;

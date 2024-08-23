@@ -1,5 +1,4 @@
-import {pickARandomAxis} from "../Util";
-import {checkShipStartingPositionXAxis, checkShipStartingPositionYAxis} from "../index"; // ToDo add to UiDIsplay class
+
 
 
 class AIBot {
@@ -31,7 +30,7 @@ class AIBot {
             const builtUpCoordinate = randomGeneratedNumber + randomGeneratedAxis;
             console.log('Random build up coordinate: ' + builtUpCoordinate);
             if(randomGeneratedAxis === 'Y') {
-                if(checkShipStartingPositionYAxis(builtUpCoordinate, this.game.getCurrentPlayer2SelectedBoat(), this.game, this.game.player2)) {
+                if(this.game.checkShipStartingPositionYAxis(builtUpCoordinate, this.game.getCurrentPlayer2SelectedBoat(), this.game, this.game.player2)) {
                     console.log('Player 2 boat placed succesfully!!!');
                     this.game.changePlayer2BoatSelection();
                     index ++;
@@ -47,7 +46,7 @@ class AIBot {
                 }
             }
             else {
-                if(checkShipStartingPositionXAxis(builtUpCoordinate, this.game.getCurrentPlayer2SelectedBoat(), this.game, this.game.player2)) {
+                if(this.game.checkShipStartingPositionXAxis(builtUpCoordinate, this.game.getCurrentPlayer2SelectedBoat(), this.game, this.game.player2)) {
                     console.log('Player 2 boat placed succesfully!!!');
                     this.game.changePlayer2BoatSelection();
                     index ++;

@@ -8,14 +8,11 @@ class BattleShipGame {
 
     constructor(name) {
         this.name = name;
-        this.noOfPlayers = 0;
-        this.gamePlayers = [];
-        this.totalNumberOfShips = 0;
-        this.player1Ships = [];
-        this.player2Ships = [];
         this.gameOver = false;
         this.player1 = new Player('Player1', 1);
         this.player2 = new Player('Player2', 2);
+        this.player1.addShipsToPlayer();
+        this.player2.addShipsToPlayer();
         this.playerOneGameBoard = new GameBoard('Player 1 board', this.player1);
         this.playerTwoGameBoard = new GameBoard('Player 2 board', this.player2);
         this.currentPlayerTurn = this.player1;
@@ -28,6 +25,63 @@ class BattleShipGame {
         this.currentPlayer2SelectedBoat = this.player2.playerShips[this.indexOfCurrentPlayer2SelectedBoat];
         this.hasGameStarted = false;
     }
+
+
+    checkShipStartingPositionYAxis(startingPosition, ship, player) {
+        let counter = 0;
+        startingPosition = Number.parseInt(startingPosition);
+        while (counter < ship.getCellSize()) {
+            console.log('starting pos is curremt ------------------>: ' + startingPosition)
+            if(startingPosition >= 100) {
+                console.log('false ------------------------------------>')
+                return false;
+            }
+            startingPosition = startingPosition + 10;
+            counter++;
+            console.log('rounder up starting pos: ' + startingPosition);
+        }
+        startingPosition = startingPosition - (ship.getCellSize() * 10);
+        if(player === this.getPlayer1()) {
+            if(this.playerOneGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, this)) {
+                return true;
+            }
+            else {
+                console.log('Ship placement failed!!!!!')
+            }
+        }
+        else
+        if(this.playerTwoGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, this)) {
+            return true;
+        }
+    }
+
+     checkShipStartingPositionXAxis(startingPosition, ship, player) { // ToDo add to Battleship class
+        startingPosition = Number.parseInt(startingPosition);
+        const finalPosition = startingPosition - ship.getCellSize();
+        console.log('starting pos is curremt ------------------> X axis: ' + startingPosition);
+        if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0)) {
+            console.log('strike!')
+            if(player === this.getPlayer1()) {
+                if(this.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, this))
+                    return true;
+            }
+            else {
+                if(this.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, this))
+                    return true;
+            }
+            // return true;
+        }
+        else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length)) {
+            if(player === this.getPlayer1()) {  // ToDo fix this?
+                return this.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, this);
+            }
+            else {
+                return this.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, this);
+            }
+        }
+        return false;
+    }
+
 
 
     resetPlayer1BoatSelection() {
