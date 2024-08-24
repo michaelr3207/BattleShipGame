@@ -45,7 +45,7 @@ class Player {
             }
         }
         if(this.totalNumberOfSHips === 0) {
-            alert('GAME OVER!');
+            // alert('GAME OVER!');
         }
     }
 

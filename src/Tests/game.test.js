@@ -4,25 +4,13 @@ import {Boat} from "../Classes/Boat";
 import {GameBoard} from "../Classes/GameBoard";
 import {CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, coordinateReader} from "../Util";
 import expect from "expect";
-import jest from "jest";
 
-// import {changeGridColorWithShip, checkShipStartingPosition} from "../index";
 
 test('Test player creation', () => {
-
     const player1 = new Player('Bob', 1);
     expect(player1).toEqual({name: 'Bob' , playerId: 1, grid: 'grid1', playerShips: null, totalNumberOfSHips: null });
 });
 
-test('Test ship creation and also adding the ship to the game', () => {
-    const battleShipGame = new BattleShipGame('test game');
-    const player1 = battleShipGame.createPlayer('Bob');
-    const testShip = new Boat('test', 3, player1);
-    expect(battleShipGame.getNumberOfShips()).toBe(0);
-
-    battleShipGame.addShip(player1, testShip);
-    expect(battleShipGame.getNumberOfShips()).toBe(1);
-});
 
 test('100 cells are made by gameboard', () => {
     const gameBoard = new GameBoard('test board');
@@ -65,13 +53,13 @@ test('Test the attack ship method to see if a recon ship can be hit and destroye
     const randomGeneratedShipStaringPosition = 30;
     expect(battleShipGame.getPlayer1().checkForShip(reconBoat.getShipName())).toBeTruthy();
     expect(reconBoat.getIsSunk()).toBe(false);
-    battleShipGame.player1.playerGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, reconBoat, battleShipGame);
+    battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(randomGeneratedShipStaringPosition, reconBoat, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(0);
-    battleShipGame.player1.playerGameBoard.attackShip(29, battleShipGame);
+    battleShipGame.playerOneGameBoard.attackShip(29, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(1);
-    battleShipGame.player1.playerGameBoard.attackShip(28, battleShipGame);
+    battleShipGame.playerOneGameBoard.attackShip(28, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(2);
-    battleShipGame.player1.playerGameBoard.attackShip(27, battleShipGame);
+    battleShipGame.playerOneGameBoard.attackShip(27, battleShipGame);
     expect(reconBoat.getNumberOfHits()).toBe(3);
     expect(reconBoat.getIsSunk()).toBeTruthy();
     expect(battleShipGame.getPlayer1().checkForShip(reconBoat.getShipName())).toBeFalsy();

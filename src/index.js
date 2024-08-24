@@ -116,7 +116,7 @@ function populateBothGrids() {  // ToDo add to UI display class on initilization
 
 
 function addEventListenerToPlayerTwoSquares(battleshipGame) {
-    alert('Current game player is: ' + battleshipGame.getCurrentPlayerTurn().getName());
+    // alert('Current game player is: ' + battleshipGame.getCurrentPlayerTurn().getName());
     const GRID_KEYWORD = 'grid2';   //ToDO add to util class
     const allCells = battleshipGame.playerTwoGameBoard.getAllCells();
     console.log(allCells)
@@ -196,7 +196,7 @@ function addEventListenersToBoatSelectorButtons() {
 }
 
 function addEventListenerToPlayerOneSquares(battleShipGame) {
-    alert('Current game player is: ' + battleShipGame.getCurrentPlayerTurn().getName());
+    // alert('Current game player is: ' + battleShipGame.getCurrentPlayerTurn().getName());
     const GRID_KEYWORD = 'grid1';
     const allCells = battleShipGame.playerOneGameBoard.getAllCells();
     allCells.forEach(item => {console.log(item)});

@@ -172,51 +172,6 @@ class BattleShipGame {
         this.hasGameStarted = false;
     }
 
-    addShip(player, ship) {
-        if(!ship)
-            return null;
-        if(player.playerId === 1)
-            this.player1Ships.push(ship);
-        else
-            this.player2Ships.push(ship);
-        this.totalNumberOfShips++;
-    }
-
-    getPlayerOneGameBoard() {
-        return this.playerOneGameBoard;
-    }
-
-    getPlayerTwoGameBoard() {
-        return this.playerTwoGameBoard;
-    }
-
-    findShip(shipName, player) {
-        let arrayOfShips;
-        if(player.getId() === 1)
-            arrayOfShips = this.player1Ships;
-        else
-            arrayOfShips = this.player2Ships;
-        return arrayOfShips.filter((currentShip) => currentShip.getShipName() !== shipName);
-    }
-
-    addPlayer(player) {
-        if(player){
-            this.gamePlayers.push(player);
-            this.noOfPlayers++;
-        }
-        else
-            alert('ERRIR');
-    }
-
-    createPlayer(name) {
-        return new Player(name, 1);
-    }
-
-
-    getNumberOfShips() {
-        return this.totalNumberOfShips;
-    }
-
 }
 
 export {BattleShipGame};
