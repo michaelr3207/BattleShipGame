@@ -1,11 +1,12 @@
 import './style.css';
 import {BattleShipGame} from "./Classes/BattleShipGame";
 import {AIBot} from "./Classes/AIBot";
+import {extractGridCoordinatesFromGridTitle} from "./Util";
 
 
 let battleShipGame = new BattleShipGame('Battleship game');
 
-function createSquares(index){
+function createSquares(index){  //ToDo add to UIDisplay class
     let playerGrid;
     if(index === 1)
         playerGrid = 'grid1';
@@ -37,82 +38,6 @@ function populateBothGrids() {  // ToDo add to UI display class on initilization
     createSquares(playerOneIndex);
     createSquares(playerTwoIndex);
 }
-
-
-// function checkShipStartingPositionXAxis(startingPosition, ship, battleShipGame, player) { // ToDo add to Battleship class
-//     startingPosition = Number.parseInt(startingPosition);
-//     const finalPosition = startingPosition - ship.getCellSize();
-//     console.log('starting pos is curremt ------------------> X axis: ' + startingPosition);
-//     if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0)) {
-//         console.log('strike!')
-//         if(player === battleShipGame.getPlayer1()) {
-//             console.log('strike 2')
-//             if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
-//                 return true;
-//         }
-//         else {
-//                 console.log('strike 3')
-//                 if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
-//                     return true;
-//             }
-//         // return true;
-//     }
-//     else if(finalPosition.toString().length === 1 && (finalPosition.toString().length === startingPosition.toString().length)) {
-//         if(player === battleShipGame.getPlayer1()) {  // ToDo fix this?
-//             if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
-//                 return true;
-//             else {
-//                 // alert('not good');
-//                 return false;
-//             }
-//         }
-//         else {
-//             if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGrid(startingPosition, ship, battleShipGame))
-//                 return true;
-//             else {
-//                 // alert('not good');
-//                 return false;
-//             }
-//         }
-//     }
-//     console.log('false ------------------------------------>')
-//     // alert('Invalid coordinates');
-//     return false;
-// }
-
-// function checkShipStartingPositionYAxis(startingPosition, ship, battleShipGame, player) {
-//    let counter = 0;
-//    startingPosition = Number.parseInt(startingPosition);
-//    while (counter < ship.getCellSize()) {
-//        console.log('starting pos is curremt ------------------>: ' + startingPosition)
-//         if(startingPosition >= 100) {
-//             console.log('false ------------------------------------>')
-//             // alert('Invalid coordinates Y axis');
-//             return false;
-//         }
-//        startingPosition = startingPosition + 10;
-//         counter++;
-//         console.log('rounder up starting pos: ' + startingPosition);
-//     }
-//     // console.log('Result of ccall:' + battleShipGame.playerOneGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame));
-//     startingPosition = startingPosition - (ship.getCellSize() * 10);
-//     if(player === battleShipGame.getPlayer1()) {
-//         if(battleShipGame.playerOneGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame)) {
-//             return true;
-//         }
-//         else {
-//             console.log('Ship placement failed!!!!!')
-//         }
-//     }
-//     else
-//         if(battleShipGame.playerTwoGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, battleShipGame)) {
-//             return true;
-//         }
-//         else {
-//             alert('not good 2');
-//         }
-// }
-
 
 
 function addEventListenerToPlayerTwoSquares(battleshipGame) {
@@ -161,13 +86,6 @@ function addEventListenerToPlayerTwoSquares(battleshipGame) {
 
 }
 
-function extractGridCoordinatesFromGridTitle(event) {
-    if(event.length === 6)
-        return event.slice(-1);
-    else
-        return event.slice(-2);
-}
-
 function addEventListenerToRestartBtn(battleShipGame) {
     const restartBtn = document.getElementById('restartBtn');
     restartBtn.addEventListener("click", () => {
@@ -179,7 +97,6 @@ function addEventListenerToRestartBtn(battleShipGame) {
 
 function addEventListenersToBoatSelectorButtons() {
     const axisButton = document.getElementById('axisBtn');
-
     axisButton.addEventListener("click", (event) => {
         console.log('axis btn has been clicked!');
         if(event.target.value === 'Y') {

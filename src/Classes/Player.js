@@ -80,9 +80,6 @@ class Player {
         return this.playerId;
     }
 
-    getGrid() {
-        return this.grid;
-    }
 }
 
 export {Player};

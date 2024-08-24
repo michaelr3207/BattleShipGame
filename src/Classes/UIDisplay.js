@@ -21,9 +21,6 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
         this.currentSelectedAxis = getCurrentSelectedAxisFromButton();
     }
 
-    enableSelectedPlayerOneBoatToBeHighlightedOnBoard() {
-
-    }
 
     removeDestroyedPlayer1ShipFromUI(gameboard) {
         for(let item of gameboard){

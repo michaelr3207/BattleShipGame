@@ -53,6 +53,7 @@ class BattleShipGame {
         if(this.playerTwoGameBoard.plotShipOnPlayerGridYAxis(startingPosition, ship, this)) {
             return true;
         }
+        //ToDo Return false here??
     }
 
      checkShipStartingPositionXAxis(startingPosition, ship, player) { // ToDo add to Battleship class

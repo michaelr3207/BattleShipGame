@@ -109,7 +109,6 @@ class GameBoard {
                 }
             }
         }
-        // alert('MISS!!');
         console.log(CELL_TAKEN_MESSAGE);
         return true;
     }
@@ -166,52 +165,6 @@ class GameBoard {
         return isShipAvailable;
     }
 
-
-    checkIfGridCellIsAvailable(startingPosition, currentShip) {
-        console.log(`Current  ship first -------------%%%%%%%%%%%%%%%%%%%%%%%%%%%% weird error> ${currentShip.getShipName()}`);
-        console.log(`][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] ${startingPosition.toString()}`);
-        let extractedAxis = startingPosition.charAt(startingPosition.length-1);
-        console.log(`][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]] this one ${extractedAxis}`);
-        startingPosition = Number.parseInt(startingPosition);
-        const occupiedCells = this.getOccupiedCells();
-        if(extractedAxis === 'Y')
-            return this.checkCellAvailabilityYAxis(startingPosition, currentShip, occupiedCells);
-        else
-            return this.checkCellAvailabilityXAxis(startingPosition, currentShip, occupiedCells);
-    }
-
-
-    checkCellAvailabilityYAxis(startingPosition, ship, occupiedCells) {
-        let counter = 0;
-        while(counter < ship.getCellSize()) {
-            if(occupiedCells.includes(startingPosition)) {
-                console.log('--------------> ALREADY EXISTS AS A CELL')
-                return false;
-            }
-            counter ++;
-            startingPosition += 10;
-        }
-        console.log('--------------> DONT EXISTS AS A CELL')
-        return true;
-    }
-
-    checkCellAvailabilityXAxis(startingPosition, ship, occupiedCells) {
-        let counter = 0;
-        while(counter < ship.getCellSize()) {
-            if(occupiedCells.includes(startingPosition)) {
-                console.log('--------------> ALREADY EXISTS AS A CELL');
-                return false;
-            }
-            counter ++;
-            startingPosition += 1;
-        }
-        console.log('--------------> DONT EXISTS AS A CELL')
-        return true;
-    }
-
-    getOccupiedCells() {
-        return this.currentOccupiedGridPoints;
-    }
 }
 
 export {GameBoard};
