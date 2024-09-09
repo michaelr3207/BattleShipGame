@@ -34,5 +34,12 @@ function getCurrentSelectedAxisFromButton() {
     return axisButton.value;
 }
 
+function extractGridCoordinatesFromGridTitle(event) {
+    if(event.length === 6)
+        return event.slice(-1);
+    else
+        return event.slice(-2);
+}
 
-export {pickARandomAxis ,randomNumberGenerator, coordinateReader, CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, NUMBER_OF_SQUARES, getCurrentSelectedAxisFromButton};
+
+export {pickARandomAxis ,randomNumberGenerator, coordinateReader, CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, NUMBER_OF_SQUARES, getCurrentSelectedAxisFromButton, extractGridCoordinatesFromGridTitle};

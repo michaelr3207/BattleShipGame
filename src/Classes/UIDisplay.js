@@ -5,7 +5,6 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
 
     constructor(battleShipGame) {
         this.battleShipGame = battleShipGame;
-        this.currentSelectedAxis = getCurrentSelectedAxisFromButton();
     }
 
     removeDestroyedPlayer2ShipFromUI(allGameBoardCells) {
@@ -22,9 +21,6 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
         this.currentSelectedAxis = getCurrentSelectedAxisFromButton();
     }
 
-    enableSelectedPlayerOneBoatToBeHighlightedOnBoard() {
-
-    }
 
     removeDestroyedPlayer1ShipFromUI(gameboard) {
         for(let item of gameboard){

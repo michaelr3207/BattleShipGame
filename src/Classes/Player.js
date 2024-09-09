@@ -10,13 +10,8 @@ class Player {
         this.grid = 'grid' + this.getId();
         this.playerShips = null;
         this.totalNumberOfSHips = null;
-        this.playerGameBoard = new GameBoard(`Player${id} board`, this);
-        this.addShipsToPlayer();
     }
 
-    getPlayerGameBoard() {
-        return this.playerGameBoard;
-    }
 
     getNumberOfPlayerShips() {
         return this.playerShips.length;
@@ -50,7 +45,7 @@ class Player {
             }
         }
         if(this.totalNumberOfSHips === 0) {
-            alert('GAME OVER!');
+            // alert('GAME OVER!');
         }
     }
 
@@ -85,9 +80,6 @@ class Player {
         return this.playerId;
     }
 
-    getGrid() {
-        return this.grid;
-    }
 }
 
 export {Player};
