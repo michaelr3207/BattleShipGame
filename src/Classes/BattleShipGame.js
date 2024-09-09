@@ -10,7 +10,7 @@ class BattleShipGame {
         this.name = name;
         this.gameOver = false;
         this.player1 = new Player('Player1', 1);
-        this.player2 = new Player('Player2', 2);
+        this.player2 = new Player('Player 2: AiBot', 2);
         this.player1.addShipsToPlayer();
         this.player2.addShipsToPlayer();
         this.playerOneGameBoard = new GameBoard('Player 1 board', this.player1);
