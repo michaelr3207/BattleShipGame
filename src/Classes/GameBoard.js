@@ -114,7 +114,6 @@ class GameBoard {
     }
 
     plotShipOnPlayerGrid(startingPosition, ship) {  //ToDo rename
-        console.log('CUrrent brug X AXIS starting position is: ' + startingPosition)
         let counter = 0;
         startingPosition = Number.parseInt(startingPosition);
         startingPosition = startingPosition - ship.getCellSize();  //ToDO - change this maybe?
@@ -140,8 +139,6 @@ class GameBoard {
 
 
     plotShipOnPlayerGridYAxis(startingPosition, ship) {
-        console.log('Current occupied coordinates: ' + this.currentOccupiedGridPoints.toString())
-        console.log('CUrrent brug starting position is: ' + startingPosition)
         let counter = 0;
         let isShipAvailable = true;
         startingPosition = Number.parseInt(startingPosition);

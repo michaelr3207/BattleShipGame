@@ -120,7 +120,7 @@ class  UIDisplay {  //ToDO add to game class (battleshipgame object)
         this.battleShipGame.playerTwoGameBoard.getAllCells().forEach((item) => {
             if(item.getShipOnCell()) {
                 const gridSquareToBeChanged = document.getElementById('grid2' + item.getCellId());
-                // gridSquareToBeChanged.style.background = 'red';
+                gridSquareToBeChanged.style.background = 'red';
                 // gridSquareToBeChanged.style.borderRadius = '35%';
                 // gridSquareToBeChanged.style.border = 'none';
             }

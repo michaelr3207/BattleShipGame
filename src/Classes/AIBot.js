@@ -1,4 +1,4 @@
-
+import {pickARandomAxis} from "../Util";
 
 
 class AIBot {
@@ -22,52 +22,53 @@ class AIBot {
 
     generateRandomPlayer2Boats() {
         console.log('AIBOT: Attempting to generate random player 2 boats.')
-        let randomGeneratedAxis = 'Y';
-        const allCells = this.game.playerTwoGameBoard.getAllCells();
-        let index = 0;
         do {
+            let randomGeneratedAxis = pickARandomAxis();
             const randomGeneratedNumber = Math.floor(Math.random() * 99);
             const builtUpCoordinate = randomGeneratedNumber + randomGeneratedAxis;
-            console.log('Random build up coordinate: ' + builtUpCoordinate);
             if(randomGeneratedAxis === 'Y') {
-                if(this.game.checkShipStartingPositionYAxis(builtUpCoordinate, this.game.getCurrentPlayer2SelectedBoat(), this.game, this.game.player2)) {
-                    console.log('Player 2 boat placed succesfully!!!');
-                    this.game.changePlayer2BoatSelection();
-                    index ++;
-                    console.log(allCells)
-                    randomGeneratedAxis = 'X'
-                }
-                else {
-                    console.log('Player 2 boat failure');
-                    index = 0;
-                    this.game.resetPlayer2BoatSelection();
-                    console.log(allCells)
-
-                }
+                this.attemptToPlaceAiBotBoatsYAxis(randomGeneratedAxis, builtUpCoordinate);
             }
             else {
-                if(this.game.checkShipStartingPositionXAxis(builtUpCoordinate, this.game.getCurrentPlayer2SelectedBoat(), this.game, this.game.player2)) {
-                    console.log('Player 2 boat placed succesfully!!!');
-                    this.game.changePlayer2BoatSelection();
-                    index ++;
-                    console.log(allCells)
-                    randomGeneratedAxis = 'Y'
-                }
-                else {
-                    console.log('Player 2 boat failure');
-                    this.game.resetPlayer2BoatSelection();
-                    index = 0;
-                    console.log(allCells)
-                }
+               this.attemptToPlaceAiBotBoatsXAxis(randomGeneratedAxis, builtUpCoordinate);
             }
-            if(this.game.indexOfCurrentPlayer2SelectedBoat === 5) {
-                // alert('All player 2 boats successfully placed!');
-                this.game.hasGameStarted = true;
-                // this.game.uIDisplay.addShipsToPlayerTwoGrid();
+            if(this.checkIfAiBotsHaveAllBeenPlacedSuccessfully()) {
                 break;
             }
         }
         while (true);
+    }
+
+    checkIfAiBotsHaveAllBeenPlacedSuccessfully() {
+        if(this.game.indexOfCurrentPlayer2SelectedBoat === 5) {
+            // alert('All player 2 boats successfully placed!');
+            this.game.hasGameStarted = true;
+            // this.game.uIDisplay.addShipsToPlayerTwoGrid();
+            return true;
+        }
+        return false;
+    }
+
+    attemptToPlaceAiBotBoatsYAxis(randomGeneratedAxis, builtUpCoordinate) {
+        if(this.game.checkShipStartingPositionYAxis(builtUpCoordinate, this.game.getCurrentPlayer2SelectedBoat(), this.game, this.game.player2)) {
+            console.log('Player 2 boat placed succesfully!!!');
+            this.game.changePlayer2BoatSelection();
+        }
+        else {
+            console.log('Player 2 boat failure');
+            this.game.resetPlayer2BoatSelection();
+        }
+    }
+
+    attemptToPlaceAiBotBoatsXAxis(randomGeneratedAxis, builtUpCoordinate) {
+        if(this.game.checkShipStartingPositionXAxis(builtUpCoordinate, this.game.getCurrentPlayer2SelectedBoat(), this.game, this.game.player2)) {
+            console.log('Player 2 boat placed succesfully!!!');
+            this.game.changePlayer2BoatSelection();
+        }
+        else {
+            console.log('Player 2 boat failure');
+            this.game.resetPlayer2BoatSelection();
+        }
     }
 
 

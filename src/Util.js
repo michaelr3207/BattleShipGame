@@ -41,5 +41,14 @@ function extractGridCoordinatesFromGridTitle(event) {
         return event.slice(-2);
 }
 
+function extractCoordinateFromEvent(event, currentSelectedAxis) {
+    let extractedCoordinate = null;
+    if(event.target.id.length === 7)
+        extractedCoordinate = event.target.id.slice(-2) + currentSelectedAxis;
+    else
+        extractedCoordinate = event.target.id.slice(-1) + currentSelectedAxis;
+    return extractedCoordinate;
+}
 
-export {pickARandomAxis ,randomNumberGenerator, coordinateReader, CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, NUMBER_OF_SQUARES, getCurrentSelectedAxisFromButton, extractGridCoordinatesFromGridTitle};
+
+export {pickARandomAxis ,randomNumberGenerator, coordinateReader, CELL_TAKEN_ERROR, CELL_TAKEN_MESSAGE, NUMBER_OF_SQUARES, getCurrentSelectedAxisFromButton, extractGridCoordinatesFromGridTitle, extractCoordinateFromEvent};

@@ -1,7 +1,7 @@
 import './style.css';
 import {BattleShipGame} from "./Classes/BattleShipGame";
 import {AIBot} from "./Classes/AIBot";
-import {extractGridCoordinatesFromGridTitle} from "./Util";
+import {extractCoordinateFromEvent, extractGridCoordinatesFromGridTitle} from "./Util";
 
 
 let battleShipGame = new BattleShipGame('Battleship game');
@@ -124,11 +124,7 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
                 console.log('attempting to add player 1 ship through UI...');
                 console.log('current player 1 selected boat' + battleShipGame.getCurrentPlayer1SelectedBoat().getShipName());
                 const currentSelectedAxis = document.getElementById('axisBtn').value;
-                let extractedCoordinate;
-                if(event.target.id.length === 7)
-                     extractedCoordinate = event.target.id.slice(-2) + currentSelectedAxis;
-                else
-                    extractedCoordinate = event.target.id.slice(-1) + currentSelectedAxis;
+                let extractedCoordinate = extractCoordinateFromEvent(event, currentSelectedAxis);
                 console.log(extractedCoordinate + '<---------------------');
                 if(currentSelectedAxis === 'Y') {
                     if(battleShipGame.checkShipStartingPositionYAxis(extractedCoordinate, battleShipGame.getCurrentPlayer1SelectedBoat(), battleShipGame.player1)) {
@@ -161,7 +157,7 @@ function addEventListenerToPlayerOneSquares(battleShipGame) {
                 if(battleShipGame.indexOfCurrentPlayer1SelectedBoat === 5) {
                     alert('All player 1 boats successfully placed!');
                     battleShipGame.AIBot.generateRandomPlayer2Boats();
-                    battleShipGame.uIDisplay.addShipsToPlayerTwoGrid();
+                    // battleShipGame.uIDisplay.addShipsToPlayerTwoGrid();
                 }
             }
             else {

@@ -31,14 +31,11 @@ class BattleShipGame {
         let counter = 0;
         startingPosition = Number.parseInt(startingPosition);
         while (counter < ship.getCellSize()) {
-            console.log('starting pos is curremt ------------------>: ' + startingPosition)
             if(startingPosition >= 100) {
-                console.log('false ------------------------------------>')
                 return false;
             }
             startingPosition = startingPosition + 10;
             counter++;
-            console.log('rounder up starting pos: ' + startingPosition);
         }
         startingPosition = startingPosition - (ship.getCellSize() * 10);
         if(player === this.getPlayer1()) {
@@ -46,7 +43,7 @@ class BattleShipGame {
                 return true;
             }
             else {
-                console.log('Ship placement failed!!!!!')
+                console.log('ERROR: Ship placement failed!!!!!')
             }
         }
         else
@@ -59,9 +56,7 @@ class BattleShipGame {
      checkShipStartingPositionXAxis(startingPosition, ship, player) { // ToDo add to Battleship class
         startingPosition = Number.parseInt(startingPosition);
         const finalPosition = startingPosition - ship.getCellSize();
-        console.log('starting pos is curremt ------------------> X axis: ' + startingPosition);
         if(finalPosition.toString().charAt(0) === startingPosition.toString().charAt(0)) {
-            console.log('strike!')
             if(player === this.getPlayer1()) {
                 if(this.playerOneGameBoard.plotShipOnPlayerGrid(startingPosition, ship, this))
                     return true;
@@ -165,7 +160,6 @@ class BattleShipGame {
 
     endTheGame() {
         this.gameOver = true;
-        console.log('GAEM OVER!');
         this.player1.addShipsToPlayer();
         this.player2.addShipsToPlayer();
         this.resetBothPlayerBoatSelection();
